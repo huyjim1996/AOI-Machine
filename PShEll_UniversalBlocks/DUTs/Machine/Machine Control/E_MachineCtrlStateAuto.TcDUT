@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_MachineCtrlStateAuto" Id="{b811404e-10ec-4b07-97a8-7fcf7754e4f0}">
+    <Declaration><![CDATA[{attribute 'strict'}
+TYPE E_MachineCtrlStateAuto :
+(
+	MACHINE_STATE_AUTO_IDLE 	:= 0,
+	MACHINE_STATE_AUTO_RUNNING 	:= 10
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

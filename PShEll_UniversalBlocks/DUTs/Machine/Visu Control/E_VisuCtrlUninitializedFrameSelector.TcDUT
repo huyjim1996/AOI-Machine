@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_VisuCtrlUninitializedFrameSelector" Id="{7f3fac89-ff42-493c-a610-83bc995f8b2b}">
+    <Declaration><![CDATA[{attribute 'strict'}
+TYPE E_VisuCtrlUninitializedFrameSelector :
+(
+	VISU_CTRL_UNINITIALIZED_FRAME_STARTUP 	:= 0,
+	VISU_CTRL_UNINITIALIZED_FRAME_SETUP		:= 1
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

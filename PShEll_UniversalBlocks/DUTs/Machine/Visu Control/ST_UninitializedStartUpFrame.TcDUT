@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_UninitializedStartUpFrame" Id="{8a512a69-219a-45d2-9de8-50ae40df44da}">
+    <Declaration><![CDATA[TYPE ST_UninitializedStartUpFrame :
+STRUCT
+	iProgressBar					: USINT;
+	bCR800EtherCatInitialization	: BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_VisuCtrlInitializingPopUpFrameSelector" Id="{61aa58af-54e6-4683-819e-1dccb326328e}">
+    <Declaration><![CDATA[{attribute 'strict'}
+TYPE E_VisuCtrlInitializingPopUpFrameSelector :
+(
+	VISU_CTRL_INITIALIZING_FRAME_E_STOP 					:= 0,
+	VISU_CTRL_INITIALIZING_FRAME_DOOR_LOCK 					:= 1,	
+	VISU_CTRL_INITIALIZING_FRAME_RESET_BUTTON				:= 3	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

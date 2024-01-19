@@ -1,0 +1,1549 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.22" TcVersionFixed="true">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{3A82F6F8-A93E-EACE-D638-7754FF33BBAD}" IecBaseType="true" AutoDeleteType="true">ARRAY [6000..6127] OF INT</Name>
+			<BitSize>2048</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
+			<ArrayInfo>
+				<LBound>6000</LBound>
+				<Elements>128</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{A6CC6AFE-FE37-C02D-2C0C-FB1479660FEB}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..31] OF BYTE</Name>
+			<BitSize>256</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>32</Elements>
+			</ArrayInfo>
+		</DataType>
+	</DataTypes>
+	<ImageDatas>
+		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ff808080808080808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1001">424dd6020000000000003600000028000000100000000e0000000100180000000000a002000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080808080808080c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080808080808080c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080808080808080c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080808080808080c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080808080808080c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c00000ffc0c0c0c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c00000ffc0c0c0c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c000ff00c0c0c0c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ff</ImageData>
+		<ImageData Id="1002">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ff00bfffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c080808000bfff00bfff00bfff00bfff00bfffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ff00bfffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+	</ImageDatas>
+	<Project ProjectGUID="{CA45E826-D8E8-4DBE-97E2-0696C445CE11}" TargetNetId="5.127.48.8.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+		<System>
+			<Settings MaxCpus="4">
+				<Cpu CpuId="3" BaseTime="2500"/>
+				<IoIdleTask Priority="10"/>
+			</Settings>
+			<Licenses>
+				<Target>
+					<ManualSelect>{3EBB9639-5FF3-42B6-8847-35C70DC013C8}</ManualSelect>
+				</Target>
+			</Licenses>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+				<Task Id="6" Priority="30" CycleTime="1000000" AmsPort="351" DisableFpExceptions="true" AdtTasks="true">
+					<Name>VISU_TASK</Name>
+				</Task>
+			</Tasks>
+			<TypeSystem>
+				<AdditionalTmcFile Name="PShEll_Events" File="TMC_Modules\PShEll_Events.tmc"/>
+			</TypeSystem>
+		</System>
+		<Plc>
+			<Project GUID="{6C5E67FF-9771-4A44-BC12-3527D22E1ACA}" Name="PShEll_UniversalBlocks" PrjFilePath="PShEll_UniversalBlocks\PShEll_UniversalBlocks.plcproj" TmcFilePath="PShEll_UniversalBlocks\PShEll_UniversalBlocks.tmc" ReloadTmc="true" AmsPort="851" TargetArchiveSettings="#x000f" FileArchiveSettings="#x001f" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PShEll_UniversalBlocks\PShEll_UniversalBlocks.tmc">
+					<Name>PShEll_UniversalBlocks Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput</Name>
+							<Comment><![CDATA[Input process data (RWr)]]></Comment>
+							<Type GUID="{3A82F6F8-A93E-EACE-D638-7754FF33BBAD}">ARRAY [6000..6127] OF INT</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw</Name>
+							<Comment><![CDATA[Input process data (RX) before convertion to easier to use. 
+																			  This data are is used only in MR_ConvertEthercatData]]></Comment>
+							<Type GUID="{A6CC6AFE-FE37-C02D-2C0C-FB1479660FEB}">ARRAY [0..31] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.iInfoDataState</Name>
+							<Comment><![CDATA[ Indicates status of ethercat communication ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput</Name>
+							<Comment><![CDATA[Output process data (RWr)]]></Comment>
+							<Type GUID="{3A82F6F8-A93E-EACE-D638-7754FF33BBAD}">ARRAY [6000..6127] OF INT</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw</Name>
+							<Comment><![CDATA[Output process data (RX) before convertion to easier to use. 
+																			  This data are is used only in MR_ConvertEthercatData]]></Comment>
+							<Type GUID="{A6CC6AFE-FE37-C02D-2C0C-FB1479660FEB}">ARRAY [0..31] OF BYTE</Type>
+						</Var>
+					</Vars>
+					<UnrestoredVarLinks ImportTime="2022-08-26T09:04:13">
+						<OwnerA Name="InputDst" Prefix="TIPC^PShEll_UniversalBlocks^PShEll_UniversalBlocks Instance" Type="1">
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Mover Axis 1">
+								<Link VarA="PRG_XtsControlUnit_Test.arrMover[0].stAxisRef.NcToPlc" TypeA="MC.NCTOPLC_AXIS_REF" InOutA="0" GuidA="{10036166-C9D3-404B-BDD3-323034AAA7F4}" VarB="Outputs^ToPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Mover Axis 2">
+								<Link VarA="PRG_XtsControlUnit_Test.arrMover[1].stAxisRef.NcToPlc" TypeA="MC.NCTOPLC_AXIS_REF" InOutA="0" GuidA="{10036166-C9D3-404B-BDD3-323034AAA7F4}" VarB="Outputs^ToPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Mover Axis 3">
+								<Link VarA="PRG_XtsControlUnit_Test.arrMover[2].stAxisRef.NcToPlc" TypeA="MC.NCTOPLC_AXIS_REF" InOutA="0" GuidA="{10036166-C9D3-404B-BDD3-323034AAA7F4}" VarB="Outputs^ToPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Mover Axis 4">
+								<Link VarA="PRG_XtsControlUnit_Test.arrMover[3].stAxisRef.NcToPlc" TypeA="MC.NCTOPLC_AXIS_REF" InOutA="0" GuidA="{10036166-C9D3-404B-BDD3-323034AAA7F4}" VarB="Outputs^ToPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Mover Axis 5">
+								<Link VarA="PRG_XtsControlUnit_Test.arrMover[4].stAxisRef.NcToPlc" TypeA="MC.NCTOPLC_AXIS_REF" InOutA="0" GuidA="{10036166-C9D3-404B-BDD3-323034AAA7F4}" VarB="Outputs^ToPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Mover Axis 6">
+								<Link VarA="PRG_XtsControlUnit_Test.arrMover[5].stAxisRef.NcToPlc" TypeA="MC.NCTOPLC_AXIS_REF" InOutA="0" GuidA="{10036166-C9D3-404B-BDD3-323034AAA7F4}" VarB="Outputs^ToPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Objects^XTS Group (CA Group)">
+								<Link VarA="PRG_XtsControlUnit_Test.fbXtsControlUnit.fbMoverGroupCA.stAxesGroupRef.NcToPlc" TypeA="MC.CDT_MCTOPLC_GROUP" InOutA="0" GuidA="{467F4325-10DF-4BC1-88DD-E8240EB4F8E3}" VarB="Group Outputs^ToPLC" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+						<OwnerA Name="OutputSrc" Prefix="TIPC^PShEll_UniversalBlocks^PShEll_UniversalBlocks Instance" Type="2">
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Mover Axis 1">
+								<Link VarA="PRG_XtsControlUnit_Test.arrMover[0].stAxisRef.PlcToNc" TypeA="MC.PLCTONC_AXIS_REF" InOutA="1" GuidA="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" VarB="Inputs^FromPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Mover Axis 2">
+								<Link VarA="PRG_XtsControlUnit_Test.arrMover[1].stAxisRef.PlcToNc" TypeA="MC.PLCTONC_AXIS_REF" InOutA="1" GuidA="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" VarB="Inputs^FromPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Mover Axis 3">
+								<Link VarA="PRG_XtsControlUnit_Test.arrMover[2].stAxisRef.PlcToNc" TypeA="MC.PLCTONC_AXIS_REF" InOutA="1" GuidA="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" VarB="Inputs^FromPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Mover Axis 4">
+								<Link VarA="PRG_XtsControlUnit_Test.arrMover[3].stAxisRef.PlcToNc" TypeA="MC.PLCTONC_AXIS_REF" InOutA="1" GuidA="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" VarB="Inputs^FromPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Mover Axis 5">
+								<Link VarA="PRG_XtsControlUnit_Test.arrMover[4].stAxisRef.PlcToNc" TypeA="MC.PLCTONC_AXIS_REF" InOutA="1" GuidA="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" VarB="Inputs^FromPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Mover Axis 6">
+								<Link VarA="PRG_XtsControlUnit_Test.arrMover[5].stAxisRef.PlcToNc" TypeA="MC.PLCTONC_AXIS_REF" InOutA="1" GuidA="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" VarB="Inputs^FromPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Objects^XTS Group (CA Group)">
+								<Link VarA="PRG_XtsControlUnit_Test.fbXtsControlUnit.fbMoverGroupCA.stAxesGroupRef.PlcToNc" TypeA="MC.CDT_PLCTOMC_GROUP" InOutA="1" GuidA="{0E2E3852-A98C-4AF3-81E2-209EE128940C}" VarB="Group Inputs^FromPLC" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+						<Context>
+							<Id NeedCalleeCall="true">1</Id>
+							<Name>VISU_TASK</Name>
+							<ManualConfig>
+								<OTCID>#x02010060</OTCID>
+							</ManualConfig>
+							<Priority>30</Priority>
+							<CycleTime>100000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+						<TaskPouOid Prio="30" OTCID="#x08502002"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+		<Io>
+			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="5.127.48.8.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
+				<Name>Device 1 (EtherCAT)</Name>
+				<AddressInfo>
+					<Ccat>
+						<Address>-801112064</Address>
+						<Offset>131072</Offset>
+						<Size>8192</Size>
+						<BaseAddr>0</BaseAddr>
+						<BusNo>3</BusNo>
+						<SlotNo>0</SlotNo>
+						<VendorId>5612</VendorId>
+						<DeviceId>20480</DeviceId>
+						<Dma>
+							<Address>0</Address>
+							<Offset>4096</Offset>
+							<Size>12288</Size>
+							<BaseAddr>2</BaseAddr>
+							<RxChn>0</RxChn>
+							<TxChn>1</TxChn>
+						</Dma>
+						<TimeSize>128</TimeSize>
+						<TimeOffs>1024</TimeOffs>
+						<GpioSize>32</GpioSize>
+						<GpioOffs>768</GpioOffs>
+						<EepromSize>64</EepromSize>
+						<EepromOffs>512</EepromOffs>
+						<IntCtrlSize>16</IntCtrlSize>
+						<IntCtrlOffs>640</IntCtrlOffs>
+						<Identification>
+							<Value>1795167326</Value>
+							<Version>1</Version>
+							<Size>256</Size>
+						</Identification>
+					</Ccat>
+				</AddressInfo>
+				<Image Id="1" AddrType="9" ImageType="3">
+					<Name>Image</Name>
+				</Image>
+				<Box Id="1" BoxType="9099">
+					<Name>Term 1 (EK1200)</Name>
+					<ImageId>1000</ImageId>
+					<EtherCAT PdiType="#x0100" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04b02c52" RevisionNo="#x00001388" InfoDataState="false" PortPhys="49" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EK1200-5000 EtherCAT Power supply (2A E-Bus)" Desc="EK1200" PortABoxInfo="#x00ffffff"/>
+					<Box Id="2" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Term 2 (EL6070-0033)</Name>
+						<ImageId>1001</ImageId>
+						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" FoeType="1" VendorId="#x00000002" ProductCode="#x17b63052" RevisionNo="#x00130021" InfoDataAddr="true" RepeatSupport="true" TimeoutMailbox2="3000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6070-0033 1Ch. Licence key terminal, individual licences" Desc="EL6070-0033" PortABoxInfo="#x01000001">
+							<SyncMan>001000012600010001000000300000010001001026010000</SyncMan>
+							<SyncMan>001100012200010002000000300000010001001122010000</SyncMan>
+							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+							<MBoxUserCmdData>004003000a00000000000000030010000000000000000000000000000000000020f3100502000000010000</MBoxUserCmdData>
+							<CoeProfile ProfileNo="43914121" DisplayName="Licensing"/>
+						</EtherCAT>
+					</Box>
+					<Box Id="3" BoxType="9099">
+						<Name>Term 3 (EK1110)</Name>
+						<ImageId>1002</ImageId>
+						<EtherCAT SlaveType="1" PdiType="#x0100" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04562c52" RevisionNo="#x00110000" PortPhys="19" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EK1110 EtherCAT extension" Desc="EK1110" PortABoxInfo="#x01000002"/>
+					</Box>
+				</Box>
+				<Box Id="4" BoxType="9099" BoxFlags="#x00000020">
+					<Name>Box 4 (CompactCom 40 EtherCAT)</Name>
+					<ImageId>65</ImageId>
+					<EtherCAT SlaveType="2" PdiType="#x3680" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="51" FoeType="1" VendorId="#x0000001b" ProductCode="#x00000036" RevisionNo="#x00020015" InfoDataAddr="true" EnableWdDivider0400="true" EnableWdTime0420="true" TimeoutMailbox2="2002" PortPhys="17" Type="CompactCom 40 EtherCAT" Desc="CompactCom 40 EtherCAT" PortABoxInfo="#x01000003">
+						<SyncMan>0040140126000100010000002200ce051401004026010000</SyncMan>
+						<SyncMan>0048140122000100020000002200ce051401004822010000</SyncMan>
+						<SyncMan>001020016400010003000000000000000000001064010000</SyncMan>
+						<SyncMan>002820012000010004000000000000000000002820010000</SyncMan>
+						<Fmmu>0000000000000000001000020100000001000000000000000000000000000000</Fmmu>
+						<Fmmu>0000000000000000002800010100000002000000000000000000000000000000</Fmmu>
+						<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+						<BootStrapData>0040000400480004</BootStrapData>
+						<Pdo Name="Tx PDO (4 Sta.)" Index="#x1a00" Flags="#x0091" SyncMan="3">
+							<Entry Name="RX(6000-6007)" Index="#x2200" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6008-6015)" Index="#x2200" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6016-6023)" Index="#x2200" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6024-6031)" Index="#x2200" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6032-6039)" Index="#x2200" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6040-6047)" Index="#x2200" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6048-6055)" Index="#x2200" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6056-6063)" Index="#x2200" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6064-6071)" Index="#x2200" Sub="#x09">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6072-6079)" Index="#x2200" Sub="#x0a">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6080-6087)" Index="#x2200" Sub="#x0b">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6088-6095)" Index="#x2200" Sub="#x0c">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6096-6103)" Index="#x2200" Sub="#x0d">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6104-6111)" Index="#x2200" Sub="#x0e">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6112-6119)" Index="#x2200" Sub="#x0f">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6120-6127)" Index="#x2200" Sub="#x10">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6128-6135)" Index="#x2200" Sub="#x11">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6136-6143)" Index="#x2200" Sub="#x12">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6144-6151)" Index="#x2200" Sub="#x13">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6152-6159)" Index="#x2200" Sub="#x14">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6160-6167)" Index="#x2200" Sub="#x15">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6168-6175)" Index="#x2200" Sub="#x16">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6176-6183)" Index="#x2200" Sub="#x17">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6184-6191)" Index="#x2200" Sub="#x18">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6192-6199)" Index="#x2200" Sub="#x19">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6200-6207)" Index="#x2200" Sub="#x1a">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6208-6215)" Index="#x2200" Sub="#x1b">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6216-6223)" Index="#x2200" Sub="#x1c">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6224-6231)" Index="#x2200" Sub="#x1d">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6232-6239)" Index="#x2200" Sub="#x1e">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6240-6247)" Index="#x2200" Sub="#x1f">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RX(6248-6255)" Index="#x2200" Sub="#x20">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RWr(6000)" Index="#x2400" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6001)" Index="#x2400" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6002)" Index="#x2400" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6003)" Index="#x2400" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6004)" Index="#x2400" Sub="#x05">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6005)" Index="#x2400" Sub="#x06">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6006)" Index="#x2400" Sub="#x07">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6007)" Index="#x2400" Sub="#x08">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6008)" Index="#x2400" Sub="#x09">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6009)" Index="#x2400" Sub="#x0a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6010)" Index="#x2400" Sub="#x0b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6011)" Index="#x2400" Sub="#x0c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6012)" Index="#x2400" Sub="#x0d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6013)" Index="#x2400" Sub="#x0e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6014)" Index="#x2400" Sub="#x0f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6015)" Index="#x2400" Sub="#x10">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6016)" Index="#x2400" Sub="#x11">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6017)" Index="#x2400" Sub="#x12">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6018)" Index="#x2400" Sub="#x13">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6019)" Index="#x2400" Sub="#x14">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6020)" Index="#x2400" Sub="#x15">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6021)" Index="#x2400" Sub="#x16">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6022)" Index="#x2400" Sub="#x17">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6023)" Index="#x2400" Sub="#x18">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6024)" Index="#x2400" Sub="#x19">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6025)" Index="#x2400" Sub="#x1a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6026)" Index="#x2400" Sub="#x1b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6027)" Index="#x2400" Sub="#x1c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6028)" Index="#x2400" Sub="#x1d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6029)" Index="#x2400" Sub="#x1e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6030)" Index="#x2400" Sub="#x1f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6031)" Index="#x2400" Sub="#x20">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6032)" Index="#x2401" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6033)" Index="#x2401" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6034)" Index="#x2401" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6035)" Index="#x2401" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6036)" Index="#x2401" Sub="#x05">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6037)" Index="#x2401" Sub="#x06">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6038)" Index="#x2401" Sub="#x07">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6039)" Index="#x2401" Sub="#x08">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6040)" Index="#x2401" Sub="#x09">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6041)" Index="#x2401" Sub="#x0a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6042)" Index="#x2401" Sub="#x0b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6043)" Index="#x2401" Sub="#x0c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6044)" Index="#x2401" Sub="#x0d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6045)" Index="#x2401" Sub="#x0e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6046)" Index="#x2401" Sub="#x0f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6047)" Index="#x2401" Sub="#x10">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6048)" Index="#x2401" Sub="#x11">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6049)" Index="#x2401" Sub="#x12">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6050)" Index="#x2401" Sub="#x13">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6051)" Index="#x2401" Sub="#x14">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6052)" Index="#x2401" Sub="#x15">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6053)" Index="#x2401" Sub="#x16">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6054)" Index="#x2401" Sub="#x17">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6055)" Index="#x2401" Sub="#x18">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6056)" Index="#x2401" Sub="#x19">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6057)" Index="#x2401" Sub="#x1a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6058)" Index="#x2401" Sub="#x1b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6059)" Index="#x2401" Sub="#x1c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6060)" Index="#x2401" Sub="#x1d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6061)" Index="#x2401" Sub="#x1e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6062)" Index="#x2401" Sub="#x1f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6063)" Index="#x2401" Sub="#x20">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6064)" Index="#x2402" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6065)" Index="#x2402" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6066)" Index="#x2402" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6067)" Index="#x2402" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6068)" Index="#x2402" Sub="#x05">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6069)" Index="#x2402" Sub="#x06">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6070)" Index="#x2402" Sub="#x07">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6071)" Index="#x2402" Sub="#x08">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6072)" Index="#x2402" Sub="#x09">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="&#10;RWr(6073)" Index="#x2402" Sub="#x0a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="&#10;RWr(6074)" Index="#x2402" Sub="#x0b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6075)" Index="#x2402" Sub="#x0c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6076)" Index="#x2402" Sub="#x0d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6077)" Index="#x2402" Sub="#x0e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6078)" Index="#x2402" Sub="#x0f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6079)" Index="#x2402" Sub="#x10">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6080)" Index="#x2402" Sub="#x11">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6081)" Index="#x2402" Sub="#x12">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6082)" Index="#x2402" Sub="#x13">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6083)" Index="#x2402" Sub="#x14">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6084)" Index="#x2402" Sub="#x15">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6085)" Index="#x2402" Sub="#x16">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6086)" Index="#x2402" Sub="#x17">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6087)" Index="#x2402" Sub="#x18">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6088)" Index="#x2402" Sub="#x19">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6089)" Index="#x2402" Sub="#x1a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6090)" Index="#x2402" Sub="#x1b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6091)" Index="#x2402" Sub="#x1c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6092)" Index="#x2402" Sub="#x1d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6093)" Index="#x2402" Sub="#x1e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6094)" Index="#x2402" Sub="#x1f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6095)" Index="#x2402" Sub="#x20">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6096)" Index="#x2403" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6097)" Index="#x2403" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6098)" Index="#x2403" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6099)" Index="#x2403" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6100)" Index="#x2403" Sub="#x05">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6101)" Index="#x2403" Sub="#x06">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6102)" Index="#x2403" Sub="#x07">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6103)" Index="#x2403" Sub="#x08">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6104)" Index="#x2403" Sub="#x09">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6105)" Index="#x2403" Sub="#x0a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6106)" Index="#x2403" Sub="#x0b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6107)" Index="#x2403" Sub="#x0c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6108)" Index="#x2403" Sub="#x0d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6109)" Index="#x2403" Sub="#x0e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6110)" Index="#x2403" Sub="#x0f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6111)" Index="#x2403" Sub="#x10">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6112)" Index="#x2403" Sub="#x11">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6113)" Index="#x2403" Sub="#x12">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6114)" Index="#x2403" Sub="#x13">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6115)" Index="#x2403" Sub="#x14">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6116)" Index="#x2403" Sub="#x15">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6117)" Index="#x2403" Sub="#x16">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6118)" Index="#x2403" Sub="#x17">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6119)" Index="#x2403" Sub="#x18">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6120)" Index="#x2403" Sub="#x19">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6121)" Index="#x2403" Sub="#x1a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6122)" Index="#x2403" Sub="#x1b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="&#10;RWr(6123)" Index="#x2403" Sub="#x1c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6124)" Index="#x2403" Sub="#x1d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6125)" Index="#x2403" Sub="#x1e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6126)" Index="#x2403" Sub="#x1f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWr(6127)" Index="#x2403" Sub="#x20">
+								<Type>UINT</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="Rx PDO (4 Sta.)" Index="#x1600" InOut="1" Flags="#x0091" SyncMan="2">
+							<Entry Name="RY(6000-6007)" Index="#x2100" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6008-6015)" Index="#x2100" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6016-6023)" Index="#x2100" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6024-6031)" Index="#x2100" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6032-6039)" Index="#x2100" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6040-6047)" Index="#x2100" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6048-6055)" Index="#x2100" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6056-6063)" Index="#x2100" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6064-6071)" Index="#x2100" Sub="#x09">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6072-6079)" Index="#x2100" Sub="#x0a">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6080-6087)" Index="#x2100" Sub="#x0b">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6088-6095)" Index="#x2100" Sub="#x0c">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6096-6103)" Index="#x2100" Sub="#x0d">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6104-6111)" Index="#x2100" Sub="#x0e">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6112-6119)" Index="#x2100" Sub="#x0f">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6120-6127)" Index="#x2100" Sub="#x10">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6128-6135)" Index="#x2100" Sub="#x11">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6136-6143)" Index="#x2100" Sub="#x12">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6144-6151)" Index="#x2100" Sub="#x13">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6152-6159)" Index="#x2100" Sub="#x14">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6160-6167)" Index="#x2100" Sub="#x15">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6168-6175)" Index="#x2100" Sub="#x16">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6176-6183)" Index="#x2100" Sub="#x17">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6184-6191)" Index="#x2100" Sub="#x18">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6192-6199)" Index="#x2100" Sub="#x19">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6200-6207)" Index="#x2100" Sub="#x1a">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6208-6215)" Index="#x2100" Sub="#x1b">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6216-6223)" Index="#x2100" Sub="#x1c">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6224-6231)" Index="#x2100" Sub="#x1d">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6232-6239)" Index="#x2100" Sub="#x1e">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6240-6247)" Index="#x2100" Sub="#x1f">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RY(6248-6255)" Index="#x2100" Sub="#x20">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="RWw(6000)" Index="#x2300" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6001)" Index="#x2300" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6002)" Index="#x2300" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6003)" Index="#x2300" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6004)" Index="#x2300" Sub="#x05">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6005)" Index="#x2300" Sub="#x06">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6006)" Index="#x2300" Sub="#x07">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6007)" Index="#x2300" Sub="#x08">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6008)" Index="#x2300" Sub="#x09">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6009)" Index="#x2300" Sub="#x0a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6010)" Index="#x2300" Sub="#x0b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6011)" Index="#x2300" Sub="#x0c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6012)" Index="#x2300" Sub="#x0d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6013)" Index="#x2300" Sub="#x0e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6014)" Index="#x2300" Sub="#x0f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6015)" Index="#x2300" Sub="#x10">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6016)" Index="#x2300" Sub="#x11">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6017)" Index="#x2300" Sub="#x12">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6018)" Index="#x2300" Sub="#x13">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6019)" Index="#x2300" Sub="#x14">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6020)" Index="#x2300" Sub="#x15">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6021)" Index="#x2300" Sub="#x16">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6022)" Index="#x2300" Sub="#x17">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6023)" Index="#x2300" Sub="#x18">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6024)" Index="#x2300" Sub="#x19">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6025)" Index="#x2300" Sub="#x1a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6026)" Index="#x2300" Sub="#x1b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6027)" Index="#x2300" Sub="#x1c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6028)" Index="#x2300" Sub="#x1d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6029)" Index="#x2300" Sub="#x1e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6030)" Index="#x2300" Sub="#x1f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6031)" Index="#x2300" Sub="#x20">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6032)" Index="#x2301" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6033)" Index="#x2301" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6034)" Index="#x2301" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6035)" Index="#x2301" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6036)" Index="#x2301" Sub="#x05">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6037)" Index="#x2301" Sub="#x06">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6038)" Index="#x2301" Sub="#x07">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6039)" Index="#x2301" Sub="#x08">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6040)" Index="#x2301" Sub="#x09">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6041)" Index="#x2301" Sub="#x0a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6042)" Index="#x2301" Sub="#x0b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6043)" Index="#x2301" Sub="#x0c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6044)" Index="#x2301" Sub="#x0d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6045)" Index="#x2301" Sub="#x0e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6046)" Index="#x2301" Sub="#x0f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6047)" Index="#x2301" Sub="#x10">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6048)" Index="#x2301" Sub="#x11">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6049)" Index="#x2301" Sub="#x12">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6050)" Index="#x2301" Sub="#x13">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6051)" Index="#x2301" Sub="#x14">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6052)" Index="#x2301" Sub="#x15">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6053)" Index="#x2301" Sub="#x16">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6054)" Index="#x2301" Sub="#x17">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6055)" Index="#x2301" Sub="#x18">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6056)" Index="#x2301" Sub="#x19">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6057)" Index="#x2301" Sub="#x1a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6058)" Index="#x2301" Sub="#x1b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6059)" Index="#x2301" Sub="#x1c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6060)" Index="#x2301" Sub="#x1d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6061)" Index="#x2301" Sub="#x1e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6062)" Index="#x2301" Sub="#x1f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6063)" Index="#x2301" Sub="#x20">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6064)" Index="#x2302" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6065)" Index="#x2302" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6066)" Index="#x2302" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6067)" Index="#x2302" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6068)" Index="#x2302" Sub="#x05">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6069)" Index="#x2302" Sub="#x06">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6070)" Index="#x2302" Sub="#x07">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6071)" Index="#x2302" Sub="#x08">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6072)" Index="#x2302" Sub="#x09">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6073)" Index="#x2302" Sub="#x0a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6074)" Index="#x2302" Sub="#x0b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6075)" Index="#x2302" Sub="#x0c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6076)" Index="#x2302" Sub="#x0d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6077)" Index="#x2302" Sub="#x0e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6078)" Index="#x2302" Sub="#x0f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6079)" Index="#x2302" Sub="#x10">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6080)" Index="#x2302" Sub="#x11">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6081)" Index="#x2302" Sub="#x12">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6082)" Index="#x2302" Sub="#x13">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6083)" Index="#x2302" Sub="#x14">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6084)" Index="#x2302" Sub="#x15">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6085)" Index="#x2302" Sub="#x16">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6086)" Index="#x2302" Sub="#x17">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6087)" Index="#x2302" Sub="#x18">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6088)" Index="#x2302" Sub="#x19">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6089)" Index="#x2302" Sub="#x1a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6090)" Index="#x2302" Sub="#x1b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6091)" Index="#x2302" Sub="#x1c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6092)" Index="#x2302" Sub="#x1d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6093)" Index="#x2302" Sub="#x1e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6094)" Index="#x2302" Sub="#x1f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6095)" Index="#x2302" Sub="#x20">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6096)" Index="#x2303" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6097)" Index="#x2303" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6098)" Index="#x2303" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6099)" Index="#x2303" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6100)" Index="#x2303" Sub="#x05">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6101)" Index="#x2303" Sub="#x06">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6102)" Index="#x2303" Sub="#x07">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6103)" Index="#x2303" Sub="#x08">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6104)" Index="#x2303" Sub="#x09">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6105)" Index="#x2303" Sub="#x0a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6106)" Index="#x2303" Sub="#x0b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6107)" Index="#x2303" Sub="#x0c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6108)" Index="#x2303" Sub="#x0d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6109)" Index="#x2303" Sub="#x0e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6110)" Index="#x2303" Sub="#x0f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6111)" Index="#x2303" Sub="#x10">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6112)" Index="#x2303" Sub="#x11">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6113)" Index="#x2303" Sub="#x12">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6114)" Index="#x2303" Sub="#x13">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6115)" Index="#x2303" Sub="#x14">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6116)" Index="#x2303" Sub="#x15">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6117)" Index="#x2303" Sub="#x16">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6118)" Index="#x2303" Sub="#x17">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6119)" Index="#x2303" Sub="#x18">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6120)" Index="#x2303" Sub="#x19">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6121)" Index="#x2303" Sub="#x1a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6122)" Index="#x2303" Sub="#x1b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6123)" Index="#x2303" Sub="#x1c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6124)" Index="#x2303" Sub="#x1d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6125)" Index="#x2303" Sub="#x1e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6126)" Index="#x2303" Sub="#x1f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="RWw(6127)" Index="#x2303" Sub="#x20">
+								<Type>UINT</Type>
+							</Entry>
+						</Pdo>
+						<Slot Name="GPIO&amp;Reg">
+							<SlotData>0000010001000000000000000000000000000000000000000000000000000000</SlotData>
+							<ModuleIdent>257</ModuleIdent>
+							<ModuleIdent>258</ModuleIdent>
+							<ModuleIdent>259</ModuleIdent>
+							<ModuleIdent>260</ModuleIdent>
+							<Module Id="#x03090001" Type="4 Stations:CR800 GPIO_REG_IF" Class="">
+								<Name>Module 1 (4 Stations:CR800 GPIO_REG_IF)</Name>
+								<ImageId>65</ImageId>
+								<ModuleData>1b00000004010000000004000000000000000000000000000000000000000000</ModuleData>
+								<PdoIndex>6656</PdoIndex>
+								<PdoIndex>5632</PdoIndex>
+							</Module>
+						</Slot>
+					</EtherCAT>
+				</Box>
+				<EtherCAT/>
+			</Device>
+		</Io>
+	</Project>
+	<Mappings>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500821000403}" Id="#x02030020"/>
+		<OwnerA Name="TIPC^PShEll_UniversalBlocks^PShEll_UniversalBlocks Instance">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Box 4 (CompactCom 40 EtherCAT)">
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6000]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6000)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6001]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6001)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6002]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6002)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6003]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6003)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6004]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6004)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6005]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6005)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6006]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6006)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6007]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6007)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6008]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6008)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6009]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6009)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6010]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6010)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6011]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6011)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6012]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6012)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6013]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6013)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6014]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6014)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6015]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6015)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6016]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6016)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6017]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6017)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6018]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6018)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6019]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6019)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6020]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6020)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6021]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6021)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6022]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6022)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6023]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6023)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6024]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6024)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6025]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6025)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6026]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6026)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6027]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6027)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6028]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6028)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6029]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6029)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6030]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6030)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6031]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6031)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6032]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6032)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6033]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6033)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6034]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6034)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6035]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6035)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6036]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6036)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6037]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6037)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6038]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6038)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6039]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6039)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6040]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6040)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6041]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6041)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6042]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6042)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6043]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6043)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6044]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6044)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6045]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6045)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6046]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6046)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6047]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6047)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6048]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6048)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6049]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6049)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6050]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6050)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6051]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6051)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6052]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6052)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6053]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6053)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6054]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6054)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6055]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6055)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6056]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6056)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6057]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6057)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6058]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6058)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6059]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6059)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6060]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6060)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6061]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6061)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6062]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6062)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6063]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6063)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6064]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6064)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6065]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6065)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6066]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6066)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6067]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6067)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6068]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6068)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6069]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6069)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6070]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6070)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6071]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6071)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6072]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6072)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6073]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^&#10;RWr(6073)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6074]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^&#10;RWr(6074)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6075]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6075)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6076]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6076)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6077]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6077)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6078]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6078)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6079]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6079)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6080]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6080)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6081]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6081)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6082]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6082)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6083]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6083)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6084]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6084)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6085]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6085)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6086]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6086)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6087]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6087)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6088]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6088)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6089]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6089)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6090]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6090)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6091]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6091)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6092]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6092)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6093]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6093)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6094]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6094)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6095]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6095)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6096]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6096)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6097]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6097)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6098]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6098)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6099]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6099)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6100]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6100)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6101]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6101)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6102]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6102)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6103]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6103)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6104]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6104)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6105]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6105)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6106]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6106)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6107]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6107)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6108]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6108)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6109]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6109)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6110]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6110)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6111]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6111)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6112]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6112)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6113]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6113)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6114]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6114)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6115]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6115)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6116]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6116)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6117]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6117)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6118]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6118)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6119]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6119)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6120]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6120)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6121]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6121)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6122]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6122)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6123]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^&#10;RWr(6123)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6124]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6124)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6125]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6125)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6126]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6126)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersInput[6127]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RWr(6127)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[0]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6000-6007)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[10]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6080-6087)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[11]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6088-6095)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[12]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6096-6103)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[13]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6104-6111)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[14]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6112-6119)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[15]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6120-6127)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[16]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6128-6135)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[17]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6136-6143)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[18]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6144-6151)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[19]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6152-6159)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[1]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6008-6015)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[20]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6160-6167)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[21]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6168-6175)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[22]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6176-6183)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[23]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6184-6191)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[24]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6192-6199)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[25]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6200-6207)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[26]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6208-6215)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[27]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6216-6223)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[28]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6224-6231)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[29]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6232-6239)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[2]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6016-6023)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[30]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6240-6247)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[31]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6248-6255)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[3]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6024-6031)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[4]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6032-6039)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[5]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6040-6047)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[6]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6048-6055)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[7]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6056-6063)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[8]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6064-6071)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsInputRaw[9]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Tx PDO (4 Sta.)^RX(6072-6079)"/>
+				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.iInfoDataState" VarB="InfoData^State"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6000]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6000)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6001]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6001)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6002]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6002)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6003]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6003)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6004]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6004)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6005]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6005)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6006]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6006)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6007]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6007)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6008]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6008)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6009]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6009)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6010]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6010)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6011]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6011)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6012]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6012)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6013]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6013)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6014]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6014)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6015]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6015)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6016]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6016)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6017]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6017)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6018]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6018)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6019]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6019)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6020]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6020)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6021]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6021)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6022]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6022)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6023]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6023)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6024]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6024)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6025]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6025)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6026]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6026)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6027]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6027)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6028]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6028)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6029]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6029)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6030]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6030)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6031]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6031)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6032]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6032)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6033]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6033)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6034]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6034)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6035]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6035)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6036]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6036)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6037]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6037)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6038]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6038)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6039]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6039)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6040]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6040)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6041]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6041)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6042]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6042)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6043]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6043)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6044]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6044)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6045]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6045)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6046]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6046)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6047]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6047)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6048]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6048)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6049]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6049)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6050]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6050)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6051]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6051)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6052]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6052)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6053]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6053)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6054]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6054)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6055]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6055)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6056]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6056)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6057]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6057)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6058]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6058)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6059]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6059)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6060]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6060)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6061]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6061)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6062]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6062)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6063]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6063)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6064]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6064)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6065]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6065)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6066]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6066)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6067]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6067)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6068]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6068)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6069]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6069)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6070]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6070)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6071]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6071)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6072]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6072)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6073]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6073)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6074]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6074)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6075]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6075)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6076]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6076)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6077]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6077)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6078]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6078)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6079]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6079)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6080]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6080)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6081]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6081)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6082]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6082)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6083]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6083)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6084]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6084)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6085]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6085)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6086]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6086)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6087]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6087)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6088]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6088)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6089]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6089)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6090]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6090)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6091]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6091)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6092]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6092)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6093]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6093)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6094]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6094)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6095]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6095)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6096]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6096)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6097]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6097)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6098]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6098)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6099]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6099)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6100]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6100)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6101]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6101)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6102]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6102)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6103]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6103)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6104]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6104)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6105]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6105)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6106]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6106)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6107]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6107)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6108]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6108)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6109]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6109)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6110]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6110)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6111]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6111)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6112]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6112)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6113]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6113)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6114]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6114)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6115]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6115)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6116]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6116)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6117]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6117)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6118]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6118)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6119]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6119)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6120]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6120)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6121]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6121)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6122]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6122)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6123]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6123)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6124]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6124)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6125]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6125)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6126]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6126)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrRegistersOutput[6127]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RWw(6127)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[0]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6000-6007)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[10]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6080-6087)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[11]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6088-6095)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[12]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6096-6103)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[13]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6104-6111)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[14]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6112-6119)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[15]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6120-6127)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[16]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6128-6135)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[17]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6136-6143)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[18]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6144-6151)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[19]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6152-6159)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[1]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6008-6015)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[20]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6160-6167)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[21]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6168-6175)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[22]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6176-6183)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[23]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6184-6191)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[24]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6192-6199)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[25]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6200-6207)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[26]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6208-6215)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[27]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6216-6223)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[28]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6224-6231)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[29]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6232-6239)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[2]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6016-6023)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[30]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6240-6247)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[31]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6248-6255)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[3]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6024-6031)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[4]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6032-6039)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[5]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6040-6047)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[6]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6048-6055)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[7]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6056-6063)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[8]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6064-6071)"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.arrRobot[0].stCR800EthercatData.arrSignalsOutputRaw[9]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6072-6079)"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
+</TcSmProject>

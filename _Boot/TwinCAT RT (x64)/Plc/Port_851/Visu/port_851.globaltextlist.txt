@@ -1,0 +1,252 @@
+Id;Default
+224;%2d
+1044;%3.0f
+21;%6.3f
+331;%d
+890;%f
+976;%s
+2051;/
+887;Abort
+494;Acceleration:
+3798;Action number:
+487;Active Alarms
+1711;Active alarms:
+649;Active critical
+1670;Active critical alarms:
+202;Active criticals:
+709;Active errors
+780;Active errors:
+700;Active warnings:
+582;Active warrnings
+706;Active warrnings:
+370;Actual Position:
+78;Actual Velocity
+1000;Admin
+431;Alarms
+813;All active alarms:
+944;At least one of emergency button is active
+1158;At least one of the door lock is not locked
+427;Auto mode
+989;Auxilary
+931;Axes
+913;Axis
+542;Back
+300;Backup
+2292;Backup and restore from external directory
+2272;Battery low
+662;Battery reset
+1355;Camera
+576;Camera connection
+2601;Camera job setup
+917;Change pass.
+1549;Clear all
+349;Clear All Alarms
+277;Close
+410;Close HMI
+1072;Commands
+186;Communication Setup
+592;Continue
+1156;Controller
+2906;Controller reset
+470;Couldn$'t connect to any measurement setup
+3304;Couldn$'t connect to measurement setup
+1448;Courtains checked
+1047;Create
+2909;Create new recipe:
+2120;Current value
+2043;Cycle pause
+3558;Cycle restore
+2070;Cycle stop
+424;Cylinders
+1092;Deceleration:
+362;Deinitialization in progress...
+1655;Digital Inputs
+1456;Digital inputs
+1692;Digital Outputs
+1445;Digital outputs
+1090;Digital outputs and valves
+538;Door Lock
+1033;Door locks checked
+2366;E-Stop checked
+1643;Enable simulation
+245;Enable/Disable All
+1468;Error
+2782;Error reset
+537;Error: %d
+1738;Error: %s
+368;Event history
+1107;Event history:
+86;Event ID
+619;Event Text
+297;Event Type
+77;Export to file
+1073;Finishing initialization...
+742;Fixture 1
+433;Fixture 2
+643;Fixture 3
+801;Fixture 4
+404;Fixture 5
+945;Fixture 6
+230;Fixture 7
+591;Fixture 8
+1032;Fixture initialization (1)
+526;Fixture initialization (2)
+708;Fixture initialization (3)
+710;Fixture initialization (4)
+416;Fixture initialization (5)
+888;Fixture initialization (6)
+738;Fixture initialization (7)
+405;Fixture initialization (8)
+1696;Force Input Value
+244;Go %s
+2687;Go auto
+66;Go home
+1163;Halt
+2141;Halted
+110;Home
+1505;Homed
+2548;In Position
+371;Initialize
+1488;Initialized
+312;Inputs
+1273;IP Address
+2436;Jog
+18;Jog +
+19;Jog -
+2152;Jog mode:
+121;Lag error:
+715;Lights
+1263;Load from file
+1426;Loaded recipe
+332;Log In
+198;Log Out
+1506;Logged user
+466;Machine Initial Setup
+1379;Machine Initial Startup
+507;Machine Logger initialization
+921;Machine nearly ready to work...
+665;Machine state
+428;Manual
+485;Manual Axis Control
+1020;Manual Cylinders Control
+822;Manual mode
+3024;Manual Robots Control
+83;Measurement fixtures setup
+67;MES connection
+729;Mode switch
+417;Motors
+1606;Next
+1295;No dry run
+1023;None
+1645;Number of:
+1015;Operator
+1972;Others
+1697;Output trays replaced
+613;Outputs
+639;Override:
+1319;Override: %2.0d
+407;Override: %2d
+1429;Override: %3.0f
+1146;Parameters:
+1309;Path:
+725;Paused
+2613;Place empty trays inside machine output zone and close the cover
+1304;Port
+1845;Position hold
+2517;Position:
+905;Position: %s
+731;Powered on
+1584;Press $" Safety Reset$" button at front panel
+1825;Previous
+316;Program
+1005;Read to file
+690;Recipe list:
+2365;Recipe name
+1499;Recipe name:
+247;Recipe parameters
+298;Recipes
+260;Recipes Manager initialization
+2656;Recipes Manager: %s
+1083;Release
+2097;Reload
+2954;Remove
+3075;Reset
+707;Reset in progress...
+861;Reset:
+1061;Reseting errors...
+561;Restore
+2648;Restore auto
+854;Retry
+610;Robot 1
+704;Robot Controlers Communication Setup
+1558;Robot Controlers Power On ( aprox. 60 sec.)
+1027;Robot Controlers reset
+2693;Robot homed (1)
+2286;Robot homed (2)
+155;Robot initialization (1)
+1178;Robot initialization (2)
+951;Robots
+463;Robots Controler Power On
+2245;Robots in automatic mode
+1226;Robots in remote mode
+1611;Rotary table
+962;Rotary table initialization
+2584;Safe Inputs
+958;Safe mode switch in progress...
+711;Safe mode switching...
+1087;Safe Outputs
+2044;Safety Controler check
+2118;Safety Controler initialization
+1398;Safety Controler reset
+980;Safety Controler start
+670;Safety I/O
+2626;Save in file
+550;Select
+1288;Selected recipe
+7;Selected recipe value
+1458;Selected recipe:
+1007;Service
+2402;Servo off
+772;Servo on
+2183;Set Position:
+511;Set Velocity:
+536;Severity
+2362;Skip to next
+1781;Skip tray change
+50;Software version: v%s
+450;Start
+3789;Started
+1037;State: %s
+895;Status
+85;Statuses & parameters:
+442;Stop
+1093;Stopped
+848;Time Cleared
+730;Time Confirmed
+9;Time Raised
+1974;Time: %d [ms]
+10;Total active alarms
+3571;Trayfeeder courtain signal interupted
+3;Trayfeeder courtain signal interupted while initialization
+109;Trayfeeder home
+513;Trayfeeder initialization
+1629;Update recipes
+1832;UTU 1
+458;UTU 2
+124;UTU 3
+800;UTU 4
+236;UTU 5
+779;UTU 6
+59;UTU 7
+687;UTU 8
+342;UTU Device 1
+668;UTU Device 2
+5;UTU Device 3
+1708;UTU Device 4
+1132;UTU Device 5
+48;UTU Device 6
+1515;UTU Device 7
+948;UTU Device 8
+1334;Velocity:
+322;[%s/s]
+374;[%s]

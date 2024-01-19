@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_InitializationFrame" Id="{4846150c-8bd4-4b7d-81fe-f0825b67dd16}">
+    <Declaration><![CDATA[TYPE ST_InitializationFrame :
+STRUCT
+	bMachineLoggerInitialized	: BOOL;												(* Platform machine logger initialized*)
+	bRecipesManagerInitialized	: BOOL;												(* Platform recipes manager initialized *)
+	bMesConnected 				: BOOL;												(* Machine connected to the MES *)
+	bSafetyInitialization		: BOOL;												(*  *)
+	bEStopChecked				: BOOL;												(*  *)
+	bCourtainChecked			: BOOL;												(*  *)
+	bDoorsLocked				: BOOL;												(* Machine door's locked *)
+	bRobotControlersPowerOn		: BOOL;												(* Robots controlers power on *)
+	bSafetyReset				: BOOL;												(* Safety status checked *)
+	bSafetyStart				: BOOL;												(* Safety started *) 
+	bRobotControlersResetDone	: BOOL;												(* Robots controlers reset done *)
+	bSafetyCheck				: BOOL;												(* Safety final status OK *)
+	bRobotsInRemoteMode			: BOOL;												(* Robot controlers in remote mode *)
+	bRobotOneInitialized 		: BOOL;												(* Robot one initialized *)
+	bRobotTwoInitialized 		: BOOL;												(* Robot two initialized *)
+	bRobotOneHomed				: BOOL;												(* Robot one homed *)
+	bRobotTwoHomed				: BOOL;												(* Robot two homed *)
+	bRobotsInAutomaticMode		: BOOL;												(*  *)
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

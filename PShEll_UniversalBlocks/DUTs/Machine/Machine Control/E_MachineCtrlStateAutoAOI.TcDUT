@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_MachineCtrlStateAutoAOI" Id="{ba40d27c-eb5a-43c4-bcd5-5c73b6fce541}">
+    <Declaration><![CDATA[{attribute 'strict'}
+TYPE E_MachineCtrlStateAutoAOI :
+(
+	MACHINE_STATE_AUTO_AOI_IDLE 				:= 0,	(* During this state machine is waiting for choosing one of workmode and additional parameters *)
+	MACHINE_STATE_AUTO_AOI_PROCCESSING			:= 10,
+	MACHINE_STATE_AUTO_AOI_GO_INPUT				:= 20,
+	MACHINE_STATE_AUTO_AOI_GO_BACK				:= 30,		
+	MACHINE_STATE_AUTO_AOI_DONE					:= 40
+)UINT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

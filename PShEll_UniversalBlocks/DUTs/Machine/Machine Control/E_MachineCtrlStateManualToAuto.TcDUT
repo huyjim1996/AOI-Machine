@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_MachineCtrlStateManualToAuto" Id="{b73c7f64-58db-479a-a549-372eeef3db20}">
+    <Declaration><![CDATA[{attribute 'strict'}
+TYPE E_MachineCtrlStateManualToAuto :
+(
+	
+	MACHINE_STATE_MANUAL_TO_AUTO_ROBOT_CYCLE_STOP			:= 0,	(*  *)
+
+	MACHINE_STATE_MANUAL_TO_AUTO_ROBOT_ABORT				:= 10,	(*  *)
+	MACHINE_STATE_MANUAL_TO_AUTO_ROBOT_REMOTE_MODE			:= 20,	(*  *)
+	MACHINE_STATE_MANUAL_TO_AUTO_ROBOT_INIT					:= 30,	(*  *)
+	MACHINE_STATE_MANUAL_TO_AUTO_ROBOT_HOME					:= 40,	(*  *)
+	MACHINE_STATE_MANUAL_TO_AUTO_ROBOT_AUTOMATIC_MODE		:= 50,	(*  *)
+                 
+	MACHINE_STATE_MANUAL_TO_AUTO_DONE						:= 260
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
