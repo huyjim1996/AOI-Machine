@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-02-02T04:04:17.869Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0" etag="LHuYwU0myLysDY0VgymW" version="23.1.0" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2024-02-02T06:49:48.865Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0" etag="f80w2FElPU54-fgQ4iHe" version="23.1.0" type="github" pages="4">
   <diagram name="Overview State Machine Diagram" id="v3ZlMP72TM2bRMMOr79-">
-    <mxGraphModel dx="1263" dy="704" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
+    <mxGraphModel dx="1063" dy="704" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
       <root>
         <mxCell id="WW-zu42CSBgiY89HqXib-0" />
         <mxCell id="WW-zu42CSBgiY89HqXib-1" parent="WW-zu42CSBgiY89HqXib-0" />
@@ -8,6 +8,9 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="190" y="214" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="_DFZCtBtQmX0nNGhwsYy-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WW-zu42CSBgiY89HqXib-1" source="yEkoepyDLRdJ0-82_h-8-14" target="_DFZCtBtQmX0nNGhwsYy-5">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="yEkoepyDLRdJ0-82_h-8-14" value="" style="ellipse;fillColor=strokeColor;html=1;rounded=1;" vertex="1" parent="WW-zu42CSBgiY89HqXib-1">
           <mxGeometry x="80" y="199" width="30" height="30" as="geometry" />
@@ -133,16 +136,19 @@
         <mxCell id="_DFZCtBtQmX0nNGhwsYy-0" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;Unintialized&lt;/span&gt;" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=30;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;whiteSpace=wrap;rounded=1;" vertex="1" parent="WW-zu42CSBgiY89HqXib-1">
           <mxGeometry x="181" y="149" width="150" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="_DFZCtBtQmX0nNGhwsYy-1" value="- CR800 check" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;whiteSpace=wrap;rounded=1;align=left;" vertex="1" parent="_DFZCtBtQmX0nNGhwsYy-0">
+        <mxCell id="_DFZCtBtQmX0nNGhwsYy-1" value="- CR800 power on &amp;amp; connection check&lt;br&gt;- Power On PC&lt;br&gt;- Fan On&lt;br&gt;- Power On machine light" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;whiteSpace=wrap;rounded=1;align=left;" vertex="1" parent="_DFZCtBtQmX0nNGhwsYy-0">
           <mxGeometry width="150" height="77" relative="1" as="geometry">
             <mxPoint y="30" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="_DFZCtBtQmX0nNGhwsYy-2" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;DeInitializing&lt;/span&gt;" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=30;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;whiteSpace=wrap;rounded=1;" vertex="1" parent="WW-zu42CSBgiY89HqXib-1">
-          <mxGeometry x="224" y="465" width="150" height="110" as="geometry" />
+        <mxCell id="_DFZCtBtQmX0nNGhwsYy-5" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Lamp Off&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Release Door&lt;/span&gt;&lt;/div&gt;" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="WW-zu42CSBgiY89HqXib-1">
+          <mxGeometry x="186" y="55" width="140" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="_DFZCtBtQmX0nNGhwsYy-3" value="" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;whiteSpace=wrap;rounded=1;align=left;" vertex="1" parent="_DFZCtBtQmX0nNGhwsYy-2">
-          <mxGeometry width="150" height="77" relative="1" as="geometry">
+        <mxCell id="_DFZCtBtQmX0nNGhwsYy-11" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;Initializing&lt;/span&gt;" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=30;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;whiteSpace=wrap;rounded=1;" vertex="1" parent="WW-zu42CSBgiY89HqXib-1">
+          <mxGeometry x="489" y="463" width="176" height="109" as="geometry" />
+        </mxCell>
+        <mxCell id="_DFZCtBtQmX0nNGhwsYy-12" value="- Safety init&lt;br&gt;- Robot init&lt;br&gt;- Rotary table init&lt;br&gt;- Vision system init" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;whiteSpace=wrap;rounded=1;align=left;" vertex="1" parent="_DFZCtBtQmX0nNGhwsYy-11">
+          <mxGeometry width="176" height="80" relative="1" as="geometry">
             <mxPoint y="30" as="offset" />
           </mxGeometry>
         </mxCell>
@@ -150,7 +156,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Auto process State Diagram_First Concept" id="GE9Ud-njpaZmaiL3tsWu">
-    <mxGraphModel dx="1516" dy="845" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
+    <mxGraphModel dx="1276" dy="845" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
       <root>
         <mxCell id="q1DA9xK3n46PnG2VsxQA-0" />
         <mxCell id="q1DA9xK3n46PnG2VsxQA-1" parent="q1DA9xK3n46PnG2VsxQA-0" />
@@ -351,6 +357,22 @@
         <mxCell id="b1xWOM1ve9F-8sQgIUGB-4" value="done" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=1;" parent="b1xWOM1ve9F-8sQgIUGB-3" vertex="1" connectable="0">
           <mxGeometry x="0.4028" y="-3" relative="1" as="geometry">
             <mxPoint x="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Init" id="50sgaSQ5cKTBNT3R1G_v">
+    <mxGraphModel dx="1276" dy="845" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
+      <root>
+        <mxCell id="2POLmIKTKXDjE0cFi6Rh-0" />
+        <mxCell id="2POLmIKTKXDjE0cFi6Rh-1" parent="2POLmIKTKXDjE0cFi6Rh-0" />
+        <mxCell id="Meh8zQ_2P7Z9oA6iVJGR-2" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;Initializing&lt;/span&gt;" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=30;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;whiteSpace=wrap;rounded=1;" vertex="1" parent="2POLmIKTKXDjE0cFi6Rh-1">
+          <mxGeometry x="234" y="475" width="176" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="Meh8zQ_2P7Z9oA6iVJGR-3" value="- Machine logger&lt;br&gt;- Recipe manager&lt;br&gt;- Clear all error&lt;br&gt;- MES command logger&lt;br&gt;- MES CSV reader (barcode)&lt;br&gt;- Safety init&lt;br&gt;- Check EStop&lt;br&gt;- Check door lock&lt;br&gt;- Robot power check&lt;br&gt;- Safety reset &amp;amp; start&lt;br&gt;- Robot controller reset&lt;br&gt;- Safety check&lt;br&gt;-&amp;nbsp;" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;whiteSpace=wrap;rounded=1;align=left;" vertex="1" parent="Meh8zQ_2P7Z9oA6iVJGR-2">
+          <mxGeometry width="176" height="180" relative="1" as="geometry">
+            <mxPoint y="30" as="offset" />
           </mxGeometry>
         </mxCell>
       </root>
