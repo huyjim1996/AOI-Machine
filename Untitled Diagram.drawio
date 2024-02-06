@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-02-05T10:33:06.681Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0" etag="VHIMLiEd20-KGr10U2GY" version="23.1.1" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2024-02-06T09:32:50.199Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0" etag="99uCPZj7ERw6huAklt9y" version="23.1.1" type="github" pages="4">
   <diagram name="Overview State Machine Diagram" id="v3ZlMP72TM2bRMMOr79-">
     <mxGraphModel dx="1365" dy="811" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
       <root>
@@ -162,7 +162,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Auto process State Diagram_First Concept" id="GE9Ud-njpaZmaiL3tsWu">
-    <mxGraphModel dx="1365" dy="811" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
+    <mxGraphModel dx="824" dy="811" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
       <root>
         <mxCell id="q1DA9xK3n46PnG2VsxQA-0" />
         <mxCell id="q1DA9xK3n46PnG2VsxQA-1" parent="q1DA9xK3n46PnG2VsxQA-0" />
@@ -387,7 +387,7 @@
           <mxGeometry y="60" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="4TF_eJLBg-H4r6Ptzs8u-15" value="Bowl Feeder" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;" parent="q1DA9xK3n46PnG2VsxQA-1" vertex="1">
-          <mxGeometry x="300" y="672" width="160" height="143" as="geometry" />
+          <mxGeometry x="300" y="672" width="160" height="352" as="geometry" />
         </mxCell>
         <mxCell id="4TF_eJLBg-H4r6Ptzs8u-16" value="+ bStatus: FB_DigitalOutput&lt;br&gt;+ bEnable:&amp;nbsp;&lt;br&gt;+ aoSetpoint&lt;br&gt;+ piPresenceProduct&lt;br&gt;+&amp;nbsp;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="4TF_eJLBg-H4r6Ptzs8u-15" vertex="1">
           <mxGeometry y="26" width="160" height="83" as="geometry" />
@@ -395,8 +395,8 @@
         <mxCell id="4TF_eJLBg-H4r6Ptzs8u-17" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;rounded=1;" parent="4TF_eJLBg-H4r6Ptzs8u-15" vertex="1">
           <mxGeometry y="109" width="160" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="4TF_eJLBg-H4r6Ptzs8u-18" value="+ method(type): type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="4TF_eJLBg-H4r6Ptzs8u-15" vertex="1">
-          <mxGeometry y="117" width="160" height="26" as="geometry" />
+        <mxCell id="4TF_eJLBg-H4r6Ptzs8u-18" value="+ MR_Start(): Bool&lt;br&gt;+ MR_Stop(): Bool&lt;br&gt;+ MR_Init(): Bool&lt;br&gt;+ MR_Setpoint(SP:int): Bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="4TF_eJLBg-H4r6Ptzs8u-15" vertex="1">
+          <mxGeometry y="117" width="160" height="235" as="geometry" />
         </mxCell>
         <mxCell id="4TF_eJLBg-H4r6Ptzs8u-19" value="Vision System" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;" parent="q1DA9xK3n46PnG2VsxQA-1" vertex="1">
           <mxGeometry x="518" y="672" width="160" height="178" as="geometry" />
