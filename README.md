@@ -1,2 +1,2 @@
-Concept 1
-![image](https://github.com/huyjim1996/AOI-Machine/assets/40256878/938be3ea-b893-48e5-8ce3-e8bea7831081)
+Concept
+![image](https://github.com/huyjim1996/AOI-Machine/assets/40256878/67e3cbf4-fdb5-446f-a9a4-23720ccd8cb3)
