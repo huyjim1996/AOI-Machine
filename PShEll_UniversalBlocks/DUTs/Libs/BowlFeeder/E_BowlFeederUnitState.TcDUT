@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_BowlFeederUnitState" Id="{11e7efba-418c-4026-a844-e371f0734481}">
+    <Declaration><![CDATA[{attribute 'strict'}
+TYPE E_BowlFeederUnitState :
+(
+	BOWL_FEEDER_UNIT_UNINITIALIZED 		:= 0,
+	BOWL_FEEDER_UNIT_INITIALIZING 		:= 10,
+	BOWL_FEEDER_UNIT_READY_INITIALIZED 	:= 20,
+	
+	BOWL_FEEDER_UNIT_IDLE 				:= 30,		(* Ready to work *)
+	BOWL_FEEDER_UNIT_START				:= 40,
+	BOWL_FEEDER_UNIT_RUNNING			:= 50,
+	BOWL_FEEDER_UNIT_STOP				:= 60,
+	BOWL_FEEDER_UNIT_STOP_DONE			:= 70,
+	
+	BOWL_FEEDER_UNIT_ABORT				:= 80
+);	
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

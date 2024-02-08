@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_AnalogOutput" Id="{130a5703-b50b-4c96-afa5-692b879a0fc5}" SpecialFunc="None">
+    <Declaration><![CDATA[(* 
+| :Description: This function block represents basic analog output and can be used for creating an instance of analog output device. 
+| To control the output state use property "Out" 
+*)
+FUNCTION_BLOCK FB_AnalogOutput EXTENDS FB_AnalogDevice IMPLEMENTS I_AnalogOutput
+VAR
+	intAnalogOut AT %Q* : INT; (* Analog output value 0-32767 *)
+	rConvertedValue : REAL;
+END_VAR
+(*
+Version history:
+
++-------------+------------+----------------+----------+------------------------------------------+
+|Date         | Version    | created under  | Author   | Remark                                   |
++=============+============+================+==========+==========================================+
+|2024-02      | 1.0.0.0    | V3.1.4024.22   | HVAP     | Function block created                   |
++-------------+------------+----------------+----------+------------------------------------------+
+
+*)]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*
+Analog output
+0-10V : 0-32767 : 0-100%
+*)]]></ST>
+    </Implementation>
+    <Folder Name="Properties" Id="{81397bab-97ed-43d0-a862-a6fed67e4127}" />
+    <Property Name="Value" Id="{872519d5-7b82-4ff6-a635-b1e5a8a1bf33}" FolderPath="Properties\">
+      <Declaration><![CDATA[PROPERTY Value : REAL]]></Declaration>
+      <Get Name="Get" Id="{e002d32b-9b43-4055-afb2-bf112337c98d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Value := (INT_TO_REAL(intAnalogOut)/32767.0)*100.0;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{f42b91f7-8c0b-4776-99e4-f114e853acc6}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[intAnalogOut := REAL_TO_INT((Value/(100.0 - 0.0))*(32767.0 - 0.0));]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="FB_AnalogOutput">
+      <LineId Id="29" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="33" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AnalogOutput.Value.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AnalogOutput.Value.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

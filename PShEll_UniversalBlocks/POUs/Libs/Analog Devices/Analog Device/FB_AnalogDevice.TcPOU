@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_AnalogDevice" Id="{fd1ff737-3357-40b9-9768-3905912672c0}" SpecialFunc="None">
+    <Declaration><![CDATA[(* 
+:Description: This function block is base for all other analog devices.
+*)
+FUNCTION_BLOCK ABSTRACT FB_AnalogDevice IMPLEMENTS I_AnalogDevice
+VAR
+	sName 		: STRING; (* Name of analog device instance *)
+	sModuleType : STRING; (* Name of analog device instance *)
+	sPortID		: STRING; (* Slot number on the module *)
+END_VAR
+(*
+Version history:
+
++-------------+------------+----------------+----------+------------------------------------------+
+|Date         | Version    | created under  | Author   | Remark                                   |
++=============+============+================+==========+==========================================+
+|2024-02      | 1.0.0.0    | V3.1.4024.22   | HVAP     | Function block created                   |
++-------------+------------+----------------+----------+------------------------------------------+
+
+*)]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="FirstCycle" Id="{4838277a-937b-4d08-8eea-06187290742e}" />
+    <Folder Name="Properties" Id="{f1a577bf-52c6-4eb4-9d3c-64a214ae064d}" />
+    <Property Name="ModuleType" Id="{f871ca6f-c179-49f3-a474-2858eb824df9}" FolderPath="Properties\">
+      <Declaration><![CDATA[PROPERTY ModuleType : REFERENCE TO STRING
+]]></Declaration>
+      <Get Name="Get" Id="{6000fae3-4ae0-40ad-a735-38039d320380}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ModuleType REF= sModuleType;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="MR_FirstCycle" Id="{8f149035-58d2-427d-90ed-ab9b25d09b01}" FolderPath="FirstCycle\">
+      <Declaration><![CDATA[(*
+:Description: Call this method in the first cycle of the program
+*)
+METHOD MR_FirstCycle : BOOL
+VAR_INPUT
+	sName		: STRING;
+	sModuleType	: STRING;
+	sPortID		: STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.sName 		:= sName;
+THIS^.sModuleType 	:= sModuleType;
+THIS^.sPortID 		:= sPortID;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Name" Id="{ff6c1a88-f757-442c-9553-e7ee63a17cd4}" FolderPath="Properties\">
+      <Declaration><![CDATA[PROPERTY Name : REFERENCE TO STRING
+]]></Declaration>
+      <Get Name="Get" Id="{82df3994-9f25-48fa-b6e5-a43fa0761929}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Name REF= sName;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="PortID" Id="{abd8ec42-a7c1-4dec-ae55-0be5b99e9804}" FolderPath="Properties\">
+      <Declaration><![CDATA[PROPERTY PortID : REFERENCE TO STRING
+]]></Declaration>
+      <Get Name="Get" Id="{057fbfe2-5496-47fe-98e2-e12058d45dfb}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[PortID REF= sPortID;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_AnalogDevice">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AnalogDevice.ModuleType.Get">
+      <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AnalogDevice.MR_FirstCycle">
+      <LineId Id="10" Count="1" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AnalogDevice.Name.Get">
+      <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AnalogDevice.PortID.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

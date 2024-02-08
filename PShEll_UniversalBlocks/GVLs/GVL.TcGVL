@@ -50,6 +50,18 @@
 	(* --- Specific Machine Data --- *)
 	(* Number of hardware modules *)
 	iNUMBER_OF_ROBOTS							: USINT 		:= 1;//2	(* Number of robots used inside the machine *)
+	
+	(* --- Default machine setup --- *)
+	(* Axis *)
+	sROTARY_TABLE_NAME						: STRING := 'Rotary table';
+	sROTARY_TABLE_MEASUREMENT_UNIT			: STRING := 'mm';
+	
+	(* Vision System *)
+	sVISION_NAME 								: STRING 		:= 'RTC Vision System';
+	sVISION_HOST 								: T_IPv4Addr 	:= '192.168.0.210';
+	sVISION_AMS_NET_ID							: T_AmsNetID	:= '';
+	iVISION_PORT								: UINT 			:= 23;
+	tVISION_TIMEOUT								: TIME 			:= DEFAULT_ADS_TIMEOUT;
 END_VAR
 VAR_GLOBAL
 	(* --- Library Universal Machine ---*)

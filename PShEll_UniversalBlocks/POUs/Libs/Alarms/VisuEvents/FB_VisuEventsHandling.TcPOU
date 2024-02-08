@@ -7,8 +7,8 @@ VAR
 	arrActiveAlarms			: ARRAY[1..iMAX_EVENTS] OF ST_Event;		//Dla HMI (*  *)
 	arrActiveEvents			: ARRAY[1..iMAX_DEFINITION_EVENTS] OF ST_BaseEvent;	(*  *)
 	
-	iActiveDefinitionEvents	: UDINT;	(* zajetosc tabeli arrActiveEvents *)
-	iActiveAlarms			: UDINT;	(* Zajetosc tabeli alarmow *)
+	iActiveDefinitionEvents	: UDINT;	(* the contents of the arrActiveEvents table *)
+	iActiveAlarms			: UDINT;	(* the contents of the alarm table *)
 	
 	iActiveCritical			: UDINT;	(*  *)
 	iActiveError			: UDINT;	(*  *)

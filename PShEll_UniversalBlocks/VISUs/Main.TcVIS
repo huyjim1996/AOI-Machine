@@ -6776,10 +6776,10 @@
               <d n="FbMethods" t="CaseInsensitiveHashtable_1" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
                 <v>bea4f313-03da-4326-8736-074fa622c901</v>
-                <v>FB_Exit</v>
-                <v>e21bfa49-4ab0-453f-8121-d7f052db0a8b</v>
                 <v>FB_Reinit</v>
                 <v>bd882fec-5cd8-4389-a050-f6d3a67c1379</v>
+                <v>FB_Exit</v>
+                <v>e21bfa49-4ab0-453f-8121-d7f052db0a8b</v>
               </d>
               <v n="FbName">"NotImportant"</v>
               <v n="FbGuid">{5dce3ee0-5ad6-4c62-ba7d-db2b95c2176a}</v>
@@ -6823,7 +6823,7 @@
             </o>
             <v n="DialogDut">{7272c478-8888-45d3-a164-4c583f2cf626}</v>
           </o>
-          <v n="LastUsedIdForIdentifier">12</v>
+          <v n="LastUsedIdForIdentifier">14</v>
           <o n="TextDocument" t="TextDocument">
             <a n="TextLines" cet="TextLine">
               <o>

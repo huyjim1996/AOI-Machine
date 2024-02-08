@@ -1,7 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="PRG_MachineControl" Id="{ae1b1aa1-fabe-4a54-8a0f-85ccaf95cd7c}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM PRG_MachineControl
+    <Declaration><![CDATA[(* =======================================================================================================================================
+   Automatic Optical Inspection Machine Program
+   =======================================================================================================================================
+   Description: 
+   This PLC sample contains an object-oriented program to control the Automatic Optical Inspection Machine.
+   The application can be controlled via an integrated visualization PRG_VisuControl.
+   
+   Automatic Optical Inspection Machine:
+   Descript how to use this program
+   =======================================================================================================================================
+   References
+   ======================================================================================================================================= *)
+PROGRAM PRG_MachineControl
 VAR
 	bFirstCycle 		: BOOL := TRUE;			(*  *)
 	fbMachineControler 	: FB_MachineControl;	(*  *)
@@ -28,14 +40,14 @@ END_IF
 IF NOT fbMachineLogger.Active THEN 
 	fbMachineLogger.MR_Init();	
 END_IF
-
+// =========================================================
 (* Run global machine clock *)
 fbMachineTime(bEnable := TRUE);
 (* Cyclic run of machine controler *)
 fbMachineControler();
-
+(* Machine Logger *)
 fbMachineLogger();
-
+// =========================================================
 ]]></ST>
     </Implementation>
     <LineIds Name="PRG_MachineControl">

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_RotaryTableState" Id="{5da6bac4-6810-4db2-ad44-688d351f7d07}">
+    <Declaration><![CDATA[{attribute 'strict'}
+TYPE E_RotaryTableState :
+(
+	ROTARY_TABLE_IDLE 					:= 0,	(*  *)
+	ROTARY_TABLE_ROBOT_IN_POSITION 		:= 10,	(*  *)
+	ROTARY_TABLE_ROBOT_DROP_PRODUCT		:= 20,	(*  *)
+	ROTARY_TABLE_MOVE_TO_STATION_1		:= 30,	(*  *)
+	ROTARY_TABLE_SEND_COMMAND_STATION1	:= 40	(*  *)
+	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

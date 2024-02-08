@@ -63,6 +63,12 @@
     <Compile Include="DUTs\Libs\Axis\Universal Axis\E_AxisStatePlcOpen.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\Libs\BowlFeeder\E_BowlFeederUnitState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Libs\BowlFeeder\E_BowlFeederUnitStateInit.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\Libs\Communication\TcpIp\E_TcpIpDeviceState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -381,6 +387,12 @@
     <Compile Include="DUTs\Libs\Vision\Cognex\E_CognexCameraStoreFileStatus.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\Libs\Vision\RTC\E_RTCCameraInitState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Libs\Vision\RTC\E_RTCCameraState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\Machine\Machine Control\E_MachineCtrlStateAbort.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -399,7 +411,13 @@
     <Compile Include="DUTs\Machine\Machine Control\E_MachineCtrlStateUninitialized.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Machine\Robot\E_FcqRobotActions.TcDUT">
+    <Compile Include="DUTs\Machine\Machine Control\Internal\E_GoldenSampleMeasurementState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Machine\Machine Control\Internal\E_RotaryTableState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Machine\Robot\E_AOIRobotActions.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\Machine\Shell API\ST_Shell.TcDUT">
@@ -481,6 +499,18 @@
     <Compile Include="POUs\Libs\Alarms\VisuEvents\LDT_TO_STRING.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Libs\Analog Devices\Analog Device\FB_AnalogDevice.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Libs\Analog Devices\Analog Device\I_AnalogDevice.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Libs\Analog Devices\Analog Output\FB_AnalogOutput.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Libs\Analog Devices\Analog Output\I_AnalogOutput.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Libs\Axis\FB_AxisServo.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -488,6 +518,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Libs\Axis\I_UniversalAxis.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Libs\Bowl Feeder\FB_BowlFeeder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Libs\Communication\TcpIp\FUN_StringToTcpBufferData.TcPOU">
@@ -671,6 +704,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Libs\Vision\Cognex\I_CognexCamera.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Libs\Vision\RTC Vision\FB_RTCVision.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Machine\Alarm Control\PRG_AlarmControl.TcPOU">
@@ -998,6 +1034,7 @@
     <Folder Include="DUTs\Libs\Alarms\VisuEvents" />
     <Folder Include="DUTs\Libs\Axis" />
     <Folder Include="DUTs\Libs\Axis\Universal Axis" />
+    <Folder Include="DUTs\Libs\BowlFeeder" />
     <Folder Include="DUTs\Libs\Communication" />
     <Folder Include="DUTs\Libs\Communication\TcpIp" />
     <Folder Include="DUTs\Libs\Cylinder" />
@@ -1024,8 +1061,10 @@
     <Folder Include="DUTs\Libs\Utilities\TXT Data Exchanger" />
     <Folder Include="DUTs\Libs\Vision" />
     <Folder Include="DUTs\Libs\Vision\Cognex" />
+    <Folder Include="DUTs\Libs\Vision\RTC" />
     <Folder Include="DUTs\Machine" />
     <Folder Include="DUTs\Machine\Machine Control" />
+    <Folder Include="DUTs\Machine\Machine Control\Internal" />
     <Folder Include="DUTs\Machine\Robot" />
     <Folder Include="DUTs\Machine\Visu Control" />
     <Folder Include="DUTs\Machine\Shell API" />
@@ -1038,7 +1077,11 @@
     <Folder Include="POUs\Libs\Alarms" />
     <Folder Include="POUs\Libs\Alarms\AlarmControler" />
     <Folder Include="POUs\Libs\Alarms\VisuEvents" />
+    <Folder Include="POUs\Libs\Analog Devices" />
+    <Folder Include="POUs\Libs\Analog Devices\Analog Device" />
+    <Folder Include="POUs\Libs\Analog Devices\Analog Output" />
     <Folder Include="POUs\Libs\Axis" />
+    <Folder Include="POUs\Libs\Bowl Feeder" />
     <Folder Include="POUs\Libs\Communication" />
     <Folder Include="POUs\Libs\Communication\TcpIp" />
     <Folder Include="POUs\Libs\Communication\TcpIp\Tcp Buffer" />
@@ -1075,6 +1118,7 @@
     <Folder Include="POUs\Libs\Utilities\TXT Data Exchanger" />
     <Folder Include="POUs\Libs\Vision" />
     <Folder Include="POUs\Libs\Vision\Cognex" />
+    <Folder Include="POUs\Libs\Vision\RTC Vision" />
     <Folder Include="POUs\Machine" />
     <Folder Include="POUs\Machine\Alarm Control" />
     <Folder Include="POUs\Machine\Machine Control" />
@@ -1437,6 +1481,9 @@
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
     <SubObject Include="FB_CSVDataExchanger.M_FileProperties">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_MachineControl.M_RotaryTable_GSampleMeasurement">
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
     <SubObject Include="FB_UniversalSafety.MS_Running">

@@ -14,8 +14,15 @@ TYPE E_MachineCtrlStateInit :
 	MACHINE_STATE_INITIALIZING_ROBOT_INIT						:= 40,	(*  *)
 	MACHINE_STATE_INITIALIZING_ROBOT_HOME						:= 50,	(*  *)
 	MACHINE_STATE_INITIALIZING_ROBOT_AUTOMATIC_MODE				:= 60,	(*  *)
-                       	
-	MACHINE_STATE_INITIALIZING_DONE								:= 70	(*  *)
+	
+	(* Rotary table init *)
+	MACHINE_STATE_INITIALIZING_ROTARY_TABLE_INIT				:= 70,	(*  *)
+	MACHINE_STATE_INITIALIZING_ROTARY_TABLE_HOME				:= 80,	(*  *)
+	
+	
+	
+	
+	MACHINE_STATE_INITIALIZING_DONE								:= 200	(*  *)
 )UINT;
 END_TYPE]]></Declaration>
   </DUT>
