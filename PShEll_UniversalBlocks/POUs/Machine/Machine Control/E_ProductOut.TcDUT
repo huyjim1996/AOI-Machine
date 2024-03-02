@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_ProductOut" Id="{702043de-77ef-44bb-a1a4-45a5541471e5}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_ProductOut :
+(
+	GOOD := 0,
+	SCRATCH_DEN := 10,
+	CONTAMINATION_DIRT := 20,
+	REJECT := 30
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

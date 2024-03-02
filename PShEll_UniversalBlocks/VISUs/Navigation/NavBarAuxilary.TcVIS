@@ -208,27 +208,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_3"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="ExecuteCommandInputAction[]">
-                  <v>OnMouseClick</v>
-                  <a cet="ExecuteCommandInputAction">
-                    <o>
-                      <o n="ExecuteCommand" t="ExecuteCommandList">
-                        <l n="ExecuteCommand" t="ArrayList" cet="ExecuteCommandItem">
-                          <o>
-                            <v n="Command">"ExecutePlcProgram"</v>
-                            <v n="Value">"sCloseHMIFileName"</v>
-                            <v n="Value2">"sCloseHMIParameters"</v>
-                          </o>
-                          <o>
-                            <v n="Command">"ExecutePlcProgram"</v>
-                            <v n="Value">""</v>
-                            <v n="Value2">""</v>
-                          </o>
-                        </l>
-                      </o>
-                    </o>
-                  </a>
-                </d>
+                <d n="VisualElementInputActions" t="Hashtable" />
                 <v n="VisualElementIdentification">{30525ebc-f104-46e7-a77a-fc42a07d03eb}</v>
                 <v n="VisualElementOwningObjectGuid">{32d3f788-18da-49ea-8c72-80764bc66f70}</v>
                 <a n="LMGuids" et="Guid" />
@@ -1378,18 +1358,16 @@
           <o n="GeneratedLMMDescriptions" t="GeneratedLanguageModelEntriesData">
             <o n="GeneratedVisuFbDescription" t="GenericFbDescription">
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
-                <v>HasVisibilityAccess</v>
-                <v>66dd423e-0e2f-4bc4-884d-d586718cc00b</v>
+                <v>GetUpdateRects</v>
+                <v>9f0439f9-171c-4d00-a624-61a5905ea07c</v>
                 <v>ContainsPoint</v>
                 <v>5fb227d5-f37f-4cb9-a8a1-5289e7367f58</v>
-                <v>HasInputAccess</v>
-                <v>668e0d85-b654-44bf-bb3a-371be77088e4</v>
+                <v>SetStaticState</v>
+                <v>b1df0a1d-36c8-4a3f-bfa0-f04415b10521</v>
                 <v>HasInputAccessIntern</v>
                 <v>3d4de38c-b747-413e-b991-c35fde1d7efe</v>
                 <v>GetTooltip</v>
                 <v>0a12b317-7e79-4c0d-96e7-6e13a7388db3</v>
-                <v>GetUpdateRects</v>
-                <v>9f0439f9-171c-4d00-a624-61a5905ea07c</v>
                 <v>GetNamespace</v>
                 <v>4015947c-9596-40a7-b129-aba2dfee6c34</v>
                 <v>GetTranslator</v>
@@ -1402,6 +1380,8 @@
                 <v>e375e9c0-2029-4a0d-adfe-c96e572ce94b</v>
                 <v>Paint</v>
                 <v>85d1e189-7f31-4868-a969-46c2e8f4edff</v>
+                <v>HasVisibilityAccess</v>
+                <v>66dd423e-0e2f-4bc4-884d-d586718cc00b</v>
                 <v>GetElementArray</v>
                 <v>f78ae768-169f-40af-bd44-7642c2d106c8</v>
                 <v>SetVisuFlagsInternal</v>
@@ -1414,14 +1394,14 @@
                 <v>4ae56872-0c9b-4f2a-88a9-0d4e2d280b90</v>
                 <v>Initialize</v>
                 <v>2b1a37b7-84cf-43da-8fab-9e9407a6178f</v>
+                <v>HasInputAccess</v>
+                <v>668e0d85-b654-44bf-bb3a-371be77088e4</v>
                 <v>HasVisibilityAccessIntern</v>
                 <v>123a0aae-897a-4d23-a392-81a173760249</v>
                 <v>GetSurroundingRect</v>
                 <v>3b0829c3-927f-43d2-aad5-2e2345f4409a</v>
                 <v>ElementInfo</v>
                 <v>d43f52a0-f7cb-4b48-96a0-b66c8c457c93</v>
-                <v>SetStaticState</v>
-                <v>b1df0a1d-36c8-4a3f-bfa0-f04415b10521</v>
                 <v>GetLocalUsergroup</v>
                 <v>745634af-24c5-4ce7-8ba6-5decdbcde495</v>
                 <v>GetName</v>
@@ -1626,10 +1606,6 @@
         <Type n="CaseInsensitiveHashtable">{7df88604-7ac5-4e36-91c4-55e4fdad3e68}</Type>
         <Type n="ComplexInput">{1de566f6-72a7-494c-9353-9a418172c96e}</Type>
         <Type n="Double">System.Double</Type>
-        <Type n="ExecuteCommandInputAction">{ebdd563b-12ac-4fdd-bb3f-2346a2c4b5f8}</Type>
-        <Type n="ExecuteCommandInputAction[]">_3S.CoDeSys.VisualElem.ExecuteCommandInputAction[], VisualElem.plugin, Version=3.5.13.31, Culture=neutral, PublicKeyToken=null</Type>
-        <Type n="ExecuteCommandItem">{b4beca4d-99ba-4988-8c0e-efc5c73cc20a}</Type>
-        <Type n="ExecuteCommandList">{2ab60f36-5582-42df-87c2-0a7e9c9bd0cd}</Type>
         <Type n="GeneratedLanguageModelEntriesData">{703465dc-4679-4ff2-bcc3-c57d0a204da3}</Type>
         <Type n="GenericFbDescription">{40d6dd8d-dfd0-493a-8e29-c9a35e1e6539}</Type>
         <Type n="GenericVisualElem">{f86c2928-8614-4cca-824b-e819ac4d58c4}</Type>

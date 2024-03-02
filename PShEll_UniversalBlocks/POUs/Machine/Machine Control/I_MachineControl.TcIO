@@ -4,7 +4,7 @@
     <Declaration><![CDATA[INTERFACE I_MachineControl EXTENDS I_UniversalMachine
 ]]></Declaration>
     <Property Name="Robots" Id="{508a7188-8eec-4c0a-b26d-0bdcd24ff2fb}">
-      <Declaration><![CDATA[PROPERTY Robots : REFERENCE TO ARRAY[0..iNUMBER_OF_ROBOTS-1] OF FB_CR800EtherCAT]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Robots : REFERENCE TO FB_Robot]]></Declaration>
       <Get Name="Get" Id="{eed6073b-58a6-4232-ab65-7b3da114e4ea}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>

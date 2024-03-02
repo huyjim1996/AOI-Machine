@@ -417,9 +417,6 @@
     <Compile Include="DUTs\Machine\Machine Control\Internal\E_RotaryTableState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Machine\Robot\E_AOIRobotActions.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DUTs\Machine\Shell API\ST_Shell.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -521,6 +518,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Libs\Bowl Feeder\FB_BowlFeeder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Libs\Bowl Feeder\I_BowlFeeder.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Libs\Communication\TcpIp\FUN_StringToTcpBufferData.TcPOU">
@@ -649,6 +649,9 @@
     <Compile Include="POUs\Libs\Utilities\CSV Data Exchanger\I_CSVDataExchanger.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Libs\Utilities\FB_DataSetFifo.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Libs\Utilities\File Logger\FB_FileLogger.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -706,10 +709,10 @@
     <Compile Include="POUs\Libs\Vision\Cognex\I_CognexCamera.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Libs\Vision\RTC Vision\FB_RTCVision.TcPOU">
+    <Compile Include="POUs\Machine\FB_MachineSafety.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Machine\Alarm Control\PRG_AlarmControl.TcPOU">
+    <Compile Include="POUs\Machine\Machine Control\E_ProductOut.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Machine\Machine Control\FB_MachineControl.TcPOU">
@@ -718,11 +721,42 @@
     <Compile Include="POUs\Machine\Machine Control\I_MachineControl.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Machine\Machine Control\PRG_MachineControl.TcPOU">
+    <Compile Include="POUs\Machine\Module\Robot\E_AOIRobotActions.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Machine\Recipes Manager\PRG_RecipesManager.TcPOU">
+    <Compile Include="POUs\Machine\Module\Robot\E_AOIRobotState.TcDUT">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\Robot\E_AOIRobotStateAbort.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\Robot\E_AOIRobotStateInit.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\Robot\E_EtherCATStatusCheck.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\Robot\FB_Robot.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\Robot\I_AOIRobot.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\RTCVision\E_SortingResult.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\RTCVision\E_VisionJob.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\RTCVision\E_VisionResult.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\RTCVision\FB_RTCVision.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\RTCVision\I_RTCVision.TcIO">
+      <SubType>Code</SubType>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="POUs\Machine\Visu Control\FB_VisuControl.TcPOU">
       <SubType>Code</SubType>
@@ -733,7 +767,19 @@
     <Compile Include="POUs\Machine\Visu Control\F_OpenDialog_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Machine\Visu Control\PRG_VisuControl.TcPOU">
+    <Compile Include="POUs\PRG\PRG_AlarmControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PRG\PRG_MachineControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PRG\PRG_MachineSafety.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PRG\PRG_RecipesManager.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PRG\PRG_VisuControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Visualization Manager.TcVMO">
@@ -1118,12 +1164,13 @@
     <Folder Include="POUs\Libs\Utilities\TXT Data Exchanger" />
     <Folder Include="POUs\Libs\Vision" />
     <Folder Include="POUs\Libs\Vision\Cognex" />
-    <Folder Include="POUs\Libs\Vision\RTC Vision" />
     <Folder Include="POUs\Machine" />
-    <Folder Include="POUs\Machine\Alarm Control" />
     <Folder Include="POUs\Machine\Machine Control" />
-    <Folder Include="POUs\Machine\Recipes Manager" />
+    <Folder Include="POUs\Machine\Module" />
+    <Folder Include="POUs\Machine\Module\Robot" />
+    <Folder Include="POUs\Machine\Module\RTCVision" />
     <Folder Include="POUs\Machine\Visu Control" />
+    <Folder Include="POUs\PRG" />
     <Folder Include="VISUs" />
     <Folder Include="POUs">
       <ExcludeFromBuild>false</ExcludeFromBuild>
@@ -1483,7 +1530,10 @@
     <SubObject Include="FB_CSVDataExchanger.M_FileProperties">
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
-    <SubObject Include="FB_MachineControl.M_RotaryTable_GSampleMeasurement">
+    <SubObject Include="FB_MachineControl.M_AutoProcessing">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_RTCVision\Backup">
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
     <SubObject Include="FB_UniversalSafety.MS_Running">

@@ -1,0 +1,779 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_MachineSafety" Id="{8f774f44-3795-42e9-899c-e51ea2c809f8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_MachineSafety EXTENDS FB_UniversalSafety
+VAR
+	bRunStop 						AT %Q* 	: BOOL;
+	bErrorACK 						AT %Q* 	: BOOL;
+	bFB_Error 						AT %I* 	: BOOL;
+	bComm_Error 					AT %I* 	: BOOL;
+	                                       	
+	bRestartButton 					AT %I* 	: BOOL;
+	bPressureEDM 					AT %I* 	: BOOL;
+	bEStopContactorsEDM 			AT %I* 	: BOOL;
+	bCoverContactorsEDM 			AT %I* 	: BOOL;
+	bTrayHandlerContactorsEDM 		AT %I* 	: BOOL;
+	                                       	
+	bRestartButtonOut 				AT %Q* 	: BOOL;
+	bPressureEDMOut 				AT %Q* 	: BOOL;
+	bEStopContactorsEDMOut			AT %Q* 	: BOOL;
+	bCoverContactorsEDMOut 			AT %Q* 	: BOOL;
+	bTrayHandlerContactorsEDMOut 	AT %Q*	: BOOL;
+	
+	piInputSafeDataE_StopA					: FB_DigitalInput;
+	piInputSafeDataE_StopB					: FB_DigitalInput;
+	piInputSafeDataSafetyOverrideA			: FB_DigitalInput;
+	piInputSafeDataSafetyOverrideB			: FB_DigitalInput;
+	
+	piInputSafeDataDoorLockA				: FB_DigitalInput;
+	piInputSafeDataDoorLockB				: FB_DigitalInput;
+	piInputSafeDataRobotE_StopA				: FB_DigitalInput;
+	piInputSafeDataRobotE_StopB				: FB_DigitalInput;
+	
+	piInputSafeDataExternalE_StopA			: FB_DigitalInput;
+	piInputSafeDataExternalE_StopB			: FB_DigitalInput;
+	piInputSafeDataTrayFeederCourtainA		: FB_DigitalInput;
+	piInputSafeDataTrayFeederCourtainB		: FB_DigitalInput;
+	
+	piInputSafeDataSlowStartValve			: FB_DigitalInput;
+	piInputSafeDataE_StopContactor			: FB_DigitalInput;
+	piInputSafeDataCoverContactors			: FB_DigitalInput;
+	piInputSafeDataTrayHandlerContactors	: FB_DigitalInput;
+	
+	bE_Stop									: BOOL;
+	bSafetyOverride 						: BOOL;
+	bDoorLock								: BOOL;
+	bRobotE_Stop							: BOOL;
+	bExternalE_Stop 						: BOOL;
+	bTrayfeederCourtain						: BOOL;
+	bSlowStartValve							: BOOL;
+	bE_StopContactor						: BOOL;
+	bCoverContactors						: BOOL;
+	bTrayfeederContactors					: BOOL;
+	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Send EDM data from standard inputs to Safety Program *)
+bCoverContactorsEDMOut 			:= bCoverContactorsEDM;
+bEStopContactorsEDMOut 			:= bEStopContactorsEDM;
+bPressureEDMOut 				:= bPressureEDM;
+bTrayHandlerContactorsEDMOut 	:= bTrayHandlerContactorsEDM;
+bRestartButtonOut 				:= bRestartButton;
+
+(* Run parent *)
+SUPER^();
+
+(* Refresh data from Safe Logic Module *)
+piInputSafeDataE_StopA();
+piInputSafeDataE_StopB();
+piInputSafeDataSafetyOverrideA();
+piInputSafeDataSafetyOverrideB();
+
+piInputSafeDataDoorLockA();
+piInputSafeDataDoorLockB();
+piInputSafeDataRobotE_StopA();
+piInputSafeDataRobotE_StopB();
+
+piInputSafeDataExternalE_StopA();
+piInputSafeDataExternalE_StopB();
+piInputSafeDataTrayFeederCourtainA();
+piInputSafeDataTrayFeederCourtainB();
+
+piInputSafeDataSlowStartValve();
+piInputSafeDataE_StopContactor();
+piInputSafeDataCoverContactors();
+piInputSafeDataTrayHandlerContactors();
+
+(* Update status for PLC program *)
+bE_Stop 				:= piInputSafeDataE_StopA.In AND piInputSafeDataE_StopB.In;
+bSafetyOverride 		:= piInputSafeDataSafetyOverrideA.In AND piInputSafeDataSafetyOverrideB.In;
+bDoorLock 				:= piInputSafeDataDoorLockA.In AND piInputSafeDataDoorLockB.In;
+bRobotE_Stop 			:= piInputSafeDataRobotE_StopA.In AND piInputSafeDataRobotE_StopB.In;
+bExternalE_Stop 		:= piInputSafeDataExternalE_StopA.In AND piInputSafeDataExternalE_StopB.In;
+bTrayfeederCourtain 	:= piInputSafeDataTrayFeederCourtainA.In AND piInputSafeDataTrayFeederCourtainB.In;
+
+(* Used to trigger state change -> Emergency *)
+bSlowStartValve 		:= piInputSafeDataSlowStartValve.In;
+bE_StopContactor		:= piInputSafeDataE_StopContactor.In;
+bCoverContactors		:= piInputSafeDataCoverContactors.In;
+bTrayfeederContactors	:= piInputSafeDataTrayHandlerContactors.In;]]></ST>
+    </Implementation>
+    <Folder Name="FirstCycle" Id="{ec33358a-3b3e-4b05-8741-ee0ebcd6b0d2}" />
+    <Folder Name="Properties" Id="{b9e7eb0b-1e8a-4e6d-81b9-066da731adf9}">
+      <Folder Name="Parameters" Id="{ad6f2e38-a857-4036-a1c9-5cca126482a4}" />
+      <Folder Name="References" Id="{199197fb-5369-43bc-9802-94ff6bc0886c}" />
+      <Folder Name="Status" Id="{2858c95b-e497-4fd6-8663-06c938fa9dac}">
+        <Folder Name="Channels" Id="{56437c65-b1f1-4da1-8de3-017f6842cef4}" />
+        <Folder Name="EDM" Id="{4ae0890c-b011-498b-801e-7308f6575501}" />
+        <Folder Name="System" Id="{c82caeaf-8c3d-4f1f-9cb4-1f0871748da6}" />
+      </Folder>
+    </Folder>
+    <Folder Name="Requests" Id="{aa24860d-b0fd-4054-af01-9f494c55a41b}" />
+    <Folder Name="StateMachine" Id="{01abad9c-bcac-44dc-9746-e290cd36de6f}" />
+    <Property Name="Comm_Error" Id="{3071cadd-f63d-4856-a611-59b258425cc1}" FolderPath="Properties\Status\System\">
+      <Declaration><![CDATA[PROPERTY Comm_Error : BOOL]]></Declaration>
+      <Get Name="Get" Id="{6278a5f0-1cbb-4ce6-897a-4f470dc6bc0f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Comm_Error := bComm_Error;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="CoverContactors" Id="{9cfa6058-cd31-442e-b36e-9b831c3bd256}" FolderPath="Properties\Status\Channels\">
+      <Declaration><![CDATA[PROPERTY CoverContactors : REFERENCE TO BOOL]]></Declaration>
+      <Get Name="Get" Id="{64dbeaa6-6e0a-4588-9877-11894b69dc16}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CoverContactors REF= bCoverContactors;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="CoverContactorsEDM" Id="{daf854de-cd5f-4552-88da-bad5ce9374d5}" FolderPath="Properties\Status\EDM\">
+      <Declaration><![CDATA[PROPERTY CoverContactorsEDM : BOOL]]></Declaration>
+      <Get Name="Get" Id="{1e81a969-e4e2-4ba1-8190-c881762ddf6c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CoverContactorsEDM := bCoverContactorsEDM;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="DoorLock" Id="{ff3cc486-a7c9-4b4c-b549-a287eedc8af4}" FolderPath="Properties\Status\Channels\">
+      <Declaration><![CDATA[PROPERTY DoorLock : REFERENCE TO BOOL]]></Declaration>
+      <Get Name="Get" Id="{6e2d0795-c98a-4696-90cf-9dae7ac0e2d1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[DoorLock REF= bDoorLock;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="E_Stop" Id="{24ab90cc-1558-4f44-914b-015b75e37a43}" FolderPath="Properties\Status\Channels\">
+      <Declaration><![CDATA[PROPERTY E_Stop : REFERENCE TO BOOL]]></Declaration>
+      <Get Name="Get" Id="{bd983ff2-c46b-4092-a7e7-3cf2a642b94f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[E_Stop REF= bE_Stop;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="E_StopContactors" Id="{58aa9f6b-9287-4bb9-9b1b-22675cc51ddc}" FolderPath="Properties\Status\Channels\">
+      <Declaration><![CDATA[PROPERTY E_StopContactors : REFERENCE TO BOOL]]></Declaration>
+      <Get Name="Get" Id="{20634f3e-297e-4bc6-abc7-28a50f4e17fe}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[E_StopContactors REF= bE_StopContactor;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ErrorAck" Id="{0399aa21-35aa-48d0-8a66-1d7dcac4f3bc}" FolderPath="Properties\Parameters\">
+      <Declaration><![CDATA[PROPERTY ErrorAck : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d332447e-61c5-48af-9980-9750764e2d3f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ErrorAck := bErrorACK;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{86a14d47-3b20-43fa-861d-18197de8d9b1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bErrorACK := ErrorAck;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="EStopContactorsEDM" Id="{34604517-7afe-4c76-b266-381f10be3833}" FolderPath="Properties\Status\EDM\">
+      <Declaration><![CDATA[PROPERTY EStopContactorsEDM : BOOL]]></Declaration>
+      <Get Name="Get" Id="{a1e8d91b-341d-45fe-8e8c-9265d9b1be6a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[EStopContactorsEDM := bEStopContactorsEDM;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ExternalE_Stop" Id="{d78ac0e1-6532-4709-b7b7-dbb754a83f65}" FolderPath="Properties\Status\Channels\">
+      <Declaration><![CDATA[PROPERTY ExternalE_Stop : REFERENCE TO BOOL]]></Declaration>
+      <Get Name="Get" Id="{aa57b992-25aa-444b-bac4-4fbeeffbc8f0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ExternalE_Stop REF= bExternalE_Stop;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="FB_Error" Id="{edfdd748-2b96-4819-b558-094acaa4f03f}" FolderPath="Properties\Status\System\">
+      <Declaration><![CDATA[PROPERTY FB_Error : BOOL]]></Declaration>
+      <Get Name="Get" Id="{835c4836-57d3-4d03-bfe3-8626aa0c8519}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[FB_Error := bFB_Error;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="MR_Abort" Id="{ae473f4e-a869-46bb-a19a-865d51bb47e6}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_Abort : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_FirstCycle" Id="{791adf32-9fd5-4057-be28-0193053a90f7}" FolderPath="FirstCycle\">
+      <Declaration><![CDATA[METHOD MR_FirstCycle : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_Init" Id="{bd164331-91f8-44fe-aee7-aa3ef5179f1d}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_Init : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_Reset" Id="{71225d07-5283-40bf-b541-e77793a8909b}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_Reset : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Aborting" Id="{839f9ffe-de1d-46eb-a079-a520d69272a9}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Aborting
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Initializing" Id="{24a2b7db-3a1d-4d69-9abc-4a8f03526029}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Initializing
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_ReadyInitialized" Id="{20f3b3a8-5216-4631-aec6-1385e665795d}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_ReadyInitialized
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Reset" Id="{4f7c61bd-c4e9-4b44-bbb1-ee40d17d6e62}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_ResetDone" Id="{ea40ac5c-045b-4660-b142-d30f58e31a70}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_ResetDone
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Running" Id="{61fb2eaa-abc5-4065-bab7-36e702e8cf35}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Running
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Uninitialized" Id="{3c602eab-48ea-46df-804c-2783d8d40c73}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Uninitialized
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="PressureEDM" Id="{a527cacc-bd4b-45e4-a843-e7706b2a76aa}" FolderPath="Properties\Status\EDM\">
+      <Declaration><![CDATA[PROPERTY PressureEDM : BOOL]]></Declaration>
+      <Get Name="Get" Id="{ff60372c-36a4-4744-a871-25fb3e17287d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[PressureEDM := bPressureEDM;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataCoverContactors" Id="{c75c1642-b364-4150-bf3d-2018a21ebb4b}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataCoverContactors : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{648c8a9f-9c36-4411-9c47-b33e29b73c13}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataCoverContactors REF= piInputSafeDataCoverContactors;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataDoorLockA" Id="{a70b291f-0f78-4168-82d4-a1e8ef222376}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataDoorLockA : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{4ba226ca-3f8d-4436-8aaf-59b93d7f401e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataDoorLockA REF= piInputSafeDataDoorLockA;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataDoorLockB" Id="{dc4ff636-cbff-4c6a-b8cb-7671e31c4156}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataDoorLockB : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{c707a4f4-f540-4dd2-b855-247b569a5254}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataDoorLockB REF= piInputSafeDataDoorLockB;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataE_StopA" Id="{a64abfab-fad6-4c3c-a4fa-b5850af25bbc}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataE_StopA : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{e595f271-d326-4cf6-8e41-0e9e9989e809}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataE_StopA REF= piInputSafeDataE_StopA;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataE_StopB" Id="{33e86bb1-046a-4fab-83a9-a77127a80c99}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataE_StopB : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{e84f20ae-36ce-4591-aa13-571c681776b9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataE_StopB REF= piInputSafeDataE_StopB;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataE_StopContactor" Id="{71bd5fd2-f9a7-4ae9-9130-cf276481bcc7}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataE_StopContactor : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{1bd98c29-2fef-498d-be12-e222cb79df18}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataE_StopContactor REF= piInputSafeDataE_StopContactor;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataExternalE_StopA" Id="{a5b444aa-7556-4163-aaa9-78a65a307039}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataExternalE_StopA : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{0e4fb986-1986-403e-9b0a-4f6dce970c0c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataExternalE_StopA REF= piInputSafeDataExternalE_StopA;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataExternalE_StopB" Id="{d5c05436-b33e-4093-957e-f88883de92c6}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataExternalE_StopB : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{a5522757-1a9a-47e7-996b-bdfba5f52ee4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataExternalE_StopB REF= piInputSafeDataExternalE_StopB;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataRobotE_StopA" Id="{d316d016-ca10-4750-b78e-802342b8a90e}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataRobotE_StopA : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{8c27bb76-06d0-44f4-a91d-d46f191799a5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataRobotE_StopA REF= piInputSafeDataRobotE_StopA;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataRobotE_StopB" Id="{6577b880-f403-4e7a-aa7a-c3001689be71}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataRobotE_StopB : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{5a331844-0e37-41cd-9254-3815c0504cdf}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataRobotE_StopB REF= piInputSafeDataRobotE_StopB;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataSafetyOverrideA" Id="{ca0a7fc8-4e6f-4d9b-848d-5ade5c79479b}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataSafetyOverrideA : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{37487216-fd28-4eac-ac36-e3f871f7261f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataSafetyOverrideA REF= piInputSafeDataSafetyOverrideA;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataSafetyOverrideB" Id="{a55113f5-a60e-4392-b7cd-05ad8213bb5a}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataSafetyOverrideB : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{1b591bfe-2e49-4d3d-9512-ab2a065fec41}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataSafetyOverrideB REF= piInputSafeDataSafetyOverrideB;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataSlowStartValve" Id="{adf9153c-a132-4d3c-bb33-48000f518ea5}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataSlowStartValve : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{3c3aee4e-5537-4bdb-a405-cc38ada31104}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataSlowStartValve REF= piInputSafeDataSlowStartValve;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataTrayfeederContactors" Id="{8f59c296-fcd9-44c0-bf6c-27af63c0a566}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataTrayfeederContactors : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{8d8a2ecb-f0aa-4017-a288-a48feb61ed0c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataTrayfeederContactors REF= piInputSafeDataTrayHandlerContactors;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataTrayfeederCourtainA" Id="{7d0b25cc-0db5-4e43-906a-ea7b10578222}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataTrayfeederCourtainA : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{a127b1da-bd1f-4c9c-bbc7-73b8a781c0ba}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataTrayfeederCourtainA REF= piInputSafeDataTrayFeederCourtainA;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ref_InputSafeDataTrayfeederCourtainB" Id="{6f5a56a5-8f60-4339-aee9-8729aba2cfc4}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_InputSafeDataTrayfeederCourtainB : REFERENCE TO FB_DigitalInput]]></Declaration>
+      <Get Name="Get" Id="{be74509a-661d-4531-a0e9-8d9154536452}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_InputSafeDataTrayfeederCourtainB REF= piInputSafeDataTrayFeederCourtainB;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="RestartButton" Id="{27c7f3c5-4cd0-49ce-af91-0245207270a7}" FolderPath="Properties\Status\System\">
+      <Declaration><![CDATA[PROPERTY RestartButton : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d05009b4-ef70-4228-9310-91e95a4b7b3c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RestartButton := bRestartButton;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="RobotE_Stop" Id="{3081c03a-a102-4d00-a561-3e7f16b3f1ff}" FolderPath="Properties\Status\Channels\">
+      <Declaration><![CDATA[PROPERTY RobotE_Stop : REFERENCE TO BOOL]]></Declaration>
+      <Get Name="Get" Id="{baa8c769-0da5-4eca-b4ed-341c60c2b4b7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RobotE_Stop REF= bRobotE_Stop;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="RunStop" Id="{2beb2355-4e6d-45cc-8a5b-c81a6879ed97}" FolderPath="Properties\Parameters\">
+      <Declaration><![CDATA[PROPERTY RunStop : BOOL]]></Declaration>
+      <Get Name="Get" Id="{963df30e-a511-403b-86d2-03e0aa6e43dd}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RunStop := bRunStop;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{647229ae-f05c-458c-b52e-1f21bc74e518}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bRunStop := RunStop;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="SafetyOverride" Id="{308b10bb-10c6-44b1-8476-93a786f0c730}" FolderPath="Properties\Status\Channels\">
+      <Declaration><![CDATA[PROPERTY SafetyOverride : REFERENCE TO BOOL]]></Declaration>
+      <Get Name="Get" Id="{5c908146-8a73-45ac-a68e-f37a4ee42c43}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SafetyOverride REF= bSafetyOverride;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="SlowStartValveContactors" Id="{eccb51bc-b606-4e28-bb8d-710616258e5a}" FolderPath="Properties\Status\Channels\">
+      <Declaration><![CDATA[PROPERTY SlowStartValveContactors : REFERENCE TO BOOL]]></Declaration>
+      <Get Name="Get" Id="{c8f076c3-b64b-48a8-a86e-f3687ce2e414}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SlowStartValveContactors REF= bSlowStartValve;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="TrayfeederContactors" Id="{95779d90-1c77-4bb8-bc05-70cf228f4103}" FolderPath="Properties\Status\Channels\">
+      <Declaration><![CDATA[PROPERTY TrayfeederContactors : REFERENCE TO BOOL]]></Declaration>
+      <Get Name="Get" Id="{67a8d639-9943-40f4-a708-ab9c4cae2a13}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TrayfeederContactors REF= bTrayfeederContactors;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="TrayfeederContactorsEDM" Id="{e087140f-8af2-474c-b44b-9cf275bd347c}" FolderPath="Properties\Status\EDM\">
+      <Declaration><![CDATA[PROPERTY TrayfeederContactorsEDM : BOOL]]></Declaration>
+      <Get Name="Get" Id="{6102d551-91e0-4c48-98b9-fd98a335f8d4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TrayfeederContactorsEDM := bTrayHandlerContactorsEDM;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="TrayfeederCourtain" Id="{9ee2afab-d53b-424b-b0ca-e1bf4a64e2e4}" FolderPath="Properties\Status\Channels\">
+      <Declaration><![CDATA[PROPERTY TrayfeederCourtain : REFERENCE TO BOOL]]></Declaration>
+      <Get Name="Get" Id="{5e955346-4093-4647-9700-0c6db9b17718}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TrayfeederCourtain REF= bTrayfeederCourtain;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_MachineSafety">
+      <LineId Id="383" Count="0" />
+      <LineId Id="318" Count="4" />
+      <LineId Id="384" Count="0" />
+      <LineId Id="323" Count="1" />
+      <LineId Id="385" Count="0" />
+      <LineId Id="325" Count="9" />
+      <LineId Id="340" Count="3" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="362" Count="3" />
+      <LineId Id="361" Count="0" />
+      <LineId Id="381" Count="0" />
+      <LineId Id="355" Count="0" />
+      <LineId Id="354" Count="0" />
+      <LineId Id="356" Count="4" />
+      <LineId Id="387" Count="0" />
+      <LineId Id="386" Count="0" />
+      <LineId Id="375" Count="0" />
+      <LineId Id="377" Count="0" />
+      <LineId Id="379" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.Comm_Error.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.CoverContactors.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.CoverContactorsEDM.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.DoorLock.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.E_Stop.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.E_StopContactors.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ErrorAck.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ErrorAck.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.EStopContactorsEDM.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ExternalE_Stop.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.FB_Error.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.MR_Abort">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.MR_FirstCycle">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.MR_Init">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.MR_Reset">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.MS_Aborting">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.MS_Initializing">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.MS_ReadyInitialized">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.MS_Reset">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.MS_ResetDone">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.MS_Running">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.MS_Uninitialized">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.PressureEDM.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataCoverContactors.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataDoorLockA.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataDoorLockB.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataE_StopA.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataE_StopB.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataE_StopContactor.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataExternalE_StopA.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataExternalE_StopB.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataRobotE_StopA.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataRobotE_StopB.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataSafetyOverrideA.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataSafetyOverrideB.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataSlowStartValve.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataTrayfeederContactors.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataTrayfeederCourtainA.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.ref_InputSafeDataTrayfeederCourtainB.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.RestartButton.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.RobotE_Stop.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.RunStop.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.RunStop.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.SafetyOverride.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.SlowStartValveContactors.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.TrayfeederContactors.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.TrayfeederContactorsEDM.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineSafety.TrayfeederCourtain.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

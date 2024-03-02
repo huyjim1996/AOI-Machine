@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_SortingResult" Id="{2bc22ade-a5e0-463c-9bd7-ccaed6211ed0}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_SortingResult :
+(
+	GOOD 				:= 0,
+	CONTAMINATION_DIRTY	:= 10,
+	SCRATCH_DENT		:= 20,
+	REJECT				:= 30
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

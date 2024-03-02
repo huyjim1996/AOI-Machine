@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="I_RTCVision" Id="{b60eefe9-fa6d-499d-9116-46d912891c1f}">
+    <Declaration><![CDATA[INTERFACE I_RTCVision
+]]></Declaration>
+    <Property Name="Active" Id="{ad53ce21-21fd-43e6-a7ce-f3d008a6ab67}">
+      <Declaration><![CDATA[PROPERTY Active : BOOL]]></Declaration>
+      <Get Name="Get" Id="{3d96a357-f07f-42a7-9fb4-b93c10afc55f}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Busy" Id="{f594d9f1-310e-4971-8232-311dae77bbc7}">
+      <Declaration><![CDATA[PROPERTY Busy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{fd6cb527-0d0a-4334-83a7-065ba14baa26}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="CurrentJob" Id="{b5b9d961-48f3-4f46-b174-a1d8734ec25c}">
+      <Declaration><![CDATA[PROPERTY CurrentJob : UINT]]></Declaration>
+      <Get Name="Get" Id="{7b543680-9666-4fac-bafd-96dd43b31e60}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Error" Id="{4f99832a-78f8-4c7c-8e51-f88916fe11cc}">
+      <Declaration><![CDATA[PROPERTY Error : BOOL]]></Declaration>
+      <Get Name="Get" Id="{98d87f5b-629a-4025-b4eb-0a6ab1efc6e9}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{1b5f7528-3f27-41f2-8532-cffd874c5946}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="ErrorID" Id="{4808f712-1e2d-44b7-a1be-e9cbdbfb868e}">
+      <Declaration><![CDATA[PROPERTY ErrorID : INT]]></Declaration>
+      <Get Name="Get" Id="{f5d00011-2938-4275-8132-44871739a1b6}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="JobStarted" Id="{1ff006c3-956d-489c-9dec-3224b7d788b2}">
+      <Declaration><![CDATA[PROPERTY JobStarted : BOOL]]></Declaration>
+      <Get Name="Get" Id="{6e46990a-b0fa-4348-8604-63c4915755b8}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="JobStopped" Id="{db95fc53-7b30-42df-ba13-f969717f9d08}">
+      <Declaration><![CDATA[PROPERTY JobStopped : BOOL]]></Declaration>
+      <Get Name="Get" Id="{60eb0139-e643-49a0-88ee-fabef4819d5f}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="M_CommandStation1" Id="{1e048699-0a53-48da-9b99-153727e9d9cf}">
+      <Declaration><![CDATA[METHOD M_CommandStation1 : BOOL
+VAR_INPUT
+	//PulseWidth					: TIME;
+	DelayTimeForSecondTrigger	: TIME; //T#0.1ms
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="M_CommandStation2" Id="{d2e56ac4-5f94-4811-a3b9-e54541ad9cb7}">
+      <Declaration><![CDATA[METHOD M_CommandStation2 : BOOL
+VAR_INPUT
+	DelayTimeForSecondTrigger	: TIME; //T#0.1ms
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_SetJob" Id="{2cc9a430-8aeb-4fc9-b493-73242085dd37}">
+      <Declaration><![CDATA[METHOD M_SetJob : BOOL
+VAR_INPUT
+	uiJob : UINT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Start" Id="{0c0281cd-28d6-4136-a96a-11133c155485}">
+      <Declaration><![CDATA[METHOD M_Start : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Stop" Id="{ce2c178f-cae7-4b82-bcf3-b457db7c0b9e}">
+      <Declaration><![CDATA[METHOD M_Stop : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MR_FirstCycle" Id="{ae5adb2d-dddd-47c5-9e73-5ee9d0225bc7}">
+      <Declaration><![CDATA[METHOD MR_FirstCycle : BOOL
+VAR_INPUT	
+	sName 				: STRING;
+	sHost				: T_IPv4Addr;	(*  *)
+	sAmsNetID 			: T_AmsNetID;	(*  *)
+	iPort				: UINT;			(*  *)
+	tTimeout			: TIME;			(*  *)
+	
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="Result_Station1" Id="{ebd568f7-2a39-4eab-96ac-b92b8899b956}">
+      <Declaration><![CDATA[PROPERTY Result_Station1 : UINT]]></Declaration>
+      <Get Name="Get" Id="{578cba40-a35f-4ebb-a735-35fa56585d4f}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Result_Station2" Id="{5f1f5a8e-379f-49db-8457-48fbd5112e27}">
+      <Declaration><![CDATA[PROPERTY Result_Station2 : UINT]]></Declaration>
+      <Get Name="Get" Id="{b237ed69-934f-4796-86bf-6c52c4d4d615}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

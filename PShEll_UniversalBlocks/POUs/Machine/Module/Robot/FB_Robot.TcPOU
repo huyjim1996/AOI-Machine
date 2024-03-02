@@ -1,0 +1,832 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_Robot" Id="{beed19da-5153-44ad-bda3-2a9766d39d44}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+Copyrights	: Operation Automation Department
+Author		: HVAP
+Description	: This function block is used to control robot and vision from RTC vendor
+*)
+FUNCTION_BLOCK FB_Robot IMPLEMENTS I_AOIRobot
+VAR
+	bFirstCycle 					: BOOL := TRUE;
+	(* Auxilary *)
+	tonDelay							: TON;		(* Provides any delay into the machine when switching something On/Off *)
+	
+	sName							: STRING;
+	iOverride						: USINT;
+	
+	(* Properties *)
+	_bActive						: BOOL;
+	_bBusy							: BOOL;
+	
+	(* Components *)
+	doRobotPowerOn					: FB_DigitalOutput;	(* Power on CR800 *)
+	doRobotModeSwitch				: FB_DigitalOutput;	(* Set robot into automatic work mode *)
+	
+	(* Function blocks *)
+	fbCR800 						: FB_CR800EtherCAT;
+	
+	(* CR800 EtherCAT diagnostic *)
+	fbGetCR800EcState			:  FB_EcGetSlaveState;
+	fbSetCR800CtrlState 		:  FB_EcReqSlaveState;		
+	stCR800GetEcState			:  ST_EcSlaveState;		
+	
+	(* Robots EtherCAT communication *)
+	sPLC_NET_ID 				: T_AmsNetId;// := '5.127.48.8.2.1'; //hardware config
+	iCR800_1_ADDRESS			: UINT;//	:= 1003; //hardware config
+	
+	(* Action list *)
+	eRobotAction				: E_AOIRobotActions;
+	eRobotLastAction			: E_AOIRobotActions;
+	
+	(* State Machine *)
+	eRobotState					: E_AOIRobotState;
+	eRobotStateInit				: E_AOIRobotStateInit;
+	eRobotStateAbort			: E_AOIRobotStateAbort;
+	
+END_VAR
+(*
+Version history:
+
++-------------+------------+----------------+----------+------------------------------------------+
+|Date         | Version    | created under  | Author   | Remark                                   |
++=============+============+================+==========+==========================================+
+|2024-02      | 1.0.0.0    | V3.1.4024.22   | HVAP     | Function block created                   |
++-------------+------------+----------------+----------+------------------------------------------+
+
+*)]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bFirstCycle THEN
+	bFirstCycle := FALSE;
+	fbCR800.MR_FirstCycle( sName := CONCAT(STR1 := sName, STR2 := ':CR800 Controler'), iOverride := iOverride);
+	
+	(* Assign digital output - robots power on switch *)
+	doRobotPowerOn.MR_FirstCycle(	sName 		:= 'POWER ON',
+									sModuleType := '',
+									sPortID		:= '');
+									
+	(* Assign digital output - robots automatic mode switch *)
+	doRobotModeSwitch.MR_FirstCycle(	sName 		:= 'MODE SWITCH',
+										sModuleType := '',
+										sPortID		:= '');
+	
+END_IF
+
+_bActive := eRobotState >= E_AOIRobotState.READY_INITIALIZED;
+
+(* Cyclic run *)
+StateMachine();
+
+fbCR800();]]></ST>
+    </Implementation>
+    <Folder Name="FirstCycle" Id="{1580bd4a-1420-4473-a101-d995740d3a35}" />
+    <Folder Name="Methods" Id="{a62f5e26-aa74-4461-8ae8-95469d4d1d7f}" />
+    <Folder Name="Properties" Id="{e734ee39-01a2-484c-8a96-bb2c5182f525}">
+      <Folder Name="Parameters" Id="{f892de25-a345-4abc-a44a-a582b677a2b3}" />
+      <Folder Name="References" Id="{6265b82b-646b-429d-8fe3-f67f1f0df7ee}" />
+      <Folder Name="Status" Id="{548e22ea-a001-4ce0-bfb6-f0b19639311e}" />
+    </Folder>
+    <Folder Name="Requests" Id="{7c001b75-5440-4926-923a-1894fb46196c}" />
+    <Folder Name="StateMachine" Id="{16bb0b6d-a902-4eae-871b-304cbf39c70b}" />
+    <Property Name="Active" Id="{00dd90fa-d8ef-42e3-8f76-d0db6a5d1eda}" FolderPath="Properties\Status\">
+      <Declaration><![CDATA[PROPERTY Active : BOOL]]></Declaration>
+      <Get Name="Get" Id="{b0aeac42-ebec-459a-9660-7c3dc0dce620}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Active := _bActive;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Busy" Id="{20f17740-f408-48d9-a91c-b95c3700f049}" FolderPath="Properties\Status\">
+      <Declaration><![CDATA[PROPERTY Busy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{3ce014f4-3a6d-4466-97da-0de690b45e5e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Busy := _bBusy;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="M_EtherCATStatusCheck" Id="{bdd41f25-304e-45d0-b300-3a0c3bb9bcad}" FolderPath="Methods\">
+      <Declaration><![CDATA[METHOD M_EtherCATStatusCheck : BOOL
+VAR_INST
+	EtherCATStatusCheck : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE EtherCATStatusCheck OF
+	
+	0://MACHINE_STATE_UNINITIALIZED_CR800_ETHERCAT_STATUS_CHECK
+		fbGetCR800EcState(			sNetId 		:= sPLC_NET_ID,
+									nSlaveAddr	:= iCR800_1_ADDRESS,
+									bExecute	:= TRUE,
+									tTimeout 	:= DEFAULT_ADS_TIMEOUT,
+									state		=> stCR800GetEcState);
+		IF NOT fbGetCR800EcState.bBusy AND NOT fbGetCR800EcState.bError THEN
+			fbGetCR800EcState(bExecute := FALSE);
+			EtherCATStatusCheck := EtherCATStatusCheck + 10;
+			
+		END_IF
+	
+	10://MACHINE_STATE_UNINITIALIZED_CR800_ETHERCAT_STATUS_CHECK_DONE
+		IF stCR800GetEcState.deviceState = EC_DEVICE_STATE_ERROR OR stCR800GetEcState.deviceState = 84 THEN
+			EtherCATStatusCheck := 20;
+			
+		ELSIF stCR800GetEcState.deviceState = EC_DEVICE_STATE_SAFEOP THEN
+			EtherCATStatusCheck := 30;
+			
+		ELSIF stCR800GetEcState.deviceState = EC_DEVICE_STATE_OP THEN
+			EtherCATStatusCheck := 40;
+		ELSE
+			EtherCATStatusCheck := 0;
+		END_IF
+		
+	20://MACHINE_STATE_UNINITIALIZED_CR800_ETHERCAT_ERROR_RESET
+		fbSetCR800CtrlState( 		sNetId 		:= sPLC_NET_ID,
+									nSlaveAddr	:= iCR800_1_ADDRESS,
+									bExecute 	:= TRUE,
+									tTimeout 	:= DEFAULT_ADS_TIMEOUT,
+									state 		:= EC_DEVICE_STATE_ERROR);
+		IF NOT fbSetCR800CtrlState.bBusy AND NOT fbSetCR800CtrlState.bError THEN
+			fbSetCR800CtrlState(bExecute := FALSE);
+			EtherCATStatusCheck := 0;
+		END_IF
+	
+	30://MACHINE_STATE_UNINITIALIZED_CR800_ETHERCAT_REQUEST_OP_STATE
+		fbSetCR800CtrlState( 		sNetId 		:= sPLC_NET_ID,
+									nSlaveAddr	:= iCR800_1_ADDRESS,
+									bExecute 	:= TRUE,
+									tTimeout 	:= DEFAULT_ADS_TIMEOUT,
+									state 		:= EC_DEVICE_STATE_OP);
+		IF NOT fbSetCR800CtrlState.bBusy AND NOT fbSetCR800CtrlState.bError THEN
+			fbSetCR800CtrlState(bExecute := FALSE);
+			EtherCATStatusCheck := 0;
+		END_IF
+
+	40://MACHINE_STATE_UNINITIALIZED_CR800_CHECK_POWER_REGISTER
+		IF fbCR800.CR800PoweredOn THEN
+			EtherCATStatusCheck := 0;
+			M_EtherCATStatusCheck := TRUE;
+		END_IF
+	
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_PowerOnCommand" Id="{fb260bcb-9caf-4db9-86f5-095a9cdc6ba7}" FolderPath="Methods\">
+      <Declaration><![CDATA[METHOD M_PowerOnCommand : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[doRobotPowerOn.Out := TRUE;
+
+tonDelay(IN := TRUE, PT := T#20S);
+IF tonDelay.Q AND fbCR800.CR800PoweredOn THEN
+	tonDelay(IN := FALSE);
+	M_PowerOnCommand := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ModeSwitch" Id="{d8e990b0-c104-4c5c-ac7d-fa4f0f9f5c86}" FolderPath="Properties\Parameters\">
+      <Declaration><![CDATA[PROPERTY ModeSwitch : BOOL]]></Declaration>
+      <Set Name="Set" Id="{b8258eae-2233-4d8c-809c-aabd9517f284}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[doRobotModeSwitch.Out := ModeSwitch;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="MR_Abort" Id="{a5c0f5a2-80a9-4ac8-9e13-09b7a6c24ed7}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_Abort : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eRobotState >= E_AOIRobotState.IDLE AND eRobotState <> E_AOIRobotState.ABORT  THEN
+	_bBusy := TRUE;
+	MR_Abort := FALSE;
+	eRobotState := E_AOIRobotState.ABORT;
+	eRobotStateAbort := E_AOIRobotStateAbort.CR800_RESET;
+	
+ELSIF eRobotState = E_AOIRobotState.UNINITIALIZED THEN
+	_bBusy := FALSE;
+	MR_Abort := TRUE;
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_FirstCycle" Id="{7f19a96a-f2e7-4e0c-aeff-29412e2e3a35}" FolderPath="FirstCycle\">
+      <Declaration><![CDATA[METHOD MR_FirstCycle : BOOL
+VAR_INPUT
+	sName 				: STRING;
+	iInitialOverride 	: USINT;
+	sPLC_NET_ID			: T_AmsNetId;
+	iCR800_1_ADDRESS	: UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.sName := sName;
+THIS^.iOverride := iInitialOverride;
+THIS^.sPLC_NET_ID := sPLC_NET_ID;
+THIS^.iCR800_1_ADDRESS := iCR800_1_ADDRESS;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_GoBowl" Id="{8fca256d-d888-459c-9f57-c97bca6ada16}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_GoBowl : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eRobotState = E_AOIRobotState.IDLE THEN
+	_bBusy := TRUE;
+	MR_GoBowl := FALSE;
+	eRobotState := E_AOIRobotState.GO_BOWL;
+	
+ELSIF eRobotState = E_AOIRobotState.ACTION_DONE THEN
+	_bBusy := FALSE;
+	MR_GoBowl := TRUE;
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_GoHome" Id="{43d399af-4a0b-4990-b56b-04ec972ae6f6}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_GoHome : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eRobotState = E_AOIRobotState.IDLE THEN
+	_bBusy := TRUE;
+	MR_GoHome := FALSE;
+	eRobotState := E_AOIRobotState.GO_HOME;
+	
+ELSIF eRobotState = E_AOIRobotState.ACTION_DONE THEN
+	_bBusy := FALSE;
+	MR_GoHome := TRUE;
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_GoInputProduct" Id="{f3f53605-4546-42e6-b257-59ab4aaffaaf}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_GoInputProduct : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eRobotState = E_AOIRobotState.IDLE THEN
+	_bBusy := TRUE;
+	MR_GoInputProduct := FALSE;
+	eRobotState := E_AOIRobotState.GO_INPUT_PRODUCT;
+	
+ELSIF eRobotState = E_AOIRobotState.ACTION_DONE THEN
+	_bBusy := FALSE;
+	MR_GoInputProduct := TRUE;
+	
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_GoRotaryTable" Id="{39813b53-3508-4f82-87a0-9d0ea99299da}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_GoRotaryTable : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eRobotState = E_AOIRobotState.IDLE THEN
+	_bBusy := TRUE;
+	MR_GoRotaryTable := FALSE;
+	eRobotState := E_AOIRobotState.GO_ROTARY_TABLE;
+	
+ELSIF eRobotState = E_AOIRobotState.ACTION_DONE THEN
+	_bBusy := FALSE;
+	MR_GoRotaryTable := TRUE;
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_GoStation1" Id="{bf339daa-cf96-4f13-b6be-b781d5f2e1ca}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_GoStation1 : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eRobotState = E_AOIRobotState.IDLE THEN
+	_bBusy := TRUE;
+	MR_GoStation1 := FALSE;
+	eRobotState := E_AOIRobotState.GO_STATION_1;
+	
+ELSIF eRobotState = E_AOIRobotState.ACTION_DONE THEN
+	_bBusy := FALSE;
+	MR_GoStation1 := TRUE;
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_GoStation2" Id="{2829808c-7ae9-4746-87ba-e21e97f0e03e}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_GoStation2 : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eRobotState = E_AOIRobotState.IDLE THEN
+	_bBusy := TRUE;
+	MR_GoStation2 := FALSE;
+	eRobotState := E_AOIRobotState.GO_STATION_2;
+	
+ELSIF eRobotState = E_AOIRobotState.ACTION_DONE THEN
+	_bBusy := FALSE;
+	MR_GoStation2 := TRUE;
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_Init" Id="{48e33a1d-b7b3-402f-8de8-77c91fd721c4}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_Init : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eRobotState = E_AOIRobotState.UNINITIALIZED THEN
+	_bBusy := TRUE;
+	MR_Init := FALSE;
+	eRobotState := E_AOIRobotState.INITIALIZING;
+	eRobotStateInit := E_AOIRobotStateInit.CR800_RESET;
+	
+ELSIF eRobotState = E_AOIRobotState.IDLE THEN
+	_bBusy := FALSE;
+	MR_Init := TRUE;
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_Pick" Id="{481f59e3-2d0d-4770-b221-82fb292c369b}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_Pick : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eRobotState = E_AOIRobotState.IDLE THEN
+	_bBusy := TRUE;
+	MR_Pick := FALSE;
+	eRobotState := E_AOIRobotState.PICK;
+	
+ELSIF eRobotState = E_AOIRobotState.ACTION_DONE THEN
+	_bBusy := FALSE;
+	MR_Pick := TRUE;
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_Place" Id="{5791e094-0707-4ba1-aa12-0ccac85f8549}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_Place : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eRobotState = E_AOIRobotState.IDLE THEN
+	_bBusy := TRUE;
+	MR_Place := FALSE;
+	eRobotState := E_AOIRobotState.PLACE;
+	
+ELSIF eRobotState = E_AOIRobotState.ACTION_DONE THEN
+	_bBusy := FALSE;
+	MR_Place := TRUE;
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Abort" Id="{202625ac-d8f9-4843-98e3-bb71d732dfe9}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Abort : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE eRobotStateAbort OF
+	E_AOIRobotStateAbort.CR800_RESET:
+		fbCR800.MR_Reset();
+		IF NOT fbCR800.Busy THEN
+			eRobotStateAbort := E_AOIRobotStateAbort.CR800_ABORT;
+		END_IF
+
+	E_AOIRobotStateAbort.CR800_ABORT:
+		fbCR800.MR_Abort();
+		IF NOT fbCR800.Active THEN
+			eRobotState := E_AOIRobotState.UNINITIALIZED;
+		END_IF
+		
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_ActionDone" Id="{a91b1ec5-bc2c-4bca-9761-8a54e27a73df}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_ActionDone : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _bBusy THEN
+	eRobotState := E_AOIRobotState.IDLE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_GoBowl" Id="{f0b2f44c-a64c-48b3-9641-d2ef14384b09}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_GoBowl : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbCR800.ActionNumber := AOI_ROBOT_ACTION_GO_BOWL;
+fbCR800.MR_DoAction(iActionNumber := fbCR800.ActionNumber);
+IF NOT fbCR800.Busy THEN
+	eRobotState := E_AOIRobotState.ACTION_DONE	;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_GoHome" Id="{5388b69c-a30b-46c4-befa-600129ee884f}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_GoHome : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbCR800.MR_GoHome();
+IF NOT fbCR800.Busy THEN
+	eRobotState := E_AOIRobotState.ACTION_DONE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_GoInputProduct" Id="{5f15e32b-114e-41e6-8b51-f49c143aea82}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_GoInputProduct : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbCR800.ActionNumber := AOI_ROBOT_ACTION_GO_INPUT_PRODUCT;
+fbCR800.MR_DoAction(iActionNumber := fbCR800.ActionNumber);
+IF NOT fbCR800.Busy THEN
+	eRobotState := E_AOIRobotState.ACTION_DONE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_GoRotaryTable" Id="{c143f1f0-a01c-47ea-8125-51d7dcca852a}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_GoRotaryTable : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbCR800.ActionNumber := AOI_ROBOT_ACTION_GO_TO_ROTARY_TABLE;
+fbCR800.MR_DoAction(iActionNumber := fbCR800.ActionNumber);
+IF NOT fbCR800.Busy THEN
+	eRobotState := E_AOIRobotState.ACTION_DONE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_GoStation1" Id="{abc6b57b-a7a1-4b87-bd10-75950b036d3b}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_GoStation1 : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbCR800.ActionNumber := AOI_ROBOT_ACTION_GO_TO_STATION_1;
+fbCR800.MR_DoAction(iActionNumber := fbCR800.ActionNumber);
+IF NOT fbCR800.Busy THEN
+	eRobotState := E_AOIRobotState.ACTION_DONE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_GoStation2" Id="{3facbf49-1188-456d-bf25-9344b0b730a4}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_GoStation2 : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbCR800.ActionNumber := AOI_ROBOT_ACTION_GO_TO_STATION_2;
+fbCR800.MR_DoAction(iActionNumber := fbCR800.ActionNumber);
+IF NOT fbCR800.Busy THEN
+	eRobotState := E_AOIRobotState.ACTION_DONE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Idle" Id="{ee54a00d-3317-4f24-8a89-8f7e1b3beca5}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Idle : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Initializing" Id="{db111a47-15c1-41cf-b767-35cba4267837}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Initializing : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE eRobotStateInit OF
+	E_AOIRobotStateInit.CR800_RESET:
+		fbCR800.MR_Reset();
+		IF NOT fbCR800.Busy THEN
+			eRobotStateInit := E_AOIRobotStateInit.CR800_INIT;
+		END_IF
+	
+	E_AOIRobotStateInit.CR800_INIT:
+		fbCR800.MR_Init();
+		IF fbCR800.Active THEN
+			eRobotState := E_AOIRobotState.READY_INITIALIZED;
+		END_IF
+	
+END_CASE
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Pick" Id="{4a8b4882-669b-4a67-8b35-8be69423a413}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Pick : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbCR800.ActionNumber := AOI_ROBOT_ACTION_PICK;
+fbCR800.MR_DoAction(iActionNumber := fbCR800.ActionNumber);
+IF NOT fbCR800.Busy THEN
+	eRobotState := E_AOIRobotState.ACTION_DONE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Place" Id="{22ce814f-9ba3-4222-b910-1d35ba11f7c1}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Place : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbCR800.ActionNumber := AOI_ROBOT_ACTION_PLACE;
+fbCR800.MR_DoAction(iActionNumber := fbCR800.ActionNumber);
+IF NOT fbCR800.Busy THEN
+	eRobotState := E_AOIRobotState.ACTION_DONE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_ReadyInitialized" Id="{97befca8-33ae-4fcf-8e14-e1efc2c3c2b9}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_ReadyInitialized : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[eRobotState := E_AOIRobotState.IDLE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Uninitialized" Id="{da7a9a78-d285-4fa5-beb0-3564a32a2b8f}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Uninitialized : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ref_CR800" Id="{a836ae82-c77c-4cbb-a70d-b4e0136e24b4}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY ref_CR800 : REFERENCE TO FB_CR800EtherCAT]]></Declaration>
+      <Get Name="Get" Id="{d5a495ba-0ab4-45fb-b5cd-c1b5ae9e7c34}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ref_CR800 REF= fbCR800;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StateMachine" Id="{f0baa1ed-fb9e-4bad-9f10-d138433fcc85}" FolderPath="StateMachine\">
+      <Declaration><![CDATA[METHOD PROTECTED StateMachine : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE eRobotState OF
+	E_AOIRobotState.UNINITIALIZED:
+		MS_Uninitialized();
+		
+	E_AOIRobotState.INITIALIZING:
+		MS_Initializing();
+		
+	E_AOIRobotState.READY_INITIALIZED:
+		MS_ReadyInitialized();
+		
+	E_AOIRobotState.IDLE:
+		MS_Idle();
+
+	E_AOIRobotState.PICK:
+		MS_Pick();
+
+	E_AOIRobotState.PLACE:
+		MS_Place();
+
+	E_AOIRobotState.GO_HOME:
+		MS_GoHome();
+		
+	E_AOIRobotState.GO_BOWL:
+		MS_GoBowl();
+		
+	E_AOIRobotState.GO_INPUT_PRODUCT:
+		MS_GoInputProduct();
+	
+	E_AOIRobotState.GO_STATION_1:
+		MS_GoStation1();
+		
+	E_AOIRobotState.GO_STATION_2:
+		MS_GoStation2();
+		
+	E_AOIRobotState.GO_ROTARY_TABLE:	
+		MS_GoRotaryTable();
+		
+	E_AOIRobotState.ACTION_DONE:
+		MS_ActionDone();
+		
+	E_AOIRobotState.ABORT:
+		MS_Abort();
+		
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_Robot">
+      <LineId Id="173" Count="14" />
+      <LineId Id="199" Count="0" />
+      <LineId Id="198" Count="0" />
+      <LineId Id="190" Count="3" />
+      <LineId Id="74" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.Active.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.Busy.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.M_EtherCATStatusCheck">
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="13" Count="6" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="24" Count="9" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="37" Count="7" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="48" Count="7" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="59" Count="1" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="8" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.M_PowerOnCommand">
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="1" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.ModeSwitch.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MR_Abort">
+      <LineId Id="6" Count="9" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MR_FirstCycle">
+      <LineId Id="20" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MR_GoBowl">
+      <LineId Id="18" Count="8" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MR_GoHome">
+      <LineId Id="6" Count="8" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MR_GoInputProduct">
+      <LineId Id="5" Count="1" />
+      <LineId Id="8" Count="6" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MR_GoRotaryTable">
+      <LineId Id="6" Count="8" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MR_GoStation1">
+      <LineId Id="6" Count="8" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MR_GoStation2">
+      <LineId Id="6" Count="8" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MR_Init">
+      <LineId Id="6" Count="8" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MR_Pick">
+      <LineId Id="6" Count="8" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MR_Place">
+      <LineId Id="6" Count="8" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_Abort">
+      <LineId Id="6" Count="12" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_ActionDone">
+      <LineId Id="6" Count="1" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_GoBowl">
+      <LineId Id="6" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_GoHome">
+      <LineId Id="6" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_GoInputProduct">
+      <LineId Id="5" Count="4" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_GoRotaryTable">
+      <LineId Id="6" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_GoStation1">
+      <LineId Id="6" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_GoStation2">
+      <LineId Id="6" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_Idle">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_Initializing">
+      <LineId Id="6" Count="16" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_Pick">
+      <LineId Id="6" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_Place">
+      <LineId Id="6" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_ReadyInitialized">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.MS_Uninitialized">
+      <LineId Id="10" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.ref_CR800.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Robot.StateMachine">
+      <LineId Id="9" Count="10" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="61" Count="2" />
+      <LineId Id="23" Count="1" />
+      <LineId Id="56" Count="2" />
+      <LineId Id="35" Count="2" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="51" Count="1" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="46" Count="1" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="29" Count="2" />
+      <LineId Id="20" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

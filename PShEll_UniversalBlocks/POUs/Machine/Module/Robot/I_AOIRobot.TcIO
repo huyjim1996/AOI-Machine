@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="I_AOIRobot" Id="{d3079711-799c-4b81-9032-87d91c5984e4}">
+    <Declaration><![CDATA[INTERFACE I_AOIRobot
+]]></Declaration>
+    <Property Name="Active" Id="{557b19a5-b863-4422-baf2-f83c2c6ae3fb}">
+      <Declaration><![CDATA[PROPERTY Active : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d71c084b-050a-4ee2-bdc4-1f4651d56291}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Busy" Id="{1c482b71-030f-4d5d-b1ff-c09e0b584ae2}">
+      <Declaration><![CDATA[PROPERTY Busy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{e08f77d2-ec57-46ff-b3f5-4c873c2aa050}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="M_EtherCATStatusCheck" Id="{5764b9b1-deba-4835-8a5a-53c4c21fe5fd}">
+      <Declaration><![CDATA[METHOD M_EtherCATStatusCheck : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_PowerOnCommand" Id="{320f3aed-ed85-44d5-b740-e61a880aff7e}">
+      <Declaration><![CDATA[METHOD M_PowerOnCommand : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="ModeSwitch" Id="{508aec19-59e9-4713-9528-2d23f8d62261}">
+      <Declaration><![CDATA[PROPERTY ModeSwitch : BOOL]]></Declaration>
+      <Set Name="Set" Id="{f8d10e29-3fd2-4b52-a5f5-ec6f8a894f80}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Method Name="MR_Abort" Id="{dda4e99b-2920-4465-a86a-7a60de3dc05e}">
+      <Declaration><![CDATA[METHOD MR_Abort : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MR_FirstCycle" Id="{b81696b3-33b2-48d3-a6c0-9cd039ef52ad}">
+      <Declaration><![CDATA[METHOD MR_FirstCycle : BOOL
+VAR_INPUT
+	sName 				: STRING;
+	iInitialOverride 	: USINT;
+	sPLC_NET_ID			: T_AmsNetId;
+	iCR800_1_ADDRESS	: UINT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MR_GoBowl" Id="{8a9b1553-675f-4d0d-89d5-c61a28c5c052}">
+      <Declaration><![CDATA[METHOD MR_GoBowl : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MR_GoHome" Id="{c6d505c0-23cf-4ee9-b5f1-1e895de7154e}">
+      <Declaration><![CDATA[METHOD MR_GoHome : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MR_GoInputProduct" Id="{4b6070cf-9eba-4e5f-84a2-de123fbc3e14}">
+      <Declaration><![CDATA[METHOD MR_GoInputProduct : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MR_GoRotaryTable" Id="{734c7d45-b350-4edc-83f5-59f7cd7ad614}">
+      <Declaration><![CDATA[METHOD MR_GoRotaryTable : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MR_GoStation1" Id="{280a053a-b0c5-475b-a965-1c450584e6f8}">
+      <Declaration><![CDATA[METHOD MR_GoStation1 : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MR_GoStation2" Id="{7e81ab79-b967-4e60-a36e-4ba9e8cc7463}">
+      <Declaration><![CDATA[METHOD MR_GoStation2 : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MR_Init" Id="{872e1228-a709-4bd6-8357-0bcea053efb5}">
+      <Declaration><![CDATA[METHOD MR_Init : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MR_Pick" Id="{a2dd6a44-edf3-471f-8374-4dd014777626}">
+      <Declaration><![CDATA[METHOD MR_Pick : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MR_Place" Id="{ac389e4e-ff84-45dc-94ea-a20e842aa9f3}">
+      <Declaration><![CDATA[METHOD MR_Place : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="ref_CR800" Id="{5c719e93-fc9a-4ada-8473-bedd55c42aa9}">
+      <Declaration><![CDATA[PROPERTY ref_CR800 : REFERENCE TO FB_CR800EtherCAT]]></Declaration>
+      <Get Name="Get" Id="{de650281-3458-46de-9cd8-bb2406468280}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

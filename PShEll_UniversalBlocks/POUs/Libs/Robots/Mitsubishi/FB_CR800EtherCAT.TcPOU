@@ -745,7 +745,7 @@ CASE eCR800SendCommand OF
 	
 	CR800_CMD_EXCHANGE_IDLE:
 		M_SendCommand 	:= FALSE ;
-		RequestNumber 	:= iRequestNumber ; //Set property
+		RequestNumber 	:= iRequestNumber ; 
 		tonWatchdog.IN 	:= TRUE ;
 		eCR800SendCommand 	:= CR800_CMD_EXCHANGE_SEND_DATA ;
 
@@ -1912,7 +1912,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[stCR800EthercatData.arrSignalsOutputConverted[6004] := OperationRightsEnable;]]></ST>
+          <ST><![CDATA[stCR800EthercatData.arrSignalsOutputConverted[6004] := OperationRightsEnable ;]]></ST>
         </Implementation>
       </Set>
     </Property>

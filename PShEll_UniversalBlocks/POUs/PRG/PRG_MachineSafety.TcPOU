@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="PRG_MachineSafety" Id="{537b7dc6-6c67-40ee-bee2-17822a50d8a9}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_MachineSafety
+VAR
+	bFirstCycle 	: BOOL := TRUE;
+	fbMachineSafety : FB_MachineSafety;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* First cycle of visu controler run*)
+IF bFirstCycle THEN
+	bFirstCycle := FALSE;
+	
+	(* Assign machine controler reference to Shell API*)
+	stShell.stPlatform.ref_MachineSafety REF= fbMachineSafety;
+	
+END_IF
+
+(* Cyclic run of machine safety *)
+fbMachineSafety();]]></ST>
+    </Implementation>
+    <LineIds Name="PRG_MachineSafety">
+      <LineId Id="3" Count="9" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_DataSetFifo" Id="{68aab722-1c15-4a1c-8558-70d8155fb516}" SpecialFunc="None">
+    <Declaration><![CDATA[(* 
+:Description: This function block is used to buffer all data base on FIFO concept.
+*)
+FUNCTION_BLOCK FB_DataSetFifo
+VAR
+	MAX_BUFFER_SIZE : UINT;
+	arrBuffer 	: ARRAY[0..1000] OF BYTE; (* Buffer memory used by FB_MemRingBuffer function block *)
+	fbBuffer	: FB_MemRingBuffer;
+	
+	_bOk		: BOOL;
+	_nCount		: UDINT;
+	_nLoad		: UDINT;
+	_bOverwrite	: BOOL;
+END_VAR
+
+(*
+Version history:
+
++-------------+------------+----------------+----------+------------------------------------------------------------+
+|Date         | Version    | created under  | Author   | Remark                                                     |
++=============+============+================+==========+============================================================+
+|2024-02      | 1.0.0.0    | V3.1.4024.22   | HVAP     | Function block created                                     |
++-------------+------------+----------------+----------+------------------------------------------------------------+
+
+*)]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[;]]></ST>
+    </Implementation>
+    <Method Name="AddData" Id="{806cf257-e082-4499-824e-d35c7ee27f3b}">
+      <Declaration><![CDATA[METHOD AddData : BOOL
+VAR_INPUT
+	in : REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbBuffer.A_AddTail( pWrite:= ADR( in ),
+					cbWrite:= SIZEOF( in ),
+					pBuffer:= ADR( arrBuffer ),
+					cbBuffer:= SIZEOF( arrBuffer ),
+					bOk=> _bOk,
+					nCount => _nCount );
+
+
+IF NOT _bOk THEN (* overflow ? *)
+	IF bOverwrite THEN
+		fbBuffer.A_RemoveHead(); (* remove one oldest entry *)
+
+		fbBuffer.A_AddTail( bOk => _bOk, nCount => _nCount );
+	END_IF
+END_IF
+
+
+
+_nLoad := (fbBuffer.cbSize * 100) / 1000;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Count" Id="{42270d8d-a9c8-4f05-bae7-28d0249ec709}">
+      <Declaration><![CDATA[PROPERTY Count : UDINT]]></Declaration>
+      <Get Name="Get" Id="{adb7774c-93a8-40e4-aac2-a9fa76af383e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Count := _nCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="GetData" Id="{0e79a6b7-8e40-429c-beb1-e3e03e706085}">
+      <Declaration><![CDATA[METHOD GetData : BOOL
+VAR_OUTPUT
+	out : REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbBuffer.A_GetHead( pRead:= ADR( out ),
+					cbRead:= SIZEOF( out ),
+					pBuffer:= ADR( arrBuffer ),
+					cbBuffer:= SIZEOF( arrBuffer ),
+					bOk=> _bOk,
+					nCount => _nCount );
+
+_nLoad := (fbBuffer.cbSize * 100) / 1000;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Load" Id="{6e073599-055b-4e4c-8496-d76ae7262bdd}">
+      <Declaration><![CDATA[PROPERTY Load : UDINT]]></Declaration>
+      <Get Name="Get" Id="{b6fc64b1-9500-4ddf-a7bf-278fea2ae343}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Load := _nLoad;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="OK" Id="{7fbf5742-1e65-42d7-a9a4-cbff4411ba3c}">
+      <Declaration><![CDATA[PROPERTY OK : BOOL]]></Declaration>
+      <Get Name="Get" Id="{ab850ee0-1094-4d02-8af9-56e6be495ffe}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[OK := _bOk;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="OverWrite" Id="{a4ded3f2-b8eb-4d1e-8863-706bacfdf317}">
+      <Declaration><![CDATA[PROPERTY OverWrite : BOOL]]></Declaration>
+      <Set Name="Set" Id="{efc885fc-c103-4190-8eaa-3578c12692a0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_bOverwrite := OverWrite;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Remove" Id="{ba69501a-1e41-46ca-9a82-0a3e70bd1fc2}">
+      <Declaration><![CDATA[METHOD Remove : BOOL
+VAR_OUTPUT
+	out : REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbBuffer.A_RemoveHead( 	pRead:= ADR( out ),
+						cbRead:= SIZEOF( out ),
+						pBuffer:= ADR( arrBuffer ),
+						cbBuffer:= SIZEOF( arrBuffer ),
+						bOk=> _bOk,
+						nCount => _nCount );
+
+_nLoad := (fbBuffer.cbSize * 100) / 1000;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset" Id="{0c386d56-72f5-42dd-8228-c15774d39af4}">
+      <Declaration><![CDATA[METHOD Reset : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MEMSET( ADR( arrBuffer ), 0, SIZEOF( arrBuffer ) ); (* reset (optional) internal buffer *)
+
+fbBuffer.A_Reset( 	bOk=> _bOk,
+					nCount => _nCount );
+
+_nLoad := (fbBuffer.cbSize * 100) / 1000;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_DataSetFifo">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DataSetFifo.AddData">
+      <LineId Id="6" Count="17" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DataSetFifo.Count.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DataSetFifo.GetData">
+      <LineId Id="6" Count="6" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DataSetFifo.Load.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DataSetFifo.OK.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DataSetFifo.OverWrite.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DataSetFifo.Remove">
+      <LineId Id="6" Count="6" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_DataSetFifo.Reset">
+      <LineId Id="6" Count="4" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

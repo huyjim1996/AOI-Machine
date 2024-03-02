@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_AOIRobotState" Id="{cb68bea1-09ad-4e0b-804d-ba7b26ac14a1}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_AOIRobotState :
+(
+	UNINITIALIZED					:= 0,
+	INITIALIZING					:= 10,
+	READY_INITIALIZED				:= 20,
+	IDLE							:= 30,
+	PICK							:= 31,
+	PLACE							:= 32,
+	GO_HOME							:= 40,
+	GO_BOWL							:= 45,
+	GO_INPUT_PRODUCT				:= 51,
+	GO_STATION_1					:= 60,
+	GO_STATION_2					:= 70,
+	GO_ROTARY_TABLE					:= 80,
+	PLACE_ON_TABLE					:= 90,
+	
+	ACTION_DONE						:= 200,
+	ABORT							:= -10
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

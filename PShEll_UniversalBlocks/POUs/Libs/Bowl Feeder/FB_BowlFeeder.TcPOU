@@ -6,7 +6,7 @@ Copyrights	: Operation Automation Department
 Author		: HVAP
 Description	: This function block is used to control bowl feeder REOVIB MFS 268
 *)
-FUNCTION_BLOCK FB_BowlFeeder
+FUNCTION_BLOCK FB_BowlFeeder IMPLEMENTS I_BowlFeeder
 VAR CONSTANT
 	(* STRINGS *)
 	sPRODUCT_PRESENCE_SENSOR_NAME	: STRING := 'Producr presence sensor';
@@ -18,19 +18,20 @@ VAR
 	sName 				: STRING;			(* Bowl Feeder name for other utilities *)	
 	
 	(* Internal status *)
-	bActive : BOOL;
-	bBusy : BOOL;
-	bError : BOOL;
+	_bActive : BOOL;
+	_bBusy : BOOL;
+	_bError : BOOL;
+	_uiErrorID : UINT;
 	
 	(* State machine *)
 	eBowlFeederUnitState 		: E_BowlFeederUnitState;
 	eBowlFeederUnitStateInit 	: E_BowlFeederUnitStateInit;
 	
 	(* Hardware module *)
-	diProductPresence	: FB_DigitalInput;	(* Sensor for monitoring the queue of components on the track or an input for switching to the second setpoint 24 VDC (PNP). *)
+	//_diProductPresence	: FB_DigitalInput;	(* Sensor for monitoring the queue of components on the track or an input for switching to the second setpoint 24 VDC (PNP). *)
 	diStatusRelay		: FB_DigitalInput;	(* Relay closes when the feeder is running – the relay opens when there is no enable signal or a fault displayed. *)
 	doEnable			: FB_DigitalOutput;	(* External control function to switch the power output ON or OFF *)
-	aoSetpoint			: FB_AnalogOutput;	(* Parameter ESP in Menu C003 must be set to 1 *)
+	_aoSetpoint			: FB_AnalogOutput;	(* 0-100%*)
 	
 	(* Rising edge trigger *)
 	rtError								: R_TRIG; 					(* Rising edge trigger for function block error *)
@@ -49,9 +50,9 @@ Version history:
       <ST><![CDATA[IF bFirstCycle THEN
 	bFirstCycle := FALSE;
 	
-	diProductPresence.MR_FirstCycle( 	sName 		:= CONCAT(STR1:= sName, STR2:= CONCAT(STR1:= ':', STR2:= sPRODUCT_PRESENCE_SENSOR_NAME)),
-										sModuleType := '',
-										sPortID 	:= '');
+//	_diProductPresence.MR_FirstCycle( 	sName 		:= CONCAT(STR1:= sName, STR2:= CONCAT(STR1:= ':', STR2:= sPRODUCT_PRESENCE_SENSOR_NAME)),
+//										sModuleType := '',
+//										sPortID 	:= '');
 	
 	diStatusRelay.MR_FirstCycle(	sName		:= CONCAT(STR1:= sName, STR2:= CONCAT(STR1:= ':', STR2:= sSTATUS_RELAY)),
 									sModuleType	:= '',
@@ -63,10 +64,11 @@ Version history:
 END_IF
 
 (* Ready to work *)
-bActive := eBowlFeederUnitState >= BOWL_FEEDER_UNIT_IDLE;
+_bActive := eBowlFeederUnitState >= BOWL_FEEDER_UNIT_IDLE;
+_bBusy := eBowlFeederUnitState <> BOWL_FEEDER_UNIT_IDLE AND eBowlFeederUnitState <> BOWL_FEEDER_UNIT_UNINITIALIZED;
 
 (* Report errors that occur *)
-rtError(CLK:=bError);
+rtError(CLK:=_bError);
 IF rtError.Q THEN 
 	fbMachineLogger.MR_AddLogs(CONCAT(sName, ' : Error occured'));
 END_IF
@@ -87,7 +89,7 @@ StateMachine();]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Active := bActive;]]></ST>
+          <ST><![CDATA[Active := _bActive;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -98,7 +100,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Busy := bBusy;]]></ST>
+          <ST><![CDATA[Busy := _bBusy;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -109,7 +111,18 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Error := bError;]]></ST>
+          <ST><![CDATA[Error := _bError;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ErrorID" Id="{4ed8381b-cc4e-474e-bbf8-1f5d99465256}" FolderPath="Properties\Status\">
+      <Declaration><![CDATA[PROPERTY ErrorID : UINT]]></Declaration>
+      <Get Name="Get" Id="{c2c7a2fb-9661-45f3-a19b-972122e46ff6}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ErrorID := _uiErrorID;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -131,13 +144,11 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF eBowlFeederUnitState = BOWL_FEEDER_UNIT_UNINITIALIZED THEN
-	bBusy := TRUE;
 	MR_Init := FALSE;
 	eBowlFeederUnitState := BOWL_FEEDER_UNIT_INITIALIZING;	
 	fbMachineLogger.MR_AddLogs(CONCAT(sName,': initializing requested'));
 		
 ELSIF eBowlFeederUnitState >= BOWL_FEEDER_UNIT_READY_INITIALIZED THEN
-	bBusy := FALSE;
 	MR_Init := TRUE;
 	fbMachineLogger.MR_AddLogs(CONCAT(sName,': initializing done'));
 
@@ -151,13 +162,11 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF eBowlFeederUnitState = BOWL_FEEDER_UNIT_IDLE THEN
-	bBusy := TRUE;
 	MR_Start := FALSE;
 	eBowlFeederUnitState := BOWL_FEEDER_UNIT_START;
 	fbMachineLogger.MR_AddLogs(CONCAT(sName,': Start requesting'));
 		
 ELSIF eBowlFeederUnitState = BOWL_FEEDER_UNIT_RUNNING THEN
-	bBusy := FALSE;
 	MR_Start := TRUE;
 	fbMachineLogger.MR_AddLogs(CONCAT(sName,': Start done, is running'));
 	
@@ -170,7 +179,16 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF eBowlFeederUnitState >= BOWL_FEEDER_UNIT_IDLE THEN
+	MR_Stop := FALSE;
+	eBowlFeederUnitState := BOWL_FEEDER_UNIT_STOP;
+	fbMachineLogger.MR_AddLogs(CONCAT(sName,': Stop requesting'));
+
+ELSIF eBowlFeederUnitState = BOWL_FEEDER_UNIT_IDLE THEN
+	MR_Stop := TRUE;
+	fbMachineLogger.MR_AddLogs(CONCAT(sName,': Stop done'));
+	
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MS_Abort" Id="{dd784302-fafa-40bb-9ec0-14c7306b2234}" FolderPath="StateMachine\">
@@ -181,9 +199,7 @@ END_VAR
 
 IF NOT diStatusRelay.In THEN
 	(* Status bit *)
-	bActive 	:= FALSE;
-	bBusy 		:= FALSE;
-	bError		:= FALSE;
+	_bError		:= FALSE;
 	
 	(* State transition *)
 	eBowlFeederUnitState := BOWL_FEEDER_UNIT_UNINITIALIZED;
@@ -273,14 +289,14 @@ END_IF]]></ST>
         <ST><![CDATA[;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="ProductPresence" Id="{a253d812-9963-447f-a5e0-e726c8288f96}" FolderPath="Properties\Parameters\">
-      <Declaration><![CDATA[PROPERTY ProductPresence : BOOL]]></Declaration>
-      <Get Name="Get" Id="{29b595a4-6bfe-4ea1-a1c8-8968041ab281}">
+    <Property Name="Running" Id="{75f91e98-f73b-4b1c-aba6-b84b270d19ff}">
+      <Declaration><![CDATA[PROPERTY Running : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c2d88e11-d492-4efb-bfee-376407c032c8}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[ProductPresence := diProductPresence.In;]]></ST>
+          <ST><![CDATA[Running := diStatusRelay.In;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -291,7 +307,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Setpoint := aoSetpoint.Value;]]></ST>
+          <ST><![CDATA[Setpoint := _aoSetpoint.Value;]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{f4a770ce-bfd7-409d-ab87-2d4da36edda8}">
@@ -299,7 +315,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[aoSetpoint.Value := Setpoint;]]></ST>
+          <ST><![CDATA[_aoSetpoint.Value := Setpoint;]]></ST>
         </Implementation>
       </Set>
     </Property>
@@ -352,6 +368,7 @@ END_CASE]]></ST>
       <LineId Id="74" Count="0" />
       <LineId Id="60" Count="0" />
       <LineId Id="78" Count="0" />
+      <LineId Id="176" Count="0" />
       <LineId Id="77" Count="0" />
       <LineId Id="75" Count="0" />
       <LineId Id="80" Count="1" />
@@ -368,32 +385,45 @@ END_CASE]]></ST>
     <LineIds Name="FB_BowlFeeder.Error.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
+    <LineIds Name="FB_BowlFeeder.ErrorID.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
     <LineIds Name="FB_BowlFeeder.MR_FirstCycle">
       <LineId Id="5" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>
     <LineIds Name="FB_BowlFeeder.MR_Init">
-      <LineId Id="5" Count="1" />
+      <LineId Id="5" Count="0" />
       <LineId Id="8" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="9" Count="2" />
-      <LineId Id="16" Count="2" />
+      <LineId Id="17" Count="1" />
       <LineId Id="15" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>
     <LineIds Name="FB_BowlFeeder.MR_Start">
-      <LineId Id="5" Count="1" />
+      <LineId Id="5" Count="0" />
       <LineId Id="8" Count="0" />
       <LineId Id="16" Count="0" />
-      <LineId Id="9" Count="6" />
+      <LineId Id="9" Count="2" />
+      <LineId Id="13" Count="2" />
       <LineId Id="7" Count="0" />
     </LineIds>
     <LineIds Name="FB_BowlFeeder.MR_Stop">
       <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="10" Count="0" />
     </LineIds>
     <LineIds Name="FB_BowlFeeder.MS_Abort">
       <LineId Id="6" Count="2" />
-      <LineId Id="13" Count="2" />
+      <LineId Id="13" Count="0" />
       <LineId Id="10" Count="0" />
       <LineId Id="16" Count="0" />
       <LineId Id="18" Count="0" />
@@ -438,7 +468,7 @@ END_CASE]]></ST>
     <LineIds Name="FB_BowlFeeder.MS_Uninitialized">
       <LineId Id="5" Count="0" />
     </LineIds>
-    <LineIds Name="FB_BowlFeeder.ProductPresence.Get">
+    <LineIds Name="FB_BowlFeeder.Running.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_BowlFeeder.Setpoint.Get">
