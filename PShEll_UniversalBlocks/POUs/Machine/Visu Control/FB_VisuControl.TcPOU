@@ -23,6 +23,7 @@ VAR
 	ftRunning						: F_TRIG;													
 	rtReset							: R_TRIG;													
 	rtAbort							: R_TRIG;
+
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF bFirstCycle THEN
@@ -105,8 +106,7 @@ MR_AppendAOIMachine := TRUE;]]></ST>
       <Declaration><![CDATA[METHOD PROTECTED MS_Auto]]></Declaration>
       <Implementation>
         <ST><![CDATA[(* Run Shell code for "Auto" page *)
-SUPER^.MS_Auto();
-]]></ST>
+SUPER^.MS_Auto();]]></ST>
       </Implementation>
     </Method>
     <Method Name="MS_Emergency" Id="{2a34c643-f64a-4582-8b3a-6c75d3cb4aac}" FolderPath="States\">
@@ -298,7 +298,6 @@ END_CASE]]></ST>
     </LineIds>
     <LineIds Name="FB_VisuControl.MS_Auto">
       <LineId Id="6" Count="1" />
-      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_VisuControl.MS_Emergency">
       <LineId Id="2" Count="0" />

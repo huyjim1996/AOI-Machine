@@ -1718,41 +1718,6 @@ External Setpoint Generation:
 							<Type GUID="{A6CC6AFE-FE37-C02D-2C0C-FB1479660FEB}">ARRAY [0..31] OF BYTE</Type>
 						</Var>
 						<Var>
-							<Name>PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam1.bOut</Name>
-							<Comment><![CDATA[ Current value of output]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam2.bOut</Name>
-							<Comment><![CDATA[ Current value of output]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam3.bOut</Name>
-							<Comment><![CDATA[ Current value of output]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam4.bOut</Name>
-							<Comment><![CDATA[ Current value of output]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam5.bOut</Name>
-							<Comment><![CDATA[ Current value of output]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam6.bOut</Name>
-							<Comment><![CDATA[ Current value of output]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam7.bOut</Name>
-							<Comment><![CDATA[ Current value of output]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>PRG_MachineControl.fbMachineControler.fbBowlFeeder.doEnable.bOut</Name>
 							<Comment><![CDATA[ Current value of output]]></Comment>
 							<Type>BOOL</Type>
@@ -1773,6 +1738,66 @@ External Setpoint Generation:
 						</Var>
 						<Var>
 							<Name>PRG_MachineControl.fbMachineControler.poResetButtonLight.bOut</Name>
+							<Comment><![CDATA[ Current value of output]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.doBlowBowlFeeder.bOut</Name>
+							<Comment><![CDATA[ Current value of output]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.doBlowGood.bOut</Name>
+							<Comment><![CDATA[ Current value of output]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.doBlowReject.bOut</Name>
+							<Comment><![CDATA[ Current value of output]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.doBlowDentContamination.bOut</Name>
+							<Comment><![CDATA[ Current value of output]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.doBlowDirtScratch.bOut</Name>
+							<Comment><![CDATA[ Current value of output]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.doTriggerCam1.doCam.bOut</Name>
+							<Comment><![CDATA[ Current value of output]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.doTriggerCam2.doCam.bOut</Name>
+							<Comment><![CDATA[ Current value of output]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.doTriggerCam3.doCam.bOut</Name>
+							<Comment><![CDATA[ Current value of output]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.doTriggerCam4.doCam.bOut</Name>
+							<Comment><![CDATA[ Current value of output]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.doTriggerCam5.doCam.bOut</Name>
+							<Comment><![CDATA[ Current value of output]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.doTriggerCam6.doCam.bOut</Name>
+							<Comment><![CDATA[ Current value of output]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_MachineControl.fbMachineControler.doTriggerCam7.doCam.bOut</Name>
 							<Comment><![CDATA[ Current value of output]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
@@ -1822,6 +1847,21 @@ External Setpoint Generation:
 							</OwnerB>
 							<OwnerB Name="TINC^NC-Task 1 SAF^Objects^XTS Group (CA Group)">
 								<Link VarA="PRG_XtsControlUnit_Test.fbXtsControlUnit.fbMoverGroupCA.stAxesGroupRef.PlcToNc" TypeA="MC.CDT_PLCTOMC_GROUP" InOutA="1" GuidA="{0E2E3852-A98C-4AF3-81E2-209EE128940C}" VarB="Group Inputs^FromPLC" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
+					<UnrestoredVarLinks ImportTime="2024-03-05T18:21:17">
+						<OwnerA Name="OutputSrc" Prefix="TIPC^PShEll_UniversalBlocks^PShEll_UniversalBlocks Instance" Type="2">
+							<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 16 (EL2004)">
+								<Link VarA="PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam1.bOut" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 1^Output" Size="1" RestoreInfo="ANotFound"/>
+								<Link VarA="PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam2.bOut" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 2^Output" Size="1" RestoreInfo="ANotFound"/>
+								<Link VarA="PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam3.bOut" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 3^Output" Size="1" RestoreInfo="ANotFound"/>
+								<Link VarA="PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam4.bOut" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 4^Output" Size="1" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 17 (EL2004)">
+								<Link VarA="PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam5.bOut" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 1^Output" Size="1" RestoreInfo="ANotFound"/>
+								<Link VarA="PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam6.bOut" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 2^Output" Size="1" RestoreInfo="ANotFound"/>
+								<Link VarA="PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam7.bOut" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 3^Output" Size="1" RestoreInfo="ANotFound"/>
 							</OwnerB>
 						</OwnerA>
 					</UnrestoredVarLinks>
@@ -3875,15 +3915,15 @@ External Setpoint Generation:
 				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.fbRobot.doRobotModeSwitch.bOut" VarB="Channel 3^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 16 (EL2004)">
-				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam1.bOut" VarB="Channel 1^Output"/>
-				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam2.bOut" VarB="Channel 2^Output"/>
-				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam3.bOut" VarB="Channel 3^Output"/>
-				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam4.bOut" VarB="Channel 4^Output"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.doTriggerCam1.doCam.bOut" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.doTriggerCam2.doCam.bOut" VarB="Channel 2^Output"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.doTriggerCam3.doCam.bOut" VarB="Channel 3^Output"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.doTriggerCam4.doCam.bOut" VarB="Channel 4^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 17 (EL2004)">
-				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam5.bOut" VarB="Channel 1^Output"/>
-				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam6.bOut" VarB="Channel 2^Output"/>
-				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.fbRTCVision.doTriggerCam7.bOut" VarB="Channel 3^Output"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.doTriggerCam5.doCam.bOut" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.doTriggerCam6.doCam.bOut" VarB="Channel 2^Output"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.doTriggerCam7.doCam.bOut" VarB="Channel 3^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 19 (EL1114)">
 				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.diProductPresenceRobot.bIn" VarB="Channel 4^Input"/>
@@ -4211,6 +4251,13 @@ External Setpoint Generation:
 				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.fbRobot.fbCR800.stCR800EthercatData.arrSignalsOutputRaw[7]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6056-6063)"/>
 				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.fbRobot.fbCR800.stCR800EthercatData.arrSignalsOutputRaw[8]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6064-6071)"/>
 				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.fbRobot.fbCR800.stCR800EthercatData.arrSignalsOutputRaw[9]" VarB="Module 1 (4 Stations:CR800 GPIO_REG_IF)^Rx PDO (4 Sta.)^RY(6072-6079)"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 20 (EK1122)^Box 23 (EX260-SEC1)">
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.doBlowBowlFeeder.bOut" VarB="Byte 0^Output" Size="1"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.doBlowDentContamination.bOut" VarB="Byte 0^Output" Size="1" OffsB="4"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.doBlowDirtScratch.bOut" VarB="Byte 0^Output" Size="1" OffsB="6"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.doBlowGood.bOut" VarB="Byte 0^Output" Size="1" OffsB="2"/>
+				<Link VarA="PlcTask Outputs^PRG_MachineControl.fbMachineControler.doBlowReject.bOut" VarB="Byte 1^Output" Size="1"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 5 (EL1114)">
 				<Link VarA="PlcTask Inputs^PRG_MachineControl.fbMachineControler.diProductPresenceBowl.bIn" VarB="Channel 3^Input"/>

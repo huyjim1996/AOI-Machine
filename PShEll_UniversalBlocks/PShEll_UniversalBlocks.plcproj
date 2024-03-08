@@ -237,6 +237,9 @@
     <Compile Include="DUTs\Libs\Robots\Mitsubishi\E_RobotSystemActions.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\Libs\SMC SI Unit\ST_EX260_SEC1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\Libs\Utilities\CSV Data Exchanger\E_CSVDataExchangerCountColumnsState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -652,6 +655,9 @@
     <Compile Include="POUs\Libs\Utilities\FB_DataSetFifo.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Libs\Utilities\FB_DataSetFifo_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Libs\Utilities\File Logger\FB_FileLogger.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -715,6 +721,9 @@
     <Compile Include="POUs\Machine\Machine Control\E_ProductOut.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Machine\Machine Control\E_TableState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Machine\Machine Control\FB_MachineControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -740,6 +749,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Machine\Module\Robot\I_AOIRobot.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\RTCVision\FB_DoubleTrigger.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Machine\Module\RTCVision\E_SortingResult.TcDUT">
@@ -769,6 +781,10 @@
     </Compile>
     <Compile Include="POUs\PRG\PRG_AlarmControl.TcPOU">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PRG\PRG_FB_BowlFeeder.TcPOU">
+      <SubType>Code</SubType>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="POUs\PRG\PRG_MachineControl.TcPOU">
       <SubType>Code</SubType>
@@ -1090,6 +1106,7 @@
     <Folder Include="DUTs\Libs\Digital Devices\Lamp Indicator" />
     <Folder Include="DUTs\Libs\Fixtures" />
     <Folder Include="DUTs\Libs\Fixtures\UniversalFixture" />
+    <Folder Include="DUTs\Libs\SMC SI Unit" />
     <Folder Include="DUTs\Libs\Platform" />
     <Folder Include="DUTs\Libs\Platform\Common" />
     <Folder Include="DUTs\Libs\Platform\Universal Machine" />
@@ -1167,6 +1184,7 @@
     <Folder Include="POUs\Machine" />
     <Folder Include="POUs\Machine\Machine Control" />
     <Folder Include="POUs\Machine\Module" />
+    <Folder Include="POUs\Machine\Module\EX260SEC1_Com" />
     <Folder Include="POUs\Machine\Module\Robot" />
     <Folder Include="POUs\Machine\Module\RTCVision" />
     <Folder Include="POUs\Machine\Visu Control" />
@@ -1531,6 +1549,9 @@
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
     <SubObject Include="FB_MachineControl.M_AutoProcessing">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_MachineControl.TableProcess">
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
     <SubObject Include="FB_RTCVision\Backup">

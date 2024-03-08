@@ -17,12 +17,26 @@ VAR
 	
 	poDoorLock					: FB_DigitalOutput;			(* Requests all machine lock's to close *)
 	poResetButtonLight			: FB_DigitalOutput;			(* Physical reset button attached to door's of electrical cabinet *)
-
+	
+	doBlowBowlFeeder			: FB_DigitalOutput;
+	doBlowGood					: FB_DigitalOutput;
+	doBlowReject				: FB_DigitalOutput;
+	doBlowDentContamination		: FB_DigitalOutput;
+	doBlowDirtScratch			: FB_DigitalOutput;
+	
+	doTriggerCam1				: FB_DoubleTrigger;
+	doTriggerCam2				: FB_DoubleTrigger;
+	doTriggerCam3				: FB_DoubleTrigger;
+	doTriggerCam4				: FB_DoubleTrigger;
+	doTriggerCam5				: FB_DoubleTrigger;
+	doTriggerCam6				: FB_DoubleTrigger;
+	doTriggerCam7				: FB_DoubleTrigger;
+	
+	
+	
 	(* Auxilary *)
 	tonDelay					: TON;				(* Provides any delay into the machine when switching something On/Off *)
-	Buffer_RotaryTable			: FB_DataSetFifo; 	(* Contain the position of all product on the table *)
-	Buffer_Station3				: FB_DataSetFifo;	(* Contain the trigger position *)
-	Buffer_Station4				: FB_DataSetFifo;	(* Contain the trigger position *)
+	
 
 	(* Parameter *)
 	lrHOME_POSTION				: LREAL := 0.0;		(* Homming position *)
@@ -42,8 +56,10 @@ VAR
 	eMachineStateAbort								: E_MachineCtrlStateAbort;
 	eMachineStateManualToAuto						: E_MachineCtrlStateManualToAuto;
 	
-	(* Internal variables *)
-	RobotProcess : UINT;
+	(* HMI control *)
+	btnStartBowl : BOOL;
+	btnStopBowl : BOOL;
+	rSetpoint : REAL;
 	
 END_VAR
 ]]></Declaration>
@@ -68,24 +84,32 @@ END_VAR
 									bModulo				:= FALSE);
 									
 	fbRotaryTable.Override 			:= 100.0;
-	fbRotaryTable.Velocity 			:= 10.0;	//400,325
-//	fbRotaryTable.Acceleration 		:= 600.0; //1500,80
-//	fbRotaryTable.Deceleration 		:= 600.0; //1500,800
-//	fbRotaryTable.Jerk 				:= 6000.0; //15000,8000
-//	fbRotaryTable.JogPosition 		:= 0.0;
-//	fbRotaryTable.JogVelocity 		:= 300.0;
-//	fbRotaryTable.JogAcceleration 	:= 800.0;
-//	fbRotaryTable.JogDeceleration 	:= 800.0;
-//	fbRotaryTable.JogJerk 			:= 800.0;
-//	fbRotaryTable.StopDeceleration	:= 800.0;
-//	fbRotaryTable.StopJerk 			:= 8000.0;
+	fbRotaryTable.Velocity 			:= 100.0;	//400,325
+	fbRotaryTable.Acceleration 		:= 1500.0; //1500,80|600
+	fbRotaryTable.Deceleration 		:= 1500.0; //1500,800|600
+	fbRotaryTable.Jerk 				:= 6000.0; //15000,8000|
+
+	fbRotaryTable.JogPosition 		:= 0.0;
+	fbRotaryTable.JogVelocity 		:= 300.0;
+	fbRotaryTable.JogAcceleration 	:= 800.0;
+	fbRotaryTable.JogDeceleration 	:= 800.0;
+	fbRotaryTable.JogJerk 			:= 800.0;
+	fbRotaryTable.StopDeceleration	:= 800.0;
+	fbRotaryTable.StopJerk 			:= 8000.0;
+	
+	stRotaryTableHomingOptions.SearchDirection := Tc2_MC2.MC_Direction.MC_Negative_Direction;
+	stRotaryTableHomingOptions.SearchVelocity 	:= 10.0;
+	stRotaryTableHomingOptions.SyncDirection 	:= Tc2_MC2.MC_Direction.MC_Positive_Direction;
+	stRotaryTableHomingOptions.SyncVelocity	:= 5.0;
 	
 	fbRotaryTable.HomingMode		:= MC_HomingMode.MC_DefaultHoming;
 	fbRotaryTable.HomingOptions 	:= stRotaryTableHomingOptions;
 	
+	
+
 	(* Assign bowl feeder *)
 	fbBowlFeeder.MR_FirstCycle(sName := 'Bowl Feeder');
-	fbBowlFeeder.Setpoint := 30.0;
+	fbBowlFeeder.Setpoint := 60.0;
 	
 	(* Digital I/O *)
 	diProductPresenceBowl.MR_FirstCycle(	sName := 'Product presence on bowl at pick point',
@@ -123,10 +147,23 @@ fbPlcUps();]]></ST>
     </Implementation>
     <Folder Name="Internal" Id="{8813ce70-337e-4483-a711-2856365d1cdf}" />
     <Folder Name="Properties" Id="{29045f01-2b67-43ea-acd9-915a07c376fa}">
+      <Folder Name="References" Id="{1ad38fea-3502-4448-beef-6594ebc4effe}" />
       <Folder Name="Status" Id="{971e8d7d-8ce9-4462-b8de-cc46e6b1a59b}" />
     </Folder>
     <Folder Name="Requests" Id="{51769c61-8807-4a83-b47d-198fbacbeb51}" />
     <Folder Name="StateMachine" Id="{fcf2a465-15e6-47fd-a8c6-b9a7900c636c}" />
+    <Property Name="BowlFeeder" Id="{2574449c-1f66-4647-b734-6402fa175952}" FolderPath="Properties\References\">
+      <Declaration><![CDATA[PROPERTY BowlFeeder : REFERENCE TO FB_BowlFeeder]]></Declaration>
+      <Get Name="Get" Id="{389c1fec-9b87-4ee4-9637-69784a171b4f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[BowlFeeder REF= fbBowlFeeder;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="M_AutoProcessing" Id="{bbfa0667-78a7-4247-a707-1f83fb9a1d16}" FolderPath="Internal\">
       <Declaration><![CDATA[METHOD PROTECTED M_AutoProcessing
 VAR_INST
@@ -280,7 +317,7 @@ END_VAR
         <ST><![CDATA[bRunning := FALSE;
 
 eMachineStateAuto := MACHINE_STATE_AUTO_IDLE;
-RobotProcess := 0;]]></ST>
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="MS_Aborting" Id="{7adc3704-59d9-4656-ad31-e25e008f0070}" FolderPath="StateMachine\">
@@ -305,15 +342,25 @@ CASE eMachineStateAbort OF
 //		END_IF
 		fbRobot.MR_Abort();
 		IF NOT fbRobot.Busy THEN
-			eMachineState := MACHINE_STATE_UNINITIALIZED;
-			eMachineStateUninitialized := MACHINE_STATE_UNINITIALIZED_DONE;
+			eMachineStateAbort := MACHINE_STATE_ABORTING_TABLE;
 		END_IF
-		
+	
+	MACHINE_STATE_ABORTING_TABLE:
+		fbRotaryTable.MR_Abort();
+		IF NOT fbRotaryTable.PowerOn THEN
+			eMachineState := MACHINE_STATE_UNINITIALIZED;
+		eMachineStateUninitialized := MACHINE_STATE_UNINITIALIZED_DONE;
+		END_IF		
+
 END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="MS_Auto" Id="{9e955c8e-36bd-49e5-a90f-5a0d0edfdf23}" FolderPath="StateMachine\">
-      <Declaration><![CDATA[METHOD PROTECTED MS_Auto]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED MS_Auto
+VAR_INST
+	bSetSP:BOOL;
+	rSp:REAL;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE eMachineStateAuto OF
 	MACHINE_STATE_AUTO_IDLE:
@@ -321,9 +368,31 @@ END_CASE]]></ST>
 		
 	MACHINE_STATE_AUTO_RUNNING:
 		bRunning := TRUE;
-		RotaryTable();
 		
-END_CASE]]></ST>
+		
+END_CASE
+//Robot_Process();
+//TableProcess();
+Production();
+//tableRefer();
+//robotcamtest();
+//Robot_Process();
+IF bSetSP THEN
+	bSetSP:= FALSE;
+	fbBowlFeeder.Setpoint:=rSp;
+END_IF
+
+(*========== HMI control =============*)
+(* Bowl feeder *)
+IF btnStartBowl THEN
+	fbBowlFeeder.MR_Start();
+	doBlowBowlFeeder.Out := TRUE;
+END_IF
+IF btnStopBowl THEN
+	fbBowlFeeder.MR_Stop();
+	doBlowBowlFeeder.Out := FALSE;
+END_IF
+rSetpoint := fbBowlFeeder.Setpoint;]]></ST>
       </Implementation>
     </Method>
     <Method Name="MS_AutoToManual" Id="{02d651de-fd64-4bdf-b695-c41b74db33a4}" FolderPath="StateMachine\">
@@ -356,7 +425,12 @@ END_VAR
     </Method>
     <Method Name="MS_Initializing" Id="{99a096da-f0d2-4fb3-bcd1-503614bc69d3}" FolderPath="StateMachine\">
       <Declaration><![CDATA[METHOD PROTECTED MS_Initializing
-]]></Declaration>
+VAR_INST
+	uBowlFeederInitState : UINT;
+	uTableInitState : UINT;
+	uVisionInitState : UINT;
+	
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[(* 
 Add here code to initialize all machine objects's e.g robots, axes, cylinders. 
@@ -436,6 +510,8 @@ CASE eMachineStateInit OF
 	MACHINE_STATE_INITIALIZING_ROBOT_CONTROLERS_RESET:
 		fbRobot.ref_CR800.MR_Reset();
 		IF NOT fbRobot.ref_CR800.Busy THEN
+			uTableInitState := 10;
+			uBowlFeederInitState := 10;
 			eMachineStateInit := MACHINE_STATE_INITIALIZING_ROBOT_AUTO_MODE_SW;
 		END_IF
 (*
@@ -471,84 +547,62 @@ CASE eMachineStateInit OF
 	MACHINE_STATE_INITIALIZING_ROBOT_AUTOMATIC_MODE:
 		fbRobot.ref_CR800.MR_GoAuto();
 		IF NOT fbRobot.ref_CR800.Busy THEN
-			eMachineStateInit := MACHINE_STATE_INITIALIZING_ROTARY_TABLE_INIT;
-		END_IF
-	
-	MACHINE_STATE_INITIALIZING_ROTARY_TABLE_INIT:
-		fbRotaryTable.MR_Init();
-		IF NOT fbRotaryTable.Busy THEN
-			eMachineStateInit := MACHINE_STATE_INITIALIZING_BOWL_INIT;
-		END_IF
-
-	MACHINE_STATE_INITIALIZING_ROTARY_TABLE_HOME:
-		fbRotaryTable.MR_Home(lrHomePosition := DEFAULT_HOME_POSITION );
-		IF NOT fbRotaryTable.Busy THEN
-			eMachineStateInit := MACHINE_STATE_INITIALIZING_BOWL_INIT;
-		END_IF
-		
-	MACHINE_STATE_INITIALIZING_BOWL_INIT:
-		fbBowlFeeder.MR_Init();
-		IF NOT fbBowlFeeder.Busy THEN
 			eMachineStateInit := MACHINE_STATE_INITIALIZING_DONE;
 		END_IF
+	
+//	MACHINE_STATE_INITIALIZING_ROTARY_TABLE_ABORT:
+		
+
+//	MACHINE_STATE_INITIALIZING_ROTARY_TABLE_INIT:
+		
+
+//	MACHINE_STATE_INITIALIZING_ROTARY_TABLE_HOME:
+		
+		
+//	MACHINE_STATE_INITIALIZING_BOWL_INIT:
+		
 
 	MACHINE_STATE_INITIALIZING_DONE:
-		eMachineStateInit := MACHINE_STATE_INITIALIZING_MACHINE_LOGGER;
-		eMachineState := MACHINE_STATE_READY_INITIALIZED;
+		IF uTableInitState = 30 AND uBowlFeederInitState = 20 THEN	(* check Table and bowl init done *)
+			eMachineStateInit := MACHINE_STATE_INITIALIZING_MACHINE_LOGGER;
+			eMachineState := MACHINE_STATE_READY_INITIALIZED;
+		END_IF
+		
 END_CASE
-
-//	MACHINE_STATE_INITIALIZING_ROBOTS_POWER_CHECK:
-//		IF arrRobot[0].CR800PoweredOn THEN
-//			eMachineStateInit := MACHINE_STATE_INITIALIZING_ROBOT_CONTROLERS_RESET;
-//		END_IF
-		
-//	MACHINE_STATE_INITIALIZING_ROBOT_CONTROLERS_RESET:
-//		tonDelay( IN := TRUE, PT := T#4S);
-//		IF tonDelay.Q THEN
-//			arrRobot[0].MR_ResetCR800Err();			
-//			IF NOT arrRobot[0].Busy THEN
-//				tonDelay(IN := FALSE);
-//				eMachineStateInit := MACHINE_STATE_INITIALIZING_ROBOT_ABORT;
-//			END_IF
-//		END_IF
-		
-//	MACHINE_STATE_INITIALIZING_ROBOT_ABORT:
-//		arrRobot[0].MR_Abort();
-//		IF NOT arrRobot[0].Active THEN
-//			eMachineStateInit := MACHINE_STATE_INITIALIZING_ROBOT_INIT;
-//		END_IF
-		
-//	MACHINE_STATE_INITIALIZING_ROBOT_INIT:
-//		arrRobot[0].MR_Init();
-//		IF arrRobot[0].Active THEN
-//			eMachineStateInit := MACHINE_STATE_INITIALIZING_ROBOT_HOME;
-//		END_IF
-		
-//	MACHINE_STATE_INITIALIZING_ROBOT_HOME:
-//		arrRobot[0].MR_GoHome();
-//		IF NOT arrRobot[0].Busy THEN
-//			eMachineStateInit := MACHINE_STATE_INITIALIZING_ROBOT_AUTOMATIC_MODE;
-//		END_IF
-		
-//	MACHINE_STATE_INITIALIZING_ROBOT_AUTOMATIC_MODE:
-//		arrRobot[0].MR_GoAuto();
-//		IF NOT arrRobot[0].Busy THEN
-//			eMachineStateInit := MACHINE_STATE_INITIALIZING_ROTARY_TABLE_INIT;
-//		END_IF
-		
-//	MACHINE_STATE_INITIALIZING_ROTARY_TABLE_INIT:
-//		fbRotaryTable.MR_Init();
-//		IF fbRotaryTable.Active THEN
-//			eMachineStateInit := MACHINE_STATE_INITIALIZING_ROTARY_TABLE_HOME;
-//		END_IF
-	
-//	MACHINE_STATE_INITIALIZING_ROTARY_TABLE_HOME:
-//		fbRotaryTable.MR_Home(lrHomePosition := lrHOME_POSTION );
-//		IF fbRotaryTable.IsHomed THEN
-//			eMachineStateInit := MACHINE_STATE_INITIALIZING_DONE;
-//		END_IF
-		
-	]]></ST>
+/////////////////////////////////////////////////////////
+CASE uTableInitState OF
+	0://idle
+		;
+	5:
+		fbRotaryTable.MR_Abort();
+		IF NOT fbRotaryTable.PowerOn THEN
+			uTableInitState := 10;
+		END_IF
+	10://init
+		fbRotaryTable.MR_Init();
+		IF fbRotaryTable.PowerOn THEN
+			uTableInitState := 20;
+		END_IF
+	20://homing
+		fbRotaryTable.MR_Home(lrHomePosition := DEFAULT_HOME_POSITION );
+		IF fbRotaryTable.IsHomed THEN
+			uTableInitState := 30;
+		END_IF
+	30://done
+		;
+END_CASE
+/////////////////////////////////////////////////////////
+CASE uBowlFeederInitState OF
+	0://idle
+		;
+	10:
+		fbBowlFeeder.MR_Init();
+		IF NOT fbBowlFeeder.Busy THEN
+			uBowlFeederInitState := 20;
+		END_IF
+	20://done
+		;
+END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="MS_Manual" Id="{cfd995b2-d987-47aa-9bb0-1eb8959a8269}" FolderPath="StateMachine\">
@@ -693,20 +747,346 @@ END_VAR]]></Declaration>
 	MACHINE_STATE_UNINITIALIZED_DONE:
 		eMachineStateInit := MACHINE_STATE_INITIALIZING_MACHINE_LOGGER;
 	
-END_CASE]]></ST>
+END_CASE
+tableRefer();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Production" Id="{57a27725-eff6-400c-8e0e-707934cd22aa}" FolderPath="Internal\">
+      <Declaration><![CDATA[METHOD PROTECTED Production : BOOL
+VAR_INST
+	(* Robot *)
+	RobotState 					: UINT;
+	
+	(* Table *)
+	TableState					: UINT;
+	OneStep 					: LREAL:= -61.1928; //-61.1928;	(* Define by the distance between station 3 and 4 *)
+	lrRelativeDistance 			: LREAL;
+	lrRelativeSortingDistance 	: LREAL := -122.3856;
+	bProductAboveTable 			: BOOL;				(* Signal Robot is at the table *)
+	bGetPictureStation3			: BOOL; 			(* Cmd get picture st3 to vision system *)
+	bGetPictureStation4 		: BOOL; 			(* Cmd get picture st4 to vision system *)
+	bResultProcessing 			: BOOL;				(* Request result from vision system, then add buffer for sorting station *)
+	
+	(* Buffer *)
+	BufferState : UINT;
+	Buffer_RotaryTable			: FB_DataSetFifo_1; 	(* Contain the position of all product on the table *)
+	Buffer_Station3				: FB_DataSetFifo_1;	(* Contain the trigger position *)
+	Buffer_Station4				: FB_DataSetFifo_1;	(* Contain the trigger position *)
+	
+	(* Sorting Station *)
+	Buffer_SortGood				: FB_DataSetFifo_1;
+	Buffer_SortReject			: FB_DataSetFifo_1;
+	lrSortGoodDistance			: LREAL := -30.0;	(* Distance between cam7 to sort station *)
+	lrSortDirtDistance			: LREAL;			(* Distance between cam7 to sort station *)
+	lrSortDentDistance			: LREAL;			(* Distance between cam7 to sort station *)
+	lrSortRejectDistance		: LREAL;			(* Distance between cam7 to sort station *)
+	lrSortGoodPos				: LREAL;
+	lrSortDirtPos				: LREAL;
+	lrSortDentPos				: LREAL;
+	lrSortRejectPos				: LREAL;
+	uSortGoodGetPosState		: UINT; 			(* state machine of get sort position from buffer *)
+	//uSortGoodShootState			: UINT;				(* state machine of shoot product into bin and remove oldest buffer value *)
+	uSortRejectState			: UINT;
+	uSortStationState			: UINT;
+	uBufferGoodState			: UINT;				(* state machine of adding buffer for good sorting *)
+	tonGoodDelay				: TON;				(* one shoot of good delay valve *)
+	tonDirtDelay				: TON;				(* one shoot of dirt delay valve *)
+	tonDentDelay				: TON;				(* one shoot of dent delay valve *)								
+	tonRejectDelay				: TON;				(* one shoot of reject delay valve *)								
+	
+	(*=== Vision ===*)
+	Vision3State 		: UINT;
+	Vision4State		: UINT;
+	lrCapPosStation3 	: LREAL;
+	lrCapPosStation4	: LREAL;
+	bGood 				: BOOL;
+	bAtVision3 			: BOOL;	(* Product is at vision 3 *)
+	bAtVision4 			: BOOL;	(* Product is at vision 4 *)
+	eFinalResult		: E_SortingResult;
+
+	(* Axis status flags *)
+	bActive					: BOOL;
+	bBusy					: BOOL;								(* Function block currently executes one of the requests *)
+	bError					: BOOL;								(* Error status flag *)
+	iErrorID				: UDINT;							(* Error ID *)
+	iAxisErrorID			: UDINT;							(* Axis error ID*)
+	lrActualPosition		: LREAL;							(* Actual axis position in selected units *)
+	rActualVelocity			: REAL;								(* Actual axis velocity in selected units *)
+	bPowerOn 				: BOOL;								(* Power On status bit *)
+	bIsHomed				: BOOL;								(* Axis has been homed even once *)
+	bInVelocity				: BOOL;								(* Axis is moving in target velocity *)
+	bInPostion				: BOOL;								(* Axis reached target position *)
+	bMoveActive				: BOOL;								(* Axis is moving to target position *)
+	bJogDone				: BOOL;								(* Axis manual movement by jog done *)
+	bStopped				: BOOL;								(* Axis movement has been stopped *)
+	bHalted					: BOOL;								(* Axis movement has been halted *)
+	eStatePlcOpen			: E_AxisStatePlcOpen;
+	
+	uBufferTableCount : UDINT;
+	
+	(* testing bit *)
+	bResultTest : BOOL;
+	
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[///(*==================================== Robot + Vision process ====================================*){{{
+CASE RobotState OF	
+	0://IDLE go bowl
+		fbRobot.MR_GoBowl();
+		IF NOT fbRobot.Busy THEN
+			RobotState := 5;
+		END_IF		
+	5://product detected
+		IF diProductPresenceBowl.In THEN (* waiting product *)
+			RobotState := 6;
+		END_IF
+	
+	6://go input
+		fbRobot.MR_GoInputProduct();
+		IF NOT fbRobot.Busy THEN
+			RobotState := 7;
+		END_IF
+		
+	7://robot pick
+		fbRobot.MR_Pick();
+		IF NOT fbRobot.Busy THEN
+			RobotState := 10;
+		END_IF 
+		
+	10://go to station 1
+		fbRobot.MR_GoStation1();
+		IF NOT fbRobot.Busy THEN
+			RobotState := 20;
+		END_IF
+		
+	20://double trig cam 1+2
+		IF doTriggerCam1.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) AND
+			doTriggerCam2.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) THEN
+			RobotState:= 30;
+		END_IF
+	30://go to station 2
+		fbRobot.MR_GoStation2();
+		IF NOT fbRobot.Busy THEN
+			RobotState := 40;
+		END_IF
+	40://double trig cam 3+4
+		IF doTriggerCam3.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) AND
+			doTriggerCam4.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) THEN
+			RobotState := 50;
+		END_IF
+	50://goto rotary table
+		fbRobot.MR_GoRotaryTable();
+		IF NOT fbRobot.Busy THEN
+			bProductAboveTable := TRUE;		
+			RobotState:= 60;
+		END_IF
+	60://waiting command from table
+		;
+		
+END_CASE
+///============================================================================================}}}
+///(*==================================== Table process ====================================*){{{
+CASE TableState OF
+	0:// idle | waiting for product
+		IF bProductAboveTable THEN
+			TableState:= 10;
+		END_IF
+	10://command place product and reset robot sequence
+		fbRobot.MR_Place();
+		IF NOT fbRobot.Busy THEN
+			bProductAboveTable := FALSE;
+			RobotState := 0;
+			TableState := 20;
+		END_IF
+	20://add buffer for st 3+4, table
+		Buffer_RotaryTable.A_Add(in:= OneStep);
+		Buffer_RotaryTable.A_Add(in:= OneStep);
+		Buffer_Station3.A_Add(in:= fbRotaryTable.ActualPosition + OneStep);
+		Buffer_Station4.A_Add(in:= fbRotaryTable.ActualPosition + 2*OneStep);
+		TableState := 21;
+	21://get vision 3capture position
+		IF Vision3State = 0 THEN
+			Vision3State:= 10;
+			TableState:=22;
+		END_IF
+	22://get vision 4 capture position
+		IF Vision4State = 0 THEN
+			Vision4State:= 10;
+			TableState:=30;
+		END_IF
+	30://get table distance movement
+		Buffer_RotaryTable.A_Remove(out => lrRelativeDistance);
+		TableState := 40;
+	40://move distance
+		fbRotaryTable.MR_MoveRelative(lrRelativeDistance);
+		IF fbRotaryTable.InPosition THEN
+			
+			TableState := 50;
+		END_IF
+	50://command vision 3
+		IF Vision3State = 0 THEN
+			Vision3State:= 20;
+			TableState:=55;
+		END_IF
+	55:	//command vision 4
+		IF Vision4State = 0 THEN
+			Vision4State:= 20;
+			TableState:=60;
+		END_IF
+	60://check taking picture done
+		IF NOT bGetPictureStation3 AND NOT bGetPictureStation4  AND NOT bResultProcessing THEN
+			TableState := 70;
+		END_IF
+	70://state check result | product above table | buffer | go through sorting station
+		IF bProductAboveTable THEN
+			TableState := 10;//take product
+		ELSIF Buffer_RotaryTable.nCount > 0 THEN
+			TableState := 30;//get distance
+		ELSE
+			(* Make sure that the product is sorted *)
+			fbRotaryTable.MR_MoveRelative(lrRelativeSortingDistance);
+			IF fbRotaryTable.InPosition THEN
+				TableState := 0;//idle waiting for product
+			END_IF
+			
+		END_IF
+	
+END_CASE
+///============================================================================================}}}
+///(*==================================== Vision 3+4 process ====================================*){{{
+CASE Vision3State OF
+	0://idle | waiting
+		;
+	10://get position in buffer
+		Buffer_Station3.A_Remove(out => lrCapPosStation3);
+		Vision3State := 0;
+
+	20://check position with table
+		bGetPictureStation3 := TRUE;
+		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) = LREAL_TO_INT(lrCapPosStation3) THEN //convert from lreal to int for less precise
+			Vision3State:= 30;
+		ELSE
+			bGetPictureStation3 := FALSE;
+			Vision3State:= 0;
+		END_IF
+			
+	30://take picture cam 5+6
+		IF doTriggerCam5.Command(PulseWidth:= T#1MS, DelayTimeForSecondTrigger:= T#34MS) AND
+			doTriggerCam6.Command(PulseWidth:= T#1MS, DelayTimeForSecondTrigger:= T#34MS) THEN
+			
+			bGetPictureStation3 := FALSE;
+			Vision3State := 0; 
+		END_IF
+		
+END_CASE
+
+(* station 4 have to take picture and request result from system *)
+CASE Vision4State OF
+	0:
+		;
+	10://get trigger position in buffer
+		Buffer_Station4.A_Remove(out => lrCapPosStation4);
+		Vision4State := 0;
+
+	20://check trigger position with table position
+		bGetPictureStation4 := TRUE;
+		bResultProcessing 	:= TRUE;
+		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) = LREAL_TO_INT(lrCapPosStation4) THEN //convert from lreal to int for less precise
+			Vision4State:= 30;
+		ELSE
+			bResultProcessing			:= FALSE;
+			bGetPictureStation4 		:= FALSE;
+			Vision4State:= 0;
+		END_IF
+	
+	30://trigger cam 7
+		IF doTriggerCam7.Command(PulseWidth:= T#1MS, DelayTimeForSecondTrigger:= T#33MS) THEN
+			bGetPictureStation4 := FALSE;
+			Vision4State:= 40;
+		END_IF
+		
+	40://request result
+		bResultTest := TRUE; (* testing purpose always good *)
+		IF bResultTest THEN
+			eFinalResult := E_SortingResult.GOOD;
+			bResultTest := FALSE;
+			Vision4State:= 0;
+		END_IF
+
+END_CASE
+///============================================================================================}}}
+///(*==================================== Sorting station ====================================*){{{
+(* Add buffer for sorting station *)
+CASE eFinalResult OF
+	E_SortingResult.UNKNOWN:
+		;
+	E_SortingResult.GOOD:
+		Buffer_SortGood.A_Add(in := fbRotaryTable.ActualPosition + lrSortGoodDistance);
+		eFinalResult 		:= E_SortingResult.UNKNOWN;
+		
+END_CASE
+
+CASE uSortGoodGetPosState OF
+	0://idle | check buffer
+		IF Buffer_SortGood.nCount > 0 THEN
+			uSortGoodGetPosState:= 10;
+		END_IF
+	10://get position
+		Buffer_SortGood.A_Get(out => lrSortGoodPos);
+		uSortGoodGetPosState := 20;
+	20://waiting table move in position | command table
+		bResultProcessing 	:= FALSE;
+		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) <= LREAL_TO_INT(lrSortGoodPos) THEN
+			uSortGoodGetPosState := 30;
+		END_IF
+	30://shoot it
+		Buffer_SortGood.A_Remove(out => lrSortGoodPos);
+		doBlowGood.Out := TRUE;
+		uSortGoodGetPosState := 40;
+		
+	40://off
+		tonGoodDelay(IN := TRUE, PT := T#2S);
+		IF tonGoodDelay.Q THEN	
+			doBlowGood.Out := FALSE;
+			tonGoodDelay.IN := FALSE;
+			uSortGoodGetPosState := 0;
+		END_IF
+		
+END_CASE
+
+///============================================================================================}}}
+(* control param *)
+fbRobot.ref_CR800.Override:= 5;
+uBufferTableCount:= Buffer_RotaryTable.nCount;
+
+(* Mornitoring param *)
+bActive 			:= fbRotaryTable.Active;
+bBusy				:= fbRotaryTable.Busy;
+bError 				:= fbRotaryTable.Error;
+iErrorID 			:= fbRotaryTable.ErrorID;
+iAxisErrorID 		:= fbRotaryTable.ErrorID;
+lrActualPosition 	:= fbRotaryTable.ActualPosition;
+rActualVelocity		:= fbRotaryTable.ActualVelocity;
+bPowerOn 			:= fbRotaryTable.PowerOn;
+bIsHomed 			:= fbRotaryTable.IsHomed;
+bInVelocity			:= fbRotaryTable.InVelocity;
+bInPostion 			:= fbRotaryTable.InPosition;
+bMoveActive 		:= fbRotaryTable.MoveActive;
+bJogDone 			:= fbRotaryTable.JogDone;
+bStopped 			:= fbRotaryTable.Stopped;
+bHalted 			:= fbRotaryTable.Halted;
+eStatePlcOpen		:= fbRotaryTable.StatePlcOpen;
+
+fbRobot.ref_CR800.Override:= 30;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Robot_Process" Id="{08e07868-44ca-4ba7-b194-eb2a13c9cadc}" FolderPath="Internal\">
       <Declaration><![CDATA[METHOD PROTECTED Robot_Process
 VAR_INST
 	(* Equipment module sequences *)
-	BowlFeederProcess : UINT;
+	RobotProcess : UINT;
 	
-	RotaryTableProcess : UINT;
-	
-	(* Parameters *)
-	bIsRobotAtRotaryTable : BOOL;
-	OneStep : LREAL := 10.00;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbRobot.ref_CR800.Override:= 5;
@@ -739,19 +1119,29 @@ CASE RobotProcess OF
 		IF NOT fbRobot.Busy THEN
 			RobotProcess := 20;
 		END_IF
-	20:		
-		IF fbRTCVision.M_CommandStation1(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#10MS) THEN
-			RobotProcess := 30;
+	20://double trig cam 1
+		IF doTriggerCam1.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) AND 
+			doTriggerCam2.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) THEN
+			RobotProcess:= 30;
 		END_IF
-	30:
+//	21://double trig cam 2
+//		IF doTriggerCam2.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) THEN
+//			RobotProcess:= 30;
+//		END_IF
+	30://go to station 2
 		fbRobot.MR_GoStation2();
 		IF NOT fbRobot.Busy THEN
 			RobotProcess := 40;
 		END_IF
-	40:
-		IF fbRTCVision.M_CommandStation2(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#34MS) THEN
+	40://double trig cam 3
+		IF doTriggerCam3.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) AND
+			doTriggerCam4.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) THEN
 			RobotProcess := 50;
 		END_IF
+//	41://double trig cam 4
+//		IF doTriggerCam4.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) THEN
+//			RobotProcess:= 50;
+//		END_IF	
 	50:
 		fbRobot.MR_GoRotaryTable();
 		IF NOT fbRobot.Busy THEN
@@ -767,7 +1157,48 @@ END_CASE
 ]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Robots" Id="{7f945cab-fcf4-42ea-a55f-ae8887eca31e}" FolderPath="Properties\">
+    <Method Name="robotcamtest" Id="{825274f9-9889-437f-a546-d1f33ad499c6}" FolderPath="Internal\">
+      <Declaration><![CDATA[METHOD robotcamtest : BOOL
+VAR_INST
+	RobotProcess:UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbRobot.ref_CR800.Override:= 5;
+CASE RobotProcess OF
+	
+	0://IDLE go bowl
+		fbRobot.MR_GoBowl();
+		IF NOT fbRobot.Busy THEN
+			RobotProcess := 5;
+		END_IF		
+	5://product detected
+		IF diProductPresenceBowl.In THEN (* waiting product *)
+			RobotProcess := 6;
+		END_IF
+	
+	6://go input
+		fbRobot.MR_GoInputProduct();
+		IF NOT fbRobot.Busy THEN
+			RobotProcess := 7;
+		END_IF
+		
+	7://robot pick
+		fbRobot.MR_Pick();
+		IF NOT fbRobot.Busy THEN
+			RobotProcess := 10;
+		END_IF 
+		
+	10://go to station 1
+		fbRobot.MR_GoStation1();
+		IF NOT fbRobot.Busy THEN
+			RobotProcess := 20;
+		END_IF
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Robots" Id="{7f945cab-fcf4-42ea-a55f-ae8887eca31e}" FolderPath="Properties\References\">
       <Declaration><![CDATA[PROPERTY Robots : REFERENCE TO FB_Robot]]></Declaration>
       <Get Name="Get" Id="{da0b5682-da4c-45e1-aecb-4ccc22637b3c}">
         <Declaration><![CDATA[VAR
@@ -778,12 +1209,175 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="RotaryTable" Id="{8202b8ab-0015-49e4-bf22-3909e5c1fb4e}" FolderPath="Internal\">
-      <Declaration><![CDATA[METHOD PROTECTED RotaryTable : BOOL
-VAR_INPUT
+    <Property Name="StateInit" Id="{6264ac4e-9149-4997-8345-6779a81ba273}" FolderPath="Properties\Status\">
+      <Declaration><![CDATA[PROPERTY StateInit : REFERENCE TO E_MachineCtrlStateInit]]></Declaration>
+      <Get Name="Get" Id="{f3ca5a5b-5318-49aa-b6c3-043b3b74f2e2}">
+        <Declaration><![CDATA[VAR
 END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StateInit REF= eMachineStateInit;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="StateUninitialized" Id="{ee5f5748-2f92-4c32-baec-09ffa187a7c0}" FolderPath="Properties\Status\">
+      <Declaration><![CDATA[PROPERTY StateUninitialized : REFERENCE TO E_MachineCtrlStateUninitialized]]></Declaration>
+      <Get Name="Get" Id="{5f74a4e1-c4bf-4cc8-9020-607d10150e57}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StateUninitialized REF= eMachineStateUninitialized;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="TableProcess" Id="{c48c1fc3-cf0e-46c6-86a9-e5a35d25504f}" FolderPath="Internal\">
+      <Declaration><![CDATA[METHOD TableProcess : BOOL
 VAR_INST
-	bFirstCycle 	: BOOL := TRUE;
+	(*=== Table ===*)
+	TableState : UINT;
+	OneStep : LREAL:= -61.1928;
+	lrRelativeDistance : LREAL;
+	
+	(* Axis status flags *)
+	bActive					: BOOL;
+	bBusy					: BOOL;								(* Function block currently executes one of the requests *)
+	bError					: BOOL;								(* Error status flag *)
+	iErrorID				: UDINT;							(* Error ID *)
+	iAxisErrorID			: UDINT;							(* Axis error ID*)
+	lrActualPosition		: LREAL;							(* Actual axis position in selected units *)
+	rActualVelocity			: REAL;								(* Actual axis velocity in selected units *)
+	bPowerOn 				: BOOL;								(* Power On status bit *)
+	bIsHomed				: BOOL;								(* Axis has been homed even once *)
+	bInVelocity				: BOOL;								(* Axis is moving in target velocity *)
+	bInPostion				: BOOL;								(* Axis reached target position *)
+	bMoveActive				: BOOL;								(* Axis is moving to target position *)
+	bJogDone				: BOOL;								(* Axis manual movement by jog done *)
+	bStopped				: BOOL;								(* Axis movement has been stopped *)
+	bHalted					: BOOL;								(* Axis movement has been halted *)
+	eStatePlcOpen			: E_AxisStatePlcOpen;				(* Current PLCOpen state of axis *)
+	
+	
+	(* Buffer *)
+	Buffer_RotaryTable			: FB_DataSetFifo; 	(* Contain the position of all product on the table *)
+	Buffer_Station3				: FB_DataSetFifo;	(* Contain the trigger position *)
+	Buffer_Station4				: FB_DataSetFifo;	(* Contain the trigger position *)
+	
+	(*=== Vision ===*)
+	Vision3State : UINT;
+	Vision4State: UINT;
+	lrCapPosStation3 : LREAL;
+	lrCapPosStation4: LREAL;
+	//lrActualPosition :LREAL;
+	bBufferReset : BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE TableState OF
+	0://product in
+		IF diProductPresenceBowl.In THEN (* waiting product *)
+			TableState := 10;
+		END_IF
+	10://buffer table, station 3, station 4
+		IF Buffer_RotaryTable.Add2Data(in1 := OneStep, in2 := OneStep) THEN
+			IF Buffer_Station3.Add1Data(in := fbRotaryTable.ActualPosition + OneStep) THEN
+				IF Buffer_Station4.Add1Data(in := fbRotaryTable.ActualPosition + 2*OneStep) THEN
+					TableState := 20;
+		
+				END_IF				
+			END_IF
+		END_IF
+	20://take distance
+		Buffer_RotaryTable.Remove(out => lrRelativeDistance);
+		IF Buffer_RotaryTable.OK THEN
+			TableState := 30;
+		END_IF
+	30://move distance
+		fbRotaryTable.MR_MoveRelative(lrRelativeDistance);
+		IF fbRotaryTable.InPosition THEN
+			TableState := 40;
+		END_IF
+	40://check
+		IF Buffer_RotaryTable.Count >0 THEN
+			TableState := 20;
+		ELSE 
+			TableState := 0;
+		END_IF
+END_CASE
+
+lrActualPosition := fbRotaryTable.ActualPosition;
+
+CASE Vision3State OF
+	0://take capture position
+		Buffer_Station3.Remove(out => lrCapPosStation3);
+		IF Buffer_Station3.OK THEN
+			Vision3State := 10;
+		END_IF
+	10://waiting table move in pos
+		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) = LREAL_TO_INT(lrCapPosStation3) THEN
+			Vision3State:= 20;
+			
+		END_IF
+	20://capture
+		IF fbRTCVision.M_CommandStation3(PulseWidth:= T#1MS, DelayTimeForSecondTrigger:= T#33MS) THEN
+			Vision3State:= 0;
+		END_IF
+
+END_CASE
+
+CASE Vision4State OF
+	0://take capture position
+		Buffer_Station4.Remove(out => lrCapPosStation4);
+		IF Buffer_Station4.OK THEN
+			Vision4State := 10;
+		END_IF
+	10://waiting table move in pos
+		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) = LREAL_TO_INT(lrCapPosStation4) THEN
+			Vision4State:= 20;
+			
+		END_IF
+	20://capture
+		IF fbRTCVision.M_CommandStation4(PulseWidth:= T#1MS, DelayTimeForSecondTrigger:= T#33MS) THEN
+			Vision4State:= 0;
+		END_IF
+
+END_CASE
+(*===== Utilities =====*)
+IF bBufferReset THEN
+	Buffer_Station3.Reset();
+	Buffer_Station4.Reset();
+	Buffer_RotaryTable.Reset();
+//	IF Buffer_Station3.OK AND Buffer_Station4.OK AND Buffer_RotaryTable.OK THEN
+		
+//	END_IF
+END_IF
+
+bActive 			:= fbRotaryTable.Active;
+bBusy				:= fbRotaryTable.Busy;
+bError 				:= fbRotaryTable.Error;
+iErrorID 			:= fbRotaryTable.ErrorID;
+iAxisErrorID 		:= fbRotaryTable.ErrorID;
+lrActualPosition 	:= fbRotaryTable.ActualPosition;
+rActualVelocity		:= fbRotaryTable.ActualVelocity;
+bPowerOn 			:= fbRotaryTable.PowerOn;
+bIsHomed 			:= fbRotaryTable.IsHomed;
+bInVelocity			:= fbRotaryTable.InVelocity;
+bInPostion 			:= fbRotaryTable.InPosition;
+bMoveActive 		:= fbRotaryTable.MoveActive;
+bJogDone 			:= fbRotaryTable.JogDone;
+bStopped 			:= fbRotaryTable.Stopped;
+bHalted 			:= fbRotaryTable.Halted;
+eStatePlcOpen		:= fbRotaryTable.StatePlcOpen;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="tableRefer" Id="{82184fa1-da82-41ff-b0b5-ab0220bfcbe2}" FolderPath="Internal\">
+      <Declaration><![CDATA[METHOD tableRefer : BOOL
+VAR_INST
+	bparamhome : BOOL;
+	bFirstCycle 	: BOOL;
+	
+	stLiftHomingOptions				: ST_HomingOptions; 
+
 	
 	bInit					: BOOL;								(* Power on axis and prepare to work *)
 	bAbort					: BOOL;								(* Power off axis and reset status flags *)
@@ -849,8 +1443,6 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF bFirstCycle THEN
-	bFirstCycle := FALSE;
-	fbRotaryTable.MR_FirstCycle('Standard Beckhoff Axis 1','deg',bModulo);
 	
 	lrOverride 			:= 100.0;
 	lrVelocity 			:= 100.0;
@@ -870,8 +1462,49 @@ END_VAR
 	lrStopDeceleration	:= 250.0;
 	lrStopJerk			:= 250.0;	
 	
+	fbRotaryTable.Override			:= lrOverride;
+	fbRotaryTable.Velocity 		:= lrVelocity;
+	fbRotaryTable.Acceleration 	:= lrAcceleration;
+	fbRotaryTable.Deceleration 	:= lrDeceleration;
+	fbRotaryTable.Jerk 			:= lrJerk;
+	fbRotaryTable.JogMode			:= eJogMode;
+	fbRotaryTable.JogDirection		:= eJogDirection;
+	fbRotaryTable.JogVelocity 		:= lrJogVelocity;
+	fbRotaryTable.JogAcceleration 	:= lrJogAcceleration;
+	fbRotaryTable.JogDeceleration 	:= lrJogDeceleration;
+	fbRotaryTable.JogJerk 			:= lrJogJerk;
+	fbRotaryTable.StopDeceleration := lrStopDeceleration;
+	fbRotaryTable.StopJerk 		:= lrStopJerk;
+END_IF
+
+IF bparamhome THEN
+	bparamhome := FALSE;
+	
+	fbRotaryTable.MR_FirstCycle(	sName				:= CONCAT(STR1 := '', STR2 := CONCAT(STR1 := ':', STR2 := '')),
+							sMeasurementUnits 	:= '',
+							bModulo				:= FALSE);
+								
+	stLiftHomingOptions.SearchDirection := Tc2_MC2.MC_Direction.MC_Negative_Direction;
+	stLiftHomingOptions.SearchVelocity 	:= 50.0;
+	stLiftHomingOptions.SyncDirection 	:= Tc2_MC2.MC_Direction.MC_Positive_Direction;
+	stLiftHomingOptions.SyncVelocity	:= 10.0;
+	
+	fbRotaryTable.Override 		:= 100.0;
+	fbRotaryTable.Velocity 		:= 50.0;
+	fbRotaryTable.Acceleration 	:= 150.0;
+	fbRotaryTable.Deceleration 	:= 150.0;
+	fbRotaryTable.Jerk 			:= 1500.0;
 	fbRotaryTable.HomingMode		:= MC_HomingMode.MC_DefaultHoming;
-	fbRotaryTable.HomingOptions 	:= stRotaryTableHomingOptions;
+	fbRotaryTable.HomingOptions 	:= stLiftHomingOptions;
+	fbRotaryTable.JogPosition 		:= 0.0;
+	fbRotaryTable.JogVelocity 		:= 40.0;
+	fbRotaryTable.JogAcceleration 	:= 100.0;
+	fbRotaryTable.JogDeceleration 	:= 100.0;
+	fbRotaryTable.JogJerk 			:= 1000.0;
+	fbRotaryTable.StopDeceleration	:= 100.0;
+	fbRotaryTable.StopJerk 		:= 1000.0;
+
+	
 END_IF
 
 bActive 			:= fbRotaryTable.Active;
@@ -982,8 +1615,8 @@ CASE iAxisStateMachine OF
 	
 	(* Homing *)
 	50: 
-		fbRotaryTable.MR_Home(lrHomePosition);
-		IF fbRotaryTable.IsHomed THEN
+		fbRotaryTable.MR_Home(lrHomePosition:=-2.5);
+		IF fbRotaryTable.IsHomed THEN	
 			iAxisStateMachine := 0;
 		END_IF
 	
@@ -992,9 +1625,9 @@ CASE iAxisStateMachine OF
 		fbRotaryTable.MR_MoveVelocity();
 		IF fbRotaryTable.InVelocity THEN
 			iAxisStateMachine := 0;
-		END_IF	
+		END_IF
 		
-	(* Move absolute *)	
+	(* Move absolute *)
 	70: 
 		fbRotaryTable.MR_MoveAbsolute(lrAbsolutePosition);
 		IF fbRotaryTable.InPosition THEN
@@ -1031,46 +1664,9 @@ CASE iAxisStateMachine OF
 		END_IF		
 END_CASE
 
-fbRotaryTable.Override			:= lrOverride;
-fbRotaryTable.Velocity 		:= lrVelocity;
-fbRotaryTable.Acceleration 	:= lrAcceleration;
-fbRotaryTable.Deceleration 	:= lrDeceleration;
-fbRotaryTable.Jerk 			:= lrJerk;
-fbRotaryTable.JogMode			:= eJogMode;
-fbRotaryTable.JogDirection		:= eJogDirection;
-fbRotaryTable.JogVelocity 		:= lrJogVelocity;
-fbRotaryTable.JogAcceleration 	:= lrJogAcceleration;
-fbRotaryTable.JogDeceleration 	:= lrJogDeceleration;
-fbRotaryTable.JogJerk 			:= lrJogJerk;
-fbRotaryTable.StopDeceleration := lrStopDeceleration;
-fbRotaryTable.StopJerk 		:= lrStopJerk;
-
-fbRotaryTable();
 ]]></ST>
       </Implementation>
     </Method>
-    <Property Name="StateInit" Id="{6264ac4e-9149-4997-8345-6779a81ba273}" FolderPath="Properties\Status\">
-      <Declaration><![CDATA[PROPERTY StateInit : REFERENCE TO E_MachineCtrlStateInit]]></Declaration>
-      <Get Name="Get" Id="{f3ca5a5b-5318-49aa-b6c3-043b3b74f2e2}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[StateInit REF= eMachineStateInit;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Property Name="StateUninitialized" Id="{ee5f5748-2f92-4c32-baec-09ffa187a7c0}" FolderPath="Properties\Status\">
-      <Declaration><![CDATA[PROPERTY StateUninitialized : REFERENCE TO E_MachineCtrlStateUninitialized]]></Declaration>
-      <Get Name="Get" Id="{5f74a4e1-c4bf-4cc8-9020-607d10150e57}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[StateUninitialized REF= eMachineStateUninitialized;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <LineIds Name="FB_MachineControl">
       <LineId Id="3" Count="1" />
       <LineId Id="397" Count="0" />
@@ -1082,12 +1678,19 @@ END_VAR
       <LineId Id="284" Count="4" />
       <LineId Id="547" Count="0" />
       <LineId Id="311" Count="4" />
+      <LineId Id="792" Count="0" />
       <LineId Id="318" Count="5" />
       <LineId Id="310" Count="0" />
+      <LineId Id="840" Count="0" />
+      <LineId Id="842" Count="2" />
+      <LineId Id="841" Count="0" />
       <LineId Id="549" Count="0" />
       <LineId Id="325" Count="0" />
       <LineId Id="548" Count="0" />
-      <LineId Id="615" Count="2" />
+      <LineId Id="615" Count="0" />
+      <LineId Id="839" Count="0" />
+      <LineId Id="838" Count="0" />
+      <LineId Id="616" Count="1" />
       <LineId Id="550" Count="0" />
       <LineId Id="635" Count="0" />
       <LineId Id="618" Count="3" />
@@ -1111,6 +1714,10 @@ END_VAR
       <LineId Id="326" Count="0" />
       <LineId Id="103" Count="0" />
       <LineId Id="745" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_MachineControl.BowlFeeder.Get">
+      <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_MachineControl.M_AutoProcessing">
       <LineId Id="191" Count="70" />
@@ -1154,10 +1761,13 @@ END_VAR
       <LineId Id="15" Count="0" />
       <LineId Id="56" Count="7" />
       <LineId Id="55" Count="0" />
-      <LineId Id="64" Count="2" />
-      <LineId Id="68" Count="0" />
-      <LineId Id="67" Count="0" />
+      <LineId Id="64" Count="3" />
       <LineId Id="47" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="76" Count="2" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="72" Count="0" />
       <LineId Id="16" Count="0" />
     </LineIds>
     <LineIds Name="FB_MachineControl.MS_Auto">
@@ -1168,6 +1778,20 @@ END_VAR
       <LineId Id="12" Count="1" />
       <LineId Id="15" Count="1" />
       <LineId Id="10" Count="0" />
+      <LineId Id="17" Count="1" />
+      <LineId Id="27" Count="1" />
+      <LineId Id="33" Count="1" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="38" Count="2" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="41" Count="2" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="37" Count="0" />
     </LineIds>
     <LineIds Name="FB_MachineControl.MS_AutoToManual">
       <LineId Id="3" Count="3" />
@@ -1208,7 +1832,9 @@ END_VAR
       <LineId Id="136" Count="0" />
       <LineId Id="128" Count="1" />
       <LineId Id="150" Count="0" />
-      <LineId Id="154" Count="2" />
+      <LineId Id="154" Count="0" />
+      <LineId Id="272" Count="1" />
+      <LineId Id="155" Count="1" />
       <LineId Id="151" Count="1" />
       <LineId Id="158" Count="2" />
       <LineId Id="157" Count="0" />
@@ -1228,45 +1854,42 @@ END_VAR
       <LineId Id="179" Count="1" />
       <LineId Id="183" Count="2" />
       <LineId Id="181" Count="0" />
-      <LineId Id="192" Count="1" />
-      <LineId Id="196" Count="2" />
+      <LineId Id="218" Count="0" />
+      <LineId Id="222" Count="0" />
+      <LineId Id="217" Count="0" />
+      <LineId Id="192" Count="0" />
+      <LineId Id="198" Count="0" />
       <LineId Id="195" Count="0" />
       <LineId Id="194" Count="0" />
-      <LineId Id="199" Count="0" />
-      <LineId Id="201" Count="8" />
+      <LineId Id="203" Count="2" />
+      <LineId Id="209" Count="0" />
       <LineId Id="200" Count="0" />
-      <LineId Id="186" Count="2" />
+      <LineId Id="186" Count="0" />
+      <LineId Id="257" Count="1" />
+      <LineId Id="260" Count="0" />
+      <LineId Id="259" Count="0" />
+      <LineId Id="187" Count="0" />
       <LineId Id="182" Count="0" />
-      <LineId Id="189" Count="0" />
-      <LineId Id="52" Count="0" />
-      <LineId Id="54" Count="1" />
-      <LineId Id="53" Count="0" />
-      <LineId Id="51" Count="0" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="59" Count="2" />
-      <LineId Id="63" Count="3" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="25" Count="2" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="28" Count="1" />
-      <LineId Id="31" Count="2" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="37" Count="2" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="40" Count="1" />
-      <LineId Id="43" Count="2" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="46" Count="0" />
-      <LineId Id="68" Count="1" />
-      <LineId Id="71" Count="2" />
-      <LineId Id="70" Count="0" />
-      <LineId Id="74" Count="0" />
-      <LineId Id="76" Count="3" />
-      <LineId Id="75" Count="0" />
-      <LineId Id="16" Count="0" />
+      <LineId Id="262" Count="0" />
+      <LineId Id="229" Count="1" />
+      <LineId Id="268" Count="1" />
+      <LineId Id="233" Count="2" />
+      <LineId Id="232" Count="0" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="238" Count="2" />
+      <LineId Id="237" Count="0" />
+      <LineId Id="241" Count="0" />
+      <LineId Id="243" Count="2" />
+      <LineId Id="242" Count="0" />
+      <LineId Id="246" Count="1" />
+      <LineId Id="231" Count="0" />
+      <LineId Id="261" Count="0" />
+      <LineId Id="248" Count="1" />
+      <LineId Id="270" Count="1" />
+      <LineId Id="252" Count="2" />
+      <LineId Id="251" Count="0" />
+      <LineId Id="255" Count="1" />
+      <LineId Id="250" Count="0" />
     </LineIds>
     <LineIds Name="FB_MachineControl.MS_Manual">
       <LineId Id="3" Count="2" />
@@ -1321,6 +1944,156 @@ END_VAR
       <LineId Id="90" Count="0" />
       <LineId Id="82" Count="0" />
       <LineId Id="85" Count="2" />
+      <LineId Id="105" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineControl.Production">
+      <LineId Id="70" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="16" Count="21" />
+      <LineId Id="250" Count="4" />
+      <LineId Id="704" Count="0" />
+      <LineId Id="255" Count="1" />
+      <LineId Id="373" Count="0" />
+      <LineId Id="257" Count="1" />
+      <LineId Id="47" Count="4" />
+      <LineId Id="262" Count="1" />
+      <LineId Id="374" Count="0" />
+      <LineId Id="264" Count="1" />
+      <LineId Id="56" Count="2" />
+      <LineId Id="269" Count="0" />
+      <LineId Id="326" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="327" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="67" Count="1" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="285" Count="0" />
+      <LineId Id="300" Count="0" />
+      <LineId Id="289" Count="0" />
+      <LineId Id="287" Count="0" />
+      <LineId Id="308" Count="0" />
+      <LineId Id="748" Count="0" />
+      <LineId Id="310" Count="0" />
+      <LineId Id="749" Count="0" />
+      <LineId Id="312" Count="1" />
+      <LineId Id="754" Count="0" />
+      <LineId Id="908" Count="0" />
+      <LineId Id="918" Count="0" />
+      <LineId Id="910" Count="2" />
+      <LineId Id="880" Count="2" />
+      <LineId Id="886" Count="0" />
+      <LineId Id="883" Count="1" />
+      <LineId Id="887" Count="2" />
+      <LineId Id="885" Count="0" />
+      <LineId Id="105" Count="1" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="110" Count="2" />
+      <LineId Id="894" Count="0" />
+      <LineId Id="113" Count="1" />
+      <LineId Id="675" Count="0" />
+      <LineId Id="895" Count="2" />
+      <LineId Id="762" Count="0" />
+      <LineId Id="899" Count="3" />
+      <LineId Id="898" Count="0" />
+      <LineId Id="563" Count="3" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="546" Count="10" />
+      <LineId Id="544" Count="1" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="143" Count="0" />
+      <LineId Id="178" Count="0" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="583" Count="0" />
+      <LineId Id="873" Count="0" />
+      <LineId Id="589" Count="0" />
+      <LineId Id="766" Count="0" />
+      <LineId Id="768" Count="0" />
+      <LineId Id="860" Count="0" />
+      <LineId Id="593" Count="0" />
+      <LineId Id="905" Count="0" />
+      <LineId Id="596" Count="1" />
+      <LineId Id="606" Count="1" />
+      <LineId Id="864" Count="0" />
+      <LineId Id="595" Count="0" />
+      <LineId Id="879" Count="0" />
+      <LineId Id="598" Count="0" />
+      <LineId Id="600" Count="1" />
+      <LineId Id="876" Count="0" />
+      <LineId Id="878" Count="0" />
+      <LineId Id="877" Count="0" />
+      <LineId Id="599" Count="0" />
+      <LineId Id="746" Count="0" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="629" Count="0" />
+      <LineId Id="161" Count="2" />
+      <LineId Id="771" Count="0" />
+      <LineId Id="610" Count="0" />
+      <LineId Id="778" Count="0" />
+      <LineId Id="780" Count="0" />
+      <LineId Id="167" Count="1" />
+      <LineId Id="906" Count="1" />
+      <LineId Id="619" Count="2" />
+      <LineId Id="630" Count="0" />
+      <LineId Id="622" Count="0" />
+      <LineId Id="869" Count="0" />
+      <LineId Id="903" Count="0" />
+      <LineId Id="618" Count="0" />
+      <LineId Id="173" Count="1" />
+      <LineId Id="628" Count="0" />
+      <LineId Id="175" Count="1" />
+      <LineId Id="627" Count="0" />
+      <LineId Id="623" Count="0" />
+      <LineId Id="913" Count="0" />
+      <LineId Id="670" Count="3" />
+      <LineId Id="664" Count="0" />
+      <LineId Id="386" Count="0" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="375" Count="0" />
+      <LineId Id="534" Count="0" />
+      <LineId Id="524" Count="0" />
+      <LineId Id="533" Count="0" />
+      <LineId Id="657" Count="1" />
+      <LineId Id="668" Count="1" />
+      <LineId Id="652" Count="0" />
+      <LineId Id="526" Count="0" />
+      <LineId Id="535" Count="0" />
+      <LineId Id="402" Count="0" />
+      <LineId Id="507" Count="0" />
+      <LineId Id="640" Count="0" />
+      <LineId Id="914" Count="1" />
+      <LineId Id="637" Count="0" />
+      <LineId Id="509" Count="1" />
+      <LineId Id="700" Count="0" />
+      <LineId Id="904" Count="0" />
+      <LineId Id="715" Count="1" />
+      <LineId Id="714" Count="0" />
+      <LineId Id="701" Count="0" />
+      <LineId Id="916" Count="0" />
+      <LineId Id="717" Count="0" />
+      <LineId Id="919" Count="0" />
+      <LineId Id="683" Count="0" />
+      <LineId Id="722" Count="0" />
+      <LineId Id="921" Count="1" />
+      <LineId Id="924" Count="1" />
+      <LineId Id="923" Count="0" />
+      <LineId Id="920" Count="0" />
+      <LineId Id="723" Count="0" />
+      <LineId Id="682" Count="0" />
+      <LineId Id="376" Count="0" />
+      <LineId Id="379" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="328" Count="0" />
+      <LineId Id="205" Count="0" />
+      <LineId Id="204" Count="0" />
+      <LineId Id="208" Count="14" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="674" Count="0" />
+      <LineId Id="206" Count="0" />
     </LineIds>
     <LineIds Name="FB_MachineControl.Robot_Process">
       <LineId Id="342" Count="0" />
@@ -1333,8 +2106,20 @@ END_VAR
       <LineId Id="308" Count="0" />
       <LineId Id="313" Count="0" />
       <LineId Id="219" Count="11" />
-      <LineId Id="232" Count="10" />
-      <LineId Id="244" Count="6" />
+      <LineId Id="232" Count="0" />
+      <LineId Id="369" Count="0" />
+      <LineId Id="355" Count="0" />
+      <LineId Id="234" Count="0" />
+      <LineId Id="356" Count="0" />
+      <LineId Id="358" Count="1" />
+      <LineId Id="357" Count="0" />
+      <LineId Id="235" Count="6" />
+      <LineId Id="370" Count="0" />
+      <LineId Id="242" Count="0" />
+      <LineId Id="244" Count="0" />
+      <LineId Id="361" Count="2" />
+      <LineId Id="360" Count="0" />
+      <LineId Id="245" Count="5" />
       <LineId Id="336" Count="0" />
       <LineId Id="338" Count="1" />
       <LineId Id="337" Count="0" />
@@ -1342,22 +2127,64 @@ END_VAR
       <LineId Id="251" Count="0" />
       <LineId Id="82" Count="0" />
     </LineIds>
+    <LineIds Name="FB_MachineControl.robotcamtest">
+      <LineId Id="6" Count="28" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="36" Count="1" />
+    </LineIds>
     <LineIds Name="FB_MachineControl.Robots.Get">
       <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MachineControl.RotaryTable">
-      <LineId Id="40" Count="20" />
-      <LineId Id="298" Count="0" />
-      <LineId Id="300" Count="0" />
-      <LineId Id="299" Count="0" />
-      <LineId Id="61" Count="173" />
-      <LineId Id="17" Count="0" />
     </LineIds>
     <LineIds Name="FB_MachineControl.StateInit.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_MachineControl.StateUninitialized.Get">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineControl.TableProcess">
+      <LineId Id="37" Count="0" />
+      <LineId Id="428" Count="0" />
+      <LineId Id="426" Count="1" />
+      <LineId Id="423" Count="0" />
+      <LineId Id="429" Count="0" />
+      <LineId Id="449" Count="6" />
+      <LineId Id="439" Count="0" />
+      <LineId Id="447" Count="0" />
+      <LineId Id="465" Count="3" />
+      <LineId Id="456" Count="0" />
+      <LineId Id="469" Count="3" />
+      <LineId Id="430" Count="0" />
+      <LineId Id="473" Count="1" />
+      <LineId Id="476" Count="1" />
+      <LineId Id="475" Count="0" />
+      <LineId Id="424" Count="0" />
+      <LineId Id="504" Count="0" />
+      <LineId Id="479" Count="0" />
+      <LineId Id="505" Count="0" />
+      <LineId Id="478" Count="0" />
+      <LineId Id="484" Count="0" />
+      <LineId Id="486" Count="0" />
+      <LineId Id="490" Count="4" />
+      <LineId Id="497" Count="0" />
+      <LineId Id="495" Count="1" />
+      <LineId Id="498" Count="0" />
+      <LineId Id="500" Count="0" />
+      <LineId Id="502" Count="1" />
+      <LineId Id="499" Count="0" />
+      <LineId Id="485" Count="0" />
+      <LineId Id="519" Count="16" />
+      <LineId Id="518" Count="0" />
+      <LineId Id="507" Count="0" />
+      <LineId Id="510" Count="1" />
+      <LineId Id="513" Count="4" />
+      <LineId Id="512" Count="0" />
+      <LineId Id="537" Count="15" />
+      <LineId Id="536" Count="0" />
+      <LineId Id="591" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MachineControl.tableRefer">
+      <LineId Id="6" Count="221" />
+      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

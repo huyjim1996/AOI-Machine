@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_EX260_SEC1" Id="{5aa03d05-d2e2-4ad6-b23f-2b17383330c1}">
+    <Declaration><![CDATA[TYPE ST_EX260_SEC1 :
+STRUCT
+	arrSignalsOutputRaw			AT%Q*	: ARRAY[0..3] 		OF BYTE ; 		(*Output process data (RX) before convertion to easier to use. 
+																			This data are is used only in MR_ConvertEthercatData*)
+	arrSignalsOutputConverted			: ARRAY[1..32] OF BOOL ; 		(*Output process data (RX) after convertion to esier to uses. 
+																			  This data are used in program*)
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

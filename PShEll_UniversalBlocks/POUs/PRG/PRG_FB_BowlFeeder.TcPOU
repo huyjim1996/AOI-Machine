@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="PRG_FB_BowlFeeder" Id="{8c8ea1ee-d264-4438-888b-083a28ed0fdc}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_FB_BowlFeeder
+VAR
+	bFirstCycle 			: BOOL := TRUE;
+	fbBowlFeeder 			: FB_BowlFeeder;
+	
+	rSetSp	: REAL := 50;
+
+	bInit 					: BOOL;
+	bAbort 					: BOOL;
+	bReset					: BOOL;
+	bStart					: BOOL;
+	bStop					: BOOL;
+
+	bActive					: BOOL;
+	bRunning				: BOOL;
+	bError					: BOOL;
+	iErrorID				: UDINT;
+	
+
+	rSetpoint: REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Setting initial parameters *)
+IF bFirstCycle THEN
+	bFirstCycle := FALSE;
+	
+	fbBowlFeeder.MR_FirstCycle(sName := 'Bowl Feeder');
+	fbBowlFeeder.Setpoint := rSetSp;
+END_IF
+
+bActive := fbBowlFeeder.Active;
+bRunning := fbBowlFeeder.Running;
+bError := fbBowlFeeder.Error;
+rSetpoint := fbBowlFeeder.Setpoint;
+
+(* Simple controler *)
+IF bInit THEN
+	fbBowlFeeder.MR_Init();
+	IF fbBowlFeeder.Active THEN
+		bInit := FALSE;
+	END_IF
+END_IF
+
+IF bStart THEN
+	fbBowlFeeder.MR_Start();
+	IF fbBowlFeeder.Running THEN
+ 		bStart := FALSE;
+	END_IF
+END_IF
+
+IF bStop THEN
+	fbBowlFeeder.MR_Stop();
+	IF NOT fbBowlFeeder.Running THEN
+ 		bStop := FALSE;
+	END_IF
+END_IF
+
+fbBowlFeeder();]]></ST>
+    </Implementation>
+    <LineIds Name="PRG_FB_BowlFeeder">
+      <LineId Id="5" Count="0" />
+      <LineId Id="14" Count="1" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="17" Count="1" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="25" Count="1" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="31" Count="2" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="42" Count="2" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="45" Count="5" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="34" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

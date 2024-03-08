@@ -179,7 +179,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF eBowlFeederUnitState >= BOWL_FEEDER_UNIT_IDLE THEN
+        <ST><![CDATA[IF eBowlFeederUnitState = BOWL_FEEDER_UNIT_IDLE THEN
 	MR_Stop := FALSE;
 	eBowlFeederUnitState := BOWL_FEEDER_UNIT_STOP;
 	fbMachineLogger.MR_AddLogs(CONCAT(sName,': Stop requesting'));
@@ -251,7 +251,7 @@ END_CASE]]></ST>
       <Declaration><![CDATA[METHOD MS_Running
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[;]]></ST>
+        <ST><![CDATA[eBowlFeederUnitState := BOWL_FEEDER_UNIT_IDLE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="MS_Start" Id="{b1fa327a-ce4c-4bd2-a907-5043f3ceb702}" FolderPath="StateMachine\">
@@ -289,7 +289,7 @@ END_IF]]></ST>
         <ST><![CDATA[;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Running" Id="{75f91e98-f73b-4b1c-aba6-b84b270d19ff}">
+    <Property Name="Running" Id="{75f91e98-f73b-4b1c-aba6-b84b270d19ff}" FolderPath="Properties\Status\">
       <Declaration><![CDATA[PROPERTY Running : BOOL]]></Declaration>
       <Get Name="Get" Id="{c2d88e11-d492-4efb-bfee-376407c032c8}">
         <Declaration><![CDATA[VAR

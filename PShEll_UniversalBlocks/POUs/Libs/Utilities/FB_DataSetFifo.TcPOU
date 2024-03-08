@@ -3,7 +3,6 @@
   <POU Name="FB_DataSetFifo" Id="{68aab722-1c15-4a1c-8558-70d8155fb516}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_DataSetFifo
 VAR
-	MAX_BUFFER_SIZE : UINT;
 	arrBuffer 	: ARRAY[0..10000] OF BYTE; (* Buffer memory used by FB_MemRingBuffer function block *)
 	fbBuffer	: FB_MemRingBuffer;
 	
@@ -15,7 +14,7 @@ END_VAR
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[;]]></ST>
+      <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Add1Data" Id="{806cf257-e082-4499-824e-d35c7ee27f3b}">
       <Declaration><![CDATA[METHOD Add1Data : BOOL
@@ -53,44 +52,28 @@ VAR_INPUT
 END_VAR
 VAR_INST
 	Add2DataStep : UINT;
+	bOktemp			: BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//fbBuffer.A_AddTail( pWrite:= ADR( in1 ),
-//					cbWrite:= SIZEOF( in1 ),
-//					pBuffer:= ADR( arrBuffer ),
-//					cbBuffer:= SIZEOF( arrBuffer ),
-//					bOk=> _bOk,
-//					nCount => _nCount );
-
-//IF _bOk THEN
-//	fbBuffer.A_AddTail( pWrite:= ADR( in2 ),
-//					cbWrite:= SIZEOF( in2 ),
-//					pBuffer:= ADR( arrBuffer ),
-//					cbBuffer:= SIZEOF( arrBuffer ),
-//					bOk=> _bOk,
-//					nCount => _nCount );
-//END_IF
-//Add1Data := _bOk;
-
-CASE Add2DataStep OF
+        <ST><![CDATA[CASE Add2DataStep OF
 	0:
 		fbBuffer.A_AddTail( pWrite:= ADR( in1 ),
 					cbWrite:= SIZEOF( in1 ),
 					pBuffer:= ADR( arrBuffer ),
 					cbBuffer:= SIZEOF( arrBuffer ),
-					bOk=> _bOk,
+					bOk=> bOktemp,
 					nCount => _nCount );
-		IF _bOk THEN
+		IF bOktemp THEN
 			fbBuffer.A_AddTail( pWrite:= ADR( in2 ),
 					cbWrite:= SIZEOF( in2 ),
 					pBuffer:= ADR( arrBuffer ),
 					cbBuffer:= SIZEOF( arrBuffer ),
 					bOk=> _bOk,
 					nCount => _nCount );
-				IF _bOk THEN
-					Add2DataStep := 1;
-				END_IF
+			IF _bOk THEN
+				Add2DataStep := 1;
+			END_IF
 		END_IF
 	1: //done
 		_nLoad := (fbBuffer.cbSize * 100) / 1000;
@@ -100,13 +83,14 @@ END_CASE]]></ST>
       </Implementation>
     </Method>
     <Property Name="Count" Id="{42270d8d-a9c8-4f05-bae7-28d0249ec709}">
-      <Declaration><![CDATA[PROPERTY Count : UDINT]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Count : REFERENCE TO UDINT]]></Declaration>
       <Get Name="Get" Id="{adb7774c-93a8-40e4-aac2-a9fa76af383e}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Count := _nCount;]]></ST>
+          <ST><![CDATA[Count REF= _nCount;
+]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -123,18 +107,21 @@ END_VAR
 					cbBuffer:= SIZEOF( arrBuffer ),
 					bOk=> _bOk,
 					nCount => _nCount );
-
+GetData := _bOk;
 _nLoad := (fbBuffer.cbSize * 100) / 1000;]]></ST>
       </Implementation>
     </Method>
     <Property Name="GetValue" Id="{63fff75c-af6b-45cd-a9e3-42deab55cd76}">
       <Declaration><![CDATA[PROPERTY GetValue : LREAL (*Auto remove value after get *)]]></Declaration>
       <Get Name="Get" Id="{b2f10afa-14ea-4ffb-b7fb-72e0ee89d27f}">
-        <Declaration><![CDATA[VAR
+        <Declaration><![CDATA[(*
+Description: Get the first value in the buffer, not remove it.
+*)
+VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[fbBuffer.A_RemoveHead( 	pRead:= ADR( GetValue ),
+          <ST><![CDATA[fbBuffer.A_GetHead( 	pRead:= ADR( GetValue ),
 						cbRead:= SIZEOF( GetValue ),
 						pBuffer:= ADR( arrBuffer ),
 						cbBuffer:= SIZEOF( arrBuffer ),
@@ -157,13 +144,14 @@ END_VAR
       </Get>
     </Property>
     <Property Name="OK" Id="{7fbf5742-1e65-42d7-a9a4-cbff4411ba3c}">
-      <Declaration><![CDATA[PROPERTY OK : BOOL]]></Declaration>
+      <Declaration><![CDATA[PROPERTY OK : REFERENCE TO BOOL]]></Declaration>
       <Get Name="Get" Id="{ab850ee0-1094-4d02-8af9-56e6be495ffe}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[OK := _bOk;]]></ST>
+          <ST><![CDATA[OK REF= _bOk;
+]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -191,7 +179,7 @@ END_VAR
 						cbBuffer:= SIZEOF( arrBuffer ),
 						bOk=> _bOk,
 						nCount => _nCount );
-
+Remove := _bOk;
 _nLoad := (fbBuffer.cbSize * 100) / 1000;]]></ST>
       </Implementation>
     </Method>
@@ -213,17 +201,12 @@ _nLoad := (fbBuffer.cbSize * 100) / 1000;]]></ST>
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_DataSetFifo.Add1Data">
-      <LineId Id="32" Count="17" />
+      <LineId Id="32" Count="7" />
+      <LineId Id="54" Count="8" />
+      <LineId Id="49" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_DataSetFifo.Add2Data">
-      <LineId Id="8" Count="5" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="30" Count="4" />
-      <LineId Id="28" Count="1" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="39" Count="0" />
       <LineId Id="38" Count="0" />
       <LineId Id="40" Count="0" />
       <LineId Id="43" Count="4" />
@@ -240,6 +223,7 @@ _nLoad := (fbBuffer.cbSize * 100) / 1000;]]></ST>
     </LineIds>
     <LineIds Name="FB_DataSetFifo.Count.Get">
       <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_DataSetFifo.GetData">
       <LineId Id="6" Count="6" />
@@ -254,6 +238,7 @@ _nLoad := (fbBuffer.cbSize * 100) / 1000;]]></ST>
     </LineIds>
     <LineIds Name="FB_DataSetFifo.OK.Get">
       <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_DataSetFifo.OverWrite.Set">
       <LineId Id="2" Count="0" />

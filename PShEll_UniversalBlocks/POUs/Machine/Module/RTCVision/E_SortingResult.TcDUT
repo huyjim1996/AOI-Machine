@@ -5,10 +5,11 @@
 {attribute 'strict'}
 TYPE E_SortingResult :
 (
-	GOOD 				:= 0,
-	CONTAMINATION_DIRTY	:= 10,
-	SCRATCH_DENT		:= 20,
-	REJECT				:= 30
+	UNKNOWN				:= 0,
+	GOOD 				:= 10,
+	CONTAMINATION_DIRTY	:= 20,
+	SCRATCH_DENT		:= 30,
+	REJECT				:= 40
 );
 END_TYPE
 ]]></Declaration>

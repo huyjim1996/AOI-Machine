@@ -23,14 +23,6 @@ VAR
 	iPort				: UINT;			(*  *)
 	tTimeout			: TIME;			(*  *)
 
-	(* IO Module *)
-	doTriggerCam1		: FB_DigitalOutput;
-	doTriggerCam2		: FB_DigitalOutput;
-	doTriggerCam3		: FB_DigitalOutput;
-	doTriggerCam4		: FB_DigitalOutput;
-	doTriggerCam5		: FB_DigitalOutput;
-	doTriggerCam6		: FB_DigitalOutput;
-	doTriggerCam7		: FB_DigitalOutput;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -42,13 +34,16 @@ END_VAR
 								sAmsNetID	:= sAmsNetID,
 								iPort		:= iPort,
 								tTimeout	:= tTimeout);
-		
+
 END_IF]]></ST>
     </Implementation>
     <Folder Name="Backup" Id="{cc3b47ec-be32-4cc2-a814-533215ed53e2}" />
     <Folder Name="FirstCycle" Id="{16fc5e85-2ec4-4872-9442-efef1607810a}" />
-    <Folder Name="Properties" Id="{078b7afe-0419-4579-8830-94f79960bb2a}" />
-    <Property Name="Active" Id="{42ed5d1a-829f-4523-ac4c-5fcabc20f30d}" FolderPath="Properties\">
+    <Folder Name="Properties" Id="{078b7afe-0419-4579-8830-94f79960bb2a}">
+      <Folder Name="Parameter" Id="{c214bb2a-bd41-4761-af3c-cce70871f00e}" />
+      <Folder Name="Status" Id="{3dc41e3f-331c-4962-95f8-606668cc1fdf}" />
+    </Folder>
+    <Property Name="Active" Id="{42ed5d1a-829f-4523-ac4c-5fcabc20f30d}" FolderPath="Properties\Status\">
       <Declaration><![CDATA[PROPERTY Active : BOOL]]></Declaration>
       <Get Name="Get" Id="{097f88e0-cee3-486e-8812-2386b40ea5b7}">
         <Declaration><![CDATA[VAR
@@ -67,7 +62,7 @@ END_VAR
         </Implementation>
       </Set>
     </Property>
-    <Property Name="Busy" Id="{45ab7b77-e6e7-48c3-a403-874d58949966}" FolderPath="Properties\">
+    <Property Name="Busy" Id="{45ab7b77-e6e7-48c3-a403-874d58949966}" FolderPath="Properties\Status\">
       <Declaration><![CDATA[PROPERTY Busy : BOOL]]></Declaration>
       <Get Name="Get" Id="{390108aa-bca5-4de9-9f42-a22807c4813d}">
         <Declaration><![CDATA[VAR
@@ -86,7 +81,7 @@ END_VAR
         </Implementation>
       </Set>
     </Property>
-    <Property Name="CurrentJob" Id="{74189524-e2d7-459a-92e8-0316755e6bc2}" FolderPath="Properties\">
+    <Property Name="CurrentJob" Id="{74189524-e2d7-459a-92e8-0316755e6bc2}" FolderPath="Properties\Parameter\">
       <Declaration><![CDATA[PROPERTY CurrentJob : UINT]]></Declaration>
       <Get Name="Get" Id="{69cd6aa3-52a4-478b-ac70-94d4fbc69891}">
         <Declaration><![CDATA[VAR
@@ -105,7 +100,7 @@ END_VAR
         </Implementation>
       </Set>
     </Property>
-    <Property Name="Error" Id="{c71d3414-cff1-4e8e-94a6-1e18073ee670}" FolderPath="Properties\">
+    <Property Name="Error" Id="{c71d3414-cff1-4e8e-94a6-1e18073ee670}" FolderPath="Properties\Status\">
       <Declaration><![CDATA[PROPERTY Error : BOOL]]></Declaration>
       <Get Name="Get" Id="{ad32be09-02ae-4b15-92e1-f27feb16fdfd}">
         <Declaration><![CDATA[VAR
@@ -124,7 +119,7 @@ END_VAR
         </Implementation>
       </Set>
     </Property>
-    <Property Name="ErrorID" Id="{97ab9d11-5fda-491b-bb19-c5bd36614004}" FolderPath="Properties\">
+    <Property Name="ErrorID" Id="{97ab9d11-5fda-491b-bb19-c5bd36614004}" FolderPath="Properties\Status\">
       <Declaration><![CDATA[PROPERTY ErrorID : INT]]></Declaration>
       <Get Name="Get" Id="{b948c467-6970-4704-8d5a-45c64e354d6f}">
         <Declaration><![CDATA[VAR
@@ -152,7 +147,7 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="JobStarted" Id="{33a0fdc9-6408-451a-a058-2ea3701df471}" FolderPath="Properties\">
+    <Property Name="JobStarted" Id="{33a0fdc9-6408-451a-a058-2ea3701df471}" FolderPath="Properties\Parameter\">
       <Declaration><![CDATA[PROPERTY JobStarted : BOOL]]></Declaration>
       <Get Name="Get" Id="{464f0513-e8a2-4b3d-85e9-6317bf3af45d}">
         <Declaration><![CDATA[VAR
@@ -162,16 +157,8 @@ END_VAR
           <ST><![CDATA[]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{6553404f-345c-4a8b-816a-fdeb51237b91}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Set>
     </Property>
-    <Property Name="JobStopped" Id="{f4280290-2964-4f8c-9c89-9540d616c0cf}" FolderPath="Properties\">
+    <Property Name="JobStopped" Id="{f4280290-2964-4f8c-9c89-9540d616c0cf}" FolderPath="Properties\Parameter\">
       <Declaration><![CDATA[PROPERTY JobStopped : BOOL]]></Declaration>
       <Get Name="Get" Id="{3b773e35-d851-4536-b934-0adff9d20c16}">
         <Declaration><![CDATA[VAR
@@ -181,59 +168,7 @@ END_VAR
           <ST><![CDATA[]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{8c719f25-f917-4d0e-bbc0-2aae936c508e}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Set>
     </Property>
-    <Method Name="M_CommandStation1" Id="{edd27fe8-2c68-47b1-826f-a4d927fbd79e}">
-      <Declaration><![CDATA[METHOD M_CommandStation1 : BOOL
-VAR_INPUT
-	PulseWidth	: TIME; //T#0.1ms
-	DelayTimeForSecondTrigger	: TIME; //T#0.1ms
-END_VAR
-VAR_INST
-	StateST1 					: UINT;
-	tonDelayst1					: TON;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[CASE StateST1 OF
-	0://first trigger on
-		doTriggerCam1.Out := TRUE;
-		doTriggerCam2.Out := TRUE;
-		StateST1 := 10;
-	10://first trigger off
-		tonDelayst1(IN := TRUE, PT := PulseWidth);
-		IF tonDelayst1.Q THEN	
-			doTriggerCam1.Out := FALSE;	
-			doTriggerCam2.Out := FALSE;		
-			tonDelayst1(IN := FALSE);
-			StateST1 := 20;
-		END_IF
-	20://second trigger on
-		tonDelayst1(IN := TRUE, PT := DelayTimeForSecondTrigger);
-		IF tonDelayst1.Q THEN	
-			doTriggerCam1.Out := TRUE;
-			doTriggerCam2.Out := TRUE;	
-			tonDelayst1(IN := FALSE);
-			StateST1 := 30;
-		END_IF
-	30://second trigger off
-		tonDelayst1(IN := TRUE, PT := PulseWidth); 
-		IF tonDelayst1.Q THEN	
-			doTriggerCam1.Out := FALSE;
-			doTriggerCam2.Out := FALSE;
-			tonDelayst1(IN := FALSE);
-			M_CommandStation1 := TRUE;
-			StateST1 := 0;
-		END_IF
-END_CASE]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="M_CommandStation1_1" Id="{04fe8300-db31-4a34-9998-1b7632902af6}" FolderPath="Backup\">
       <Declaration><![CDATA[METHOD M_CommandStation1_1 : BOOL
 VAR_INPUT
@@ -274,46 +209,46 @@ END_VAR]]></Declaration>
 END_CASE]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_CommandStation2" Id="{d0b47d5f-9411-4b5f-9556-345617cf0503}">
-      <Declaration><![CDATA[METHOD M_CommandStation2 : BOOL
+    <Method Name="M_CommandStation1_2" Id="{2cfe5cd8-e084-4fe9-86db-8bcd5701e4f9}" FolderPath="Backup\">
+      <Declaration><![CDATA[METHOD M_CommandStation1_2 : BOOL
 VAR_INPUT
 	PulseWidth	: TIME; //T#0.1ms
 	DelayTimeForSecondTrigger	: TIME; //T#0.1ms
 END_VAR
 VAR_INST
-	StateST2 					: UINT;
-	tonDelayST2					: TON;
+	StateST1 					: UINT;
+	tonDelayst1					: TON;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CASE StateST2 OF
+        <ST><![CDATA[CASE StateST1 OF
 	0://first trigger on
-		doTriggerCam3.Out := FALSE;	
-		doTriggerCam4.Out := FALSE;
-		StateST2 := 10;
+		doTriggerCam1.Out := TRUE;
+		doTriggerCam2.Out := TRUE;
+		StateST1 := 10;
 	10://first trigger off
-		tonDelayST2(IN := TRUE, PT := PulseWidth);
-		IF tonDelayST2.Q THEN	
-			doTriggerCam3.Out := FALSE;	
-			doTriggerCam4.Out := FALSE;		
-			tonDelayST2(IN := FALSE);
-			StateST2 := 20;
+		tonDelayst1(IN := TRUE, PT := PulseWidth);
+		IF tonDelayst1.Q THEN	
+			doTriggerCam1.Out := FALSE;	
+			doTriggerCam2.Out := FALSE;		
+			tonDelayst1(IN := FALSE);
+			StateST1 := 20;
 		END_IF
 	20://second trigger on
-		tonDelayST2(IN := TRUE, PT := DelayTimeForSecondTrigger);
-		IF tonDelayST2.Q THEN	
-			doTriggerCam3.Out := TRUE;	
-			doTriggerCam4.Out := TRUE;		
-			tonDelayST2(IN := FALSE);
-			StateST2 := 30;
+		tonDelayst1(IN := TRUE, PT := DelayTimeForSecondTrigger);
+		IF tonDelayst1.Q THEN	
+			doTriggerCam1.Out := TRUE;
+			doTriggerCam2.Out := TRUE;	
+			tonDelayst1(IN := FALSE);
+			StateST1 := 30;
 		END_IF
 	30://second trigger off
-		tonDelayST2(IN := TRUE, PT := PulseWidth); 
-		IF tonDelayST2.Q THEN	
-			doTriggerCam3.Out := FALSE;	
-			doTriggerCam4.Out := FALSE;		
-			tonDelayST2(IN := FALSE);
-			M_CommandStation2 := TRUE;
-			StateST2 := 0;
+		tonDelayst1(IN := TRUE, PT := PulseWidth); 
+		IF tonDelayst1.Q THEN	
+			doTriggerCam1.Out := FALSE;
+			doTriggerCam2.Out := FALSE;
+			tonDelayst1(IN := FALSE);
+			M_CommandStation1 := TRUE;
+			StateST1 := 0;
 		END_IF
 END_CASE]]></ST>
       </Implementation>
@@ -358,46 +293,46 @@ END_VAR]]></Declaration>
 END_CASE]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_CommandStation3" Id="{045125ed-af62-4dae-8c63-dbb4801db03f}">
-      <Declaration><![CDATA[METHOD M_CommandStation3 : BOOL
+    <Method Name="M_CommandStation2_2" Id="{16a60a01-8151-4a5a-94be-fa12e6660312}" FolderPath="Backup\">
+      <Declaration><![CDATA[METHOD M_CommandStation2_2 : BOOL
 VAR_INPUT
 	PulseWidth	: TIME; //T#0.1ms
 	DelayTimeForSecondTrigger	: TIME; //T#0.1ms
 END_VAR
 VAR_INST
-	StateST3 					: UINT;
-	tonDelayst3					: TON;
+	StateST2 					: UINT;
+	tonDelayST2					: TON;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CASE StateST3 OF
+        <ST><![CDATA[CASE StateST2 OF
 	0://first trigger on
-		doTriggerCam5.Out := TRUE;	
-		doTriggerCam6.Out := TRUE;
-		StateST3 := 10;
+		doTriggerCam3.Out := FALSE;	
+		doTriggerCam4.Out := FALSE;
+		StateST2 := 10;
 	10://first trigger off
-		tonDelayst3(IN := TRUE, PT := PulseWidth);
-		IF tonDelayst3.Q THEN	
-			doTriggerCam5.Out := FALSE;	
-			doTriggerCam6.Out := FALSE;	
-			tonDelayst3(IN := FALSE);
-			StateST3 := 20;
+		tonDelayST2(IN := TRUE, PT := PulseWidth);
+		IF tonDelayST2.Q THEN	
+			doTriggerCam3.Out := FALSE;	
+			doTriggerCam4.Out := FALSE;		
+			tonDelayST2(IN := FALSE);
+			StateST2 := 20;
 		END_IF
 	20://second trigger on
-		tonDelayst3(IN := TRUE, PT := DelayTimeForSecondTrigger);
-		IF tonDelayst3.Q THEN	
-			doTriggerCam5.Out := TRUE;	
-			doTriggerCam6.Out := TRUE;		
-			tonDelayst3(IN := FALSE);
-			StateST3 := 30;
+		tonDelayST2(IN := TRUE, PT := DelayTimeForSecondTrigger);
+		IF tonDelayST2.Q THEN	
+			doTriggerCam3.Out := TRUE;	
+			doTriggerCam4.Out := TRUE;		
+			tonDelayST2(IN := FALSE);
+			StateST2 := 30;
 		END_IF
 	30://second trigger off
-		tonDelayst3(IN := TRUE, PT := PulseWidth); 
-		IF tonDelayst3.Q THEN	
-			doTriggerCam5.Out := FALSE;	
-			doTriggerCam6.Out := FALSE;		
-			tonDelayst3(IN := FALSE);
-			M_CommandStation3 := TRUE;
-			StateST3 := 0;
+		tonDelayST2(IN := TRUE, PT := PulseWidth); 
+		IF tonDelayST2.Q THEN	
+			doTriggerCam3.Out := FALSE;	
+			doTriggerCam4.Out := FALSE;		
+			tonDelayST2(IN := FALSE);
+			M_CommandStation2 := TRUE;
+			StateST2 := 0;
 		END_IF
 END_CASE]]></ST>
       </Implementation>
@@ -442,42 +377,46 @@ END_VAR]]></Declaration>
 END_CASE]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_CommandStation4" Id="{9205bf65-6dae-40eb-8935-c08d51a79334}">
-      <Declaration><![CDATA[METHOD M_CommandStation4 : BOOL
+    <Method Name="M_CommandStation3_2" Id="{09a7a608-ad96-4d6e-8098-e2969f13201d}" FolderPath="Backup\">
+      <Declaration><![CDATA[METHOD M_CommandStation3_2 : BOOL
 VAR_INPUT
 	PulseWidth	: TIME; //T#0.1ms
 	DelayTimeForSecondTrigger	: TIME; //T#0.1ms
 END_VAR
 VAR_INST
-	StateST4 					: UINT;
-	tonDelayST4					: TON;
+	StateST3 					: UINT;
+	tonDelayst3					: TON;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CASE StateST4 OF
+        <ST><![CDATA[CASE StateST3 OF
 	0://first trigger on
-		doTriggerCam7.Out := TRUE;
-		StateST4 := 10;
+		doTriggerCam5.Out := TRUE;	
+		doTriggerCam6.Out := TRUE;
+		StateST3 := 10;
 	10://first trigger off
-		tonDelayST4(IN := TRUE, PT := PulseWidth);//pulse width trigger 1ms
-		IF tonDelayST4.Q THEN	
-			doTriggerCam7.Out := FALSE;		
-			tonDelayST4(IN := FALSE);
-			StateST4 := 20;
+		tonDelayst3(IN := TRUE, PT := PulseWidth);
+		IF tonDelayst3.Q THEN	
+			doTriggerCam5.Out := FALSE;	
+			doTriggerCam6.Out := FALSE;	
+			tonDelayst3(IN := FALSE);
+			StateST3 := 20;
 		END_IF
 	20://second trigger on
-		tonDelayST4(IN := TRUE, PT := DelayTimeForSecondTrigger);
-		IF tonDelayST4.Q THEN	
-			doTriggerCam7.Out := TRUE;		
-			tonDelayST4(IN := FALSE);
-			StateST4 := 30;
+		tonDelayst3(IN := TRUE, PT := DelayTimeForSecondTrigger);
+		IF tonDelayst3.Q THEN	
+			doTriggerCam5.Out := TRUE;	
+			doTriggerCam6.Out := TRUE;		
+			tonDelayst3(IN := FALSE);
+			StateST3 := 30;
 		END_IF
 	30://second trigger off
-		tonDelayST4(IN := TRUE, PT := PulseWidth); //pulse width trigger 1ms
-		IF tonDelayST4.Q THEN	
-			doTriggerCam7.Out := FALSE;		
-			tonDelayST4(IN := FALSE);
-			M_CommandStation4 := TRUE;
-			StateST4 := 0;
+		tonDelayst3(IN := TRUE, PT := PulseWidth); 
+		IF tonDelayst3.Q THEN	
+			doTriggerCam5.Out := FALSE;	
+			doTriggerCam6.Out := FALSE;		
+			tonDelayst3(IN := FALSE);
+			M_CommandStation3 := TRUE;
+			StateST3 := 0;
 		END_IF
 END_CASE]]></ST>
       </Implementation>
@@ -519,6 +458,47 @@ END_VAR]]></Declaration>
 			M_CommandStation4 := TRUE;
 			StateST4 := 0;
 		END_IF
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_CommandStation4_2" Id="{4bd6fb76-f7a3-4097-8b57-5ddf0b90db91}" FolderPath="Backup\">
+      <Declaration><![CDATA[METHOD M_CommandStation4_2 : BOOL
+VAR_INPUT
+	PulseWidth	: TIME; //T#0.1ms
+	DelayTimeForSecondTrigger	: TIME; //T#0.1ms
+END_VAR
+VAR_INST
+	StateST4 					: UINT;
+	tonDelayST4					: TON;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE StateST4 OF
+	0://first trigger on
+		doTriggerCam7.Out := TRUE;
+		StateST4 := 10;
+	10://first trigger off
+		tonDelayST4(IN := TRUE, PT := PulseWidth);//pulse width trigger 1ms
+		IF tonDelayST4.Q THEN	
+			doTriggerCam7.Out := FALSE;		
+			tonDelayST4(IN := FALSE);
+			M_CommandStation4 := TRUE;
+			StateST4 := 0;
+		END_IF
+//	20://second trigger on
+//		tonDelayST4(IN := TRUE, PT := DelayTimeForSecondTrigger);
+//		IF tonDelayST4.Q THEN	
+//			doTriggerCam7.Out := TRUE;		
+//			tonDelayST4(IN := FALSE);
+//			StateST4 := 30;
+//		END_IF
+//	30://second trigger off
+//		tonDelayST4(IN := TRUE, PT := PulseWidth); //pulse width trigger 1ms
+//		IF tonDelayST4.Q THEN	
+//			doTriggerCam7.Out := FALSE;		
+//			tonDelayST4(IN := FALSE);
+//			M_CommandStation4 := TRUE;
+//			StateST4 := 0;
+//		END_IF
 END_CASE]]></ST>
       </Implementation>
     </Method>
@@ -569,44 +549,6 @@ THIS^.iPort := iPort;
 THIS^.tTimeout := tTimeout;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Result_Station1" Id="{ea8b0fe3-a355-47e2-bbe0-ac2eeedc3f23}" FolderPath="Properties\">
-      <Declaration><![CDATA[PROPERTY Result_Station1 : UINT]]></Declaration>
-      <Get Name="Get" Id="{4424d370-5c80-4224-946d-a531078c009d}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{f78f8be0-d561-4ac0-9b73-049ea8d60054}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
-    <Property Name="Result_Station2" Id="{a1230006-aa01-42f7-81e7-a0689390bec1}" FolderPath="Properties\">
-      <Declaration><![CDATA[PROPERTY Result_Station2 : UINT]]></Declaration>
-      <Get Name="Get" Id="{48c615e5-e473-4d2f-82a1-86a4742ae3b7}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{d0c425a9-6d69-46e1-8cc0-d93dca2cf688}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
     <LineIds Name="FB_RTCVision">
       <LineId Id="9" Count="0" />
       <LineId Id="14" Count="0" />
@@ -651,16 +593,29 @@ END_VAR
     <LineIds Name="FB_RTCVision.JobStarted.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_RTCVision.JobStarted.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
     <LineIds Name="FB_RTCVision.JobStopped.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_RTCVision.JobStopped.Set">
-      <LineId Id="2" Count="0" />
+    <LineIds Name="FB_RTCVision.M_CommandStation1_1">
+      <LineId Id="9" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="19" Count="2" />
+      <LineId Id="23" Count="1" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="33" Count="4" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="40" Count="3" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="18" Count="0" />
     </LineIds>
-    <LineIds Name="FB_RTCVision.M_CommandStation1">
+    <LineIds Name="FB_RTCVision.M_CommandStation1_2">
       <LineId Id="9" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="19" Count="0" />
@@ -686,7 +641,23 @@ END_VAR
       <LineId Id="39" Count="0" />
       <LineId Id="18" Count="0" />
     </LineIds>
-    <LineIds Name="FB_RTCVision.M_CommandStation1_1">
+    <LineIds Name="FB_RTCVision.M_CommandStation2_1">
+      <LineId Id="114" Count="25" />
+      <LineId Id="74" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RTCVision.M_CommandStation2_2">
+      <LineId Id="114" Count="2" />
+      <LineId Id="143" Count="0" />
+      <LineId Id="117" Count="4" />
+      <LineId Id="141" Count="0" />
+      <LineId Id="122" Count="6" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="129" Count="6" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="136" Count="3" />
+      <LineId Id="74" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RTCVision.M_CommandStation3_1">
       <LineId Id="9" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="19" Count="2" />
@@ -705,23 +676,7 @@ END_VAR
       <LineId Id="39" Count="0" />
       <LineId Id="18" Count="0" />
     </LineIds>
-    <LineIds Name="FB_RTCVision.M_CommandStation2">
-      <LineId Id="114" Count="2" />
-      <LineId Id="143" Count="0" />
-      <LineId Id="117" Count="4" />
-      <LineId Id="141" Count="0" />
-      <LineId Id="122" Count="6" />
-      <LineId Id="142" Count="0" />
-      <LineId Id="129" Count="6" />
-      <LineId Id="144" Count="0" />
-      <LineId Id="136" Count="3" />
-      <LineId Id="74" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RTCVision.M_CommandStation2_1">
-      <LineId Id="114" Count="25" />
-      <LineId Id="74" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RTCVision.M_CommandStation3">
+    <LineIds Name="FB_RTCVision.M_CommandStation3_2">
       <LineId Id="9" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="19" Count="0" />
@@ -747,44 +702,6 @@ END_VAR
       <LineId Id="39" Count="0" />
       <LineId Id="18" Count="0" />
     </LineIds>
-    <LineIds Name="FB_RTCVision.M_CommandStation3_1">
-      <LineId Id="9" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="19" Count="2" />
-      <LineId Id="23" Count="1" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="33" Count="4" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="38" Count="0" />
-      <LineId Id="40" Count="3" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="39" Count="0" />
-      <LineId Id="18" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RTCVision.M_CommandStation4">
-      <LineId Id="9" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="19" Count="2" />
-      <LineId Id="23" Count="1" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="33" Count="4" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="38" Count="0" />
-      <LineId Id="40" Count="3" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="39" Count="0" />
-      <LineId Id="18" Count="0" />
-    </LineIds>
     <LineIds Name="FB_RTCVision.M_CommandStation4_1">
       <LineId Id="9" Count="0" />
       <LineId Id="17" Count="0" />
@@ -792,6 +709,26 @@ END_VAR
       <LineId Id="23" Count="1" />
       <LineId Id="32" Count="0" />
       <LineId Id="27" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="33" Count="4" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="40" Count="3" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RTCVision.M_CommandStation4_2">
+      <LineId Id="9" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="19" Count="2" />
+      <LineId Id="23" Count="1" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="54" Count="0" />
       <LineId Id="29" Count="0" />
       <LineId Id="28" Count="0" />
       <LineId Id="25" Count="0" />
@@ -816,18 +753,6 @@ END_VAR
     <LineIds Name="FB_RTCVision.MR_FirstCycle">
       <LineId Id="5" Count="0" />
       <LineId Id="13" Count="3" />
-    </LineIds>
-    <LineIds Name="FB_RTCVision.Result_Station1.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RTCVision.Result_Station1.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RTCVision.Result_Station2.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RTCVision.Result_Station2.Set">
-      <LineId Id="2" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

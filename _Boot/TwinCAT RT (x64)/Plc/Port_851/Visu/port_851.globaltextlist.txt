@@ -1,6 +1,7 @@
 Id;Default
 224;%2d
 1044;%3.0f
+1573;%3.1f
 21;%6.3f
 331;%d
 890;%f
@@ -35,6 +36,7 @@ Id;Default
 2292;Backup and restore from external directory
 2272;Battery low
 662;Battery reset
+161;Bowl Feeder
 1355;Camera
 576;Camera connection
 2601;Camera job setup
@@ -210,10 +212,13 @@ Id;Default
 772;Servo on
 2183;Set Position:
 511;Set Velocity:
+916;Setpoint
 536;Severity
 2362;Skip to next
 1781;Skip tray change
 50;Software version: v%s
+959;Sort Good Distance
+820;Sorting Station
 450;Start
 3789;Started
 1037;State: %s
