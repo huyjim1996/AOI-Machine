@@ -1,0 +1,409 @@
+///(*==================================== Robot + Vision process ====================================*){{{
+CASE RobotState OF	
+	0://IDLE go bowl
+		fbRobot.MR_GoBowl();
+		IF NOT fbRobot.Busy THEN
+			RobotState := 5;
+		END_IF		
+	5://product detected
+		IF diProductPresenceBowl.In THEN (* waiting product *)
+			RobotState := 6;
+		END_IF
+	
+	6://go input
+		fbRobot.MR_GoInputProduct();
+		IF NOT fbRobot.Busy THEN
+			RobotState := 7;
+		END_IF
+		
+	7://robot pick
+		fbRobot.MR_Pick();
+		IF NOT fbRobot.Busy THEN
+			RobotState := 10;
+		END_IF 
+		
+	10://go to station 1
+		fbRobot.MR_GoStation1();
+		IF NOT fbRobot.Busy THEN
+			RobotState := 20;
+		END_IF
+		
+	20://double trig cam 1+2
+		IF doTriggerCam1.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) AND
+			doTriggerCam2.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) THEN
+			RobotState:= 30;
+		END_IF
+	30://go to station 2
+		fbRobot.MR_GoStation2();
+		IF NOT fbRobot.Busy THEN
+			RobotState := 40;
+		END_IF
+	40://double trig cam 3+4
+		IF doTriggerCam3.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) AND
+			doTriggerCam4.Command(PulseWidth:=T#1MS, DelayTimeForSecondTrigger := T#35MS) THEN
+			RobotState := 50;
+		END_IF
+	50://goto rotary table
+		fbRobot.MR_GoRotaryTable();
+		IF NOT fbRobot.Busy THEN
+			bProductAboveTable := TRUE;		
+			RobotState:= 60;
+		END_IF
+	60://waiting command from table
+		;
+		
+END_CASE
+///============================================================================================}}}
+///(*==================================== Table process ====================================*){{{
+CASE TableState OF
+	0:// idle | waiting for product
+		IF bProductAboveTable THEN
+			TableState:= 10;
+		END_IF
+	10://command place product and reset robot sequence
+		fbRobot.MR_Place();
+		IF NOT fbRobot.Busy THEN
+			bProductAboveTable := FALSE;
+			RobotState := 0;
+			TableState := 20;
+		END_IF
+	20://add buffer for st 3+4, table
+		Buffer_RotaryTable.A_Add(in:= OneStep);
+		Buffer_RotaryTable.A_Add(in:= OneStep);
+		Buffer_Station3.A_Add(in:= fbRotaryTable.ActualPosition + OneStep);
+		Buffer_Station4.A_Add(in:= fbRotaryTable.ActualPosition + 2*OneStep);
+		TableState := 30;
+		
+//	21://get vision 3capture position
+//		IF Vision3State = 0 THEN
+//			Vision3State:= 10;
+//			TableState:=22;
+//		END_IF
+//	22://get vision 4 capture position
+//		IF Vision4State = 0 THEN
+//			Vision4State:= 10;
+//			TableState:=30;
+//		END_IF
+	
+	30://get table distance movement
+		Buffer_RotaryTable.A_Remove(out => lrRelativeDistance);
+		TableState := 40;
+	40://move distance
+		fbRotaryTable.MR_MoveRelative(lrRelativeDistance);
+		IF fbRotaryTable.InPosition THEN
+			
+			TableState := 41;
+		END_IF
+		
+	41:// check position of vision station 3
+		IF Vision3State = 0 THEN
+			TableState := 42;
+		END_IF
+	42:
+		Buffer_Station3.A_Get(out => lrCapPosStation3);
+		bGetPictureStation3 := TRUE;
+		
+		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) = LREAL_TO_INT(lrCapPosStation3) THEN
+			Buffer_Station3.A_Remove(out => lrCapPosStation3);
+			Vision3State:= 30;
+			TableState := 43;
+			
+		ELSE
+			bGetPictureStation3 := FALSE;
+			TableState := 43;
+			
+		END_IF
+			
+	43:// check position of vision station 4
+		IF Vision4State = 0 THEN
+			TableState := 44;
+		END_IF
+	44:
+		Buffer_Station4.A_Get(out => lrCapPosStation4);
+		bGetPictureStation4 := TRUE;
+		bResultProcessing := TRUE;
+		
+		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) = LREAL_TO_INT(lrCapPosStation4) THEN
+			Buffer_Station4.A_Remove(out => lrCapPosStation4);
+			Vision4State:= 30;
+			TableState := 60;
+			
+		ELSE
+			bGetPictureStation4 := FALSE;
+			bResultProcessing := FALSE;
+			TableState := 60;
+			
+		END_IF
+	
+	
+	
+	
+//	50://command vision 3
+//		IF Vision3State = 0 THEN
+//			Vision3State:= 20;
+//			TableState:=55;
+//		END_IF
+//	55:	//command vision 4
+//		IF Vision4State = 0 THEN
+//			Vision4State:= 20;
+//			TableState:=60;
+//		END_IF
+
+	
+	
+	
+	
+	60://check taking picture done
+		IF NOT bGetPictureStation3 AND NOT bGetPictureStation4  AND NOT bResultProcessing THEN
+			TableState := 70;
+		END_IF
+		
+	70://state check result | product above table | buffer | go through sorting station
+		IF bProductAboveTable THEN
+			TableState := 10;//take product
+		ELSIF Buffer_RotaryTable.nCount > 0 THEN
+			TableState := 30;//get distance
+		ELSE
+			(* Make sure that the product is sorted *)
+			fbRotaryTable.MR_MoveRelative(2*OneStep);
+			IF fbRotaryTable.InPosition THEN
+				
+				TableState := 0;
+			END_IF
+			
+		END_IF
+	
+END_CASE
+///============================================================================================}}}
+///(*==================================== Vision 3+4 process ====================================*){{{
+CASE Vision3State OF
+	0://idle | waiting
+		;
+//	10://get position in buffer
+//		Buffer_Station3.A_Remove(out => lrCapPosStation3);
+//		Vision3State := 0;
+
+//	20://check position with table
+//		bGetPictureStation3 := TRUE;
+//		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) = LREAL_TO_INT(lrCapPosStation3) THEN //convert from lreal to int for less precise
+//			Vision3State:= 30;
+//		ELSE
+//			bGetPictureStation3 := FALSE;
+//			Vision3State:= 0;
+//		END_IF
+			
+	30://take picture cam 5+6
+		IF doTriggerCam5.Command(PulseWidth:= T#1MS, DelayTimeForSecondTrigger:= T#34MS) AND
+			doTriggerCam6.Command(PulseWidth:= T#1MS, DelayTimeForSecondTrigger:= T#34MS) THEN
+			
+			bGetPictureStation3 := FALSE;
+			Vision3State := 0; 
+		END_IF
+		
+END_CASE
+
+(* station 4 have to take picture and request result from system *)
+CASE Vision4State OF
+	0:
+		;
+//	10://get trigger position in buffer
+//		Buffer_Station4.A_Remove(out => lrCapPosStation4);
+//		Vision4State := 0;
+
+//	20://check trigger position with table position
+//		bGetPictureStation4 := TRUE;
+//		bResultProcessing 	:= TRUE;
+//		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) = LREAL_TO_INT(lrCapPosStation4) THEN //convert from lreal to int for less precise
+//			Vision4State:= 30;
+//		ELSE
+//			bResultProcessing			:= FALSE;
+//			bGetPictureStation4 		:= FALSE;
+//			Vision4State:= 0;
+//		END_IF
+	
+	30://trigger cam 7
+		IF doTriggerCam7.Command(PulseWidth:= T#1MS, DelayTimeForSecondTrigger:= T#33MS) THEN
+			bGetPictureStation4 := FALSE;
+			Vision4State:= 40;
+		END_IF
+		
+	40://request result
+		(* testing purpose *)
+		bResultGood:= TRUE;
+		IF bResultGood THEN
+			eFinalResult := VISION_RESULT_GOOD;
+			bResultGood := FALSE;
+			Vision4State:= 0;
+		ELSIF bResultDirt THEN
+			eFinalResult := VISION_RESULT_CONTAMINATION_DIRTY;
+			bResultDirt := FALSE;
+			Vision4State:= 0;
+		ELSIF bResultDent THEN
+			eFinalResult := VISION_RESULT_SCRATCH_DENT;
+			bResultDent := FALSE;
+			Vision4State:= 0;
+		ELSIF bResultReject THEN
+			eFinalResult := VISION_RESULT_REJECT;
+			bResultReject := FALSE;
+			Vision4State:= 0;
+		END_IF
+
+END_CASE
+///============================================================================================}}}
+///(*==================================== Sorting station ====================================*){{{
+(* Add buffer for sorting station *)
+CASE eFinalResult OF
+	VISION_RESULT_UNKNOWN:
+		;
+	VISION_RESULT_GOOD:
+		Buffer_SortGood.A_Add(in := fbRotaryTable.ActualPosition + lrSortGoodDistance);
+		eFinalResult 		:= VISION_RESULT_UNKNOWN;
+	VISION_RESULT_CONTAMINATION_DIRTY:
+		Buffer_SortDirt.A_Add(in := fbRotaryTable.ActualPosition + lrSortDirtDistance);
+		eFinalResult 		:= VISION_RESULT_UNKNOWN;
+	VISION_RESULT_SCRATCH_DENT:
+		Buffer_SortDent.A_Add(in := fbRotaryTable.ActualPosition + lrSortDentDistance);
+		eFinalResult 		:= VISION_RESULT_UNKNOWN;
+	VISION_RESULT_REJECT:
+		Buffer_SortReject.A_Add(in := fbRotaryTable.ActualPosition + lrSortRejectDistance);
+		eFinalResult 		:= VISION_RESULT_UNKNOWN;
+
+END_CASE
+(* Shoot the product out *)
+(* Good case *)
+CASE uSortGoodGetPosState OF
+	0://idle | check buffer
+		IF Buffer_SortGood.nCount > 0 THEN
+			uSortGoodGetPosState:= 10;
+		END_IF
+	10://get position
+		Buffer_SortGood.A_Get(out => lrSortGoodPos);
+		uSortGoodGetPosState := 20;
+	20://waiting table move in position | command table
+		bResultProcessing 	:= FALSE;
+		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) <= LREAL_TO_INT(lrSortGoodPos) THEN
+			uSortGoodGetPosState := 30;
+		END_IF
+	30://shoot it
+		Buffer_SortGood.A_Remove(out => lrSortGoodPos);
+		doBlowGood.Out := TRUE;
+		uSortGoodGetPosState := 40;
+		
+	40://off
+		tonGoodDelay(IN := TRUE, PT := tSortValveGoodTime);
+		IF tonGoodDelay.Q THEN	
+			doBlowGood.Out := FALSE;
+			tonGoodDelay.IN := FALSE;
+			uSortGoodGetPosState := 0;
+		END_IF
+		
+END_CASE
+(* DIRT CASE *)
+CASE uSortDirtGetPosState OF
+	0://idle | check buffer
+		IF Buffer_SortDirt.nCount > 0 THEN
+			uSortDirtGetPosState:= 10;
+		END_IF
+	10://get position
+		Buffer_SortDirt.A_Get(out => lrSortDirtPos);
+		uSortDirtGetPosState := 20;
+	20://waiting table move in position | command table
+		bResultProcessing 	:= FALSE;
+		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) <= LREAL_TO_INT(lrSortDirtPos) THEN
+			uSortDirtGetPosState := 30;
+		END_IF
+	30://shoot it
+		Buffer_SortDirt.A_Remove(out => lrSortDirtPos);
+		doBlowDirtScratch.Out := TRUE;
+		uSortDirtGetPosState := 40;
+		
+	40://off
+		tonDirtDelay(IN := TRUE, PT := tSortValveDirtTime);
+		IF tonDirtDelay.Q THEN	
+			doBlowDirtScratch.Out := FALSE;
+			tonDirtDelay.IN := FALSE;
+			uSortDirtGetPosState := 0;
+		END_IF
+		
+END_CASE
+(* DENT CASE *)
+CASE uSortDentGetPosState OF
+	0://idle | check buffer
+		IF Buffer_SortDent.nCount > 0 THEN
+			uSortDentGetPosState:= 10;
+		END_IF
+	10://get position
+		Buffer_SortDent.A_Get(out => lrSortDentPos);
+		uSortDentGetPosState := 20;
+	20://waiting table move in position | command table
+		bResultProcessing 	:= FALSE;
+		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) <= LREAL_TO_INT(lrSortDentPos) THEN
+			uSortDentGetPosState := 30;
+		END_IF
+	30://shoot it
+		Buffer_SortDent.A_Remove(out => lrSortDentPos);
+		doBlowDentContamination.Out := TRUE;
+		uSortDentGetPosState := 40;
+		
+	40://off
+		tonDentDelay(IN := TRUE, PT := tSortValveDentTime);
+		IF tonDentDelay.Q THEN	
+			doBlowDentContamination.Out := FALSE;
+			tonDentDelay.IN := FALSE;
+			uSortDentGetPosState := 0;
+		END_IF
+		
+END_CASE
+(* REJECT CASE *)
+CASE uSortRejectGetPosState OF
+	0://idle | check buffer
+		IF Buffer_SortReject.nCount > 0 THEN
+			uSortRejectGetPosState:= 10;
+		END_IF
+	10://get position
+		Buffer_SortReject.A_Get(out => lrSortRejectPos);
+		uSortRejectGetPosState := 20;
+	20://waiting table move in position | command table
+		bResultProcessing 	:= FALSE;
+		IF LREAL_TO_INT(fbRotaryTable.ActualPosition) <= LREAL_TO_INT(lrSortRejectPos) THEN
+			uSortRejectGetPosState := 30;
+		END_IF
+	30://shoot it
+		Buffer_SortReject.A_Remove(out => lrSortRejectPos);
+		doBlowReject.Out := TRUE;
+		uSortRejectGetPosState := 40;
+		
+	40://off
+		tonRejectDelay(IN := TRUE, PT := tSortValveRejectTime);
+		IF tonRejectDelay.Q THEN	
+			doBlowReject.Out := FALSE;
+			tonRejectDelay.IN := FALSE;
+			uSortRejectGetPosState := 0;
+		END_IF
+		
+END_CASE
+///============================================================================================}}}
+(* control param *)
+fbRobot.ref_CR800.Override:= 5;
+uBufferTableCount:= Buffer_RotaryTable.nCount;
+
+(* Mornitoring param *)
+bActive 			:= fbRotaryTable.Active;
+bBusy				:= fbRotaryTable.Busy;
+bError 				:= fbRotaryTable.Error;
+iErrorID 			:= fbRotaryTable.ErrorID;
+iAxisErrorID 		:= fbRotaryTable.ErrorID;
+lrActualPosition 	:= fbRotaryTable.ActualPosition;
+rActualVelocity		:= fbRotaryTable.ActualVelocity;
+bPowerOn 			:= fbRotaryTable.PowerOn;
+bIsHomed 			:= fbRotaryTable.IsHomed;
+bInVelocity			:= fbRotaryTable.InVelocity;
+bInPostion 			:= fbRotaryTable.InPosition;
+bMoveActive 		:= fbRotaryTable.MoveActive;
+bJogDone 			:= fbRotaryTable.JogDone;
+bStopped 			:= fbRotaryTable.Stopped;
+bHalted 			:= fbRotaryTable.Halted;
+eStatePlcOpen		:= fbRotaryTable.StatePlcOpen;
+
+fbRobot.ref_CR800.Override:= 30;
+fbRotaryTable.Velocity 			:= 50.0;

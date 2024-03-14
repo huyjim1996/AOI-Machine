@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_SortStationParam" Id="{b958e278-eeda-4e1e-99ce-beb538959e53}">
+    <Declaration><![CDATA[TYPE ST_SortStationParam :
+STRUCT
+	lrGoodPosition 		: LREAL;
+	tGoodTimer			: TIME;
+	
+	lrDirtPosition 		: LREAL;
+	tDirtTimer			: TIME;
+	
+	lrDentPosition 		: LREAL;
+	tDentTimer			: TIME;
+	
+	lrRejectPosition 	: LREAL;
+	tRejectTimer		: TIME;
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -5,7 +5,7 @@
       <Data>
         <o xml:space="preserve" t="VisualObject">
           <n n="LastVisuLanguageModelEntry" />
-          <v n="UniqueIdGenerator">"16"</v>
+          <v n="UniqueIdGenerator">"18"</v>
           <o n="VisualElemList" t="VisualElemList">
             <l n="VisualElementList" t="VisualElemCollection" cet="GenericVisualElem">
               <o>
@@ -171,6 +171,10 @@
                       <v n="Value">false</v>
                     </o>
                     <o>
+                      <v n="Id">2496894244L</v>
+                      <v n="Value">""</v>
+                    </o>
+                    <o>
                       <v n="Id">823443203L</v>
                       <v n="Value">"371"</v>
                     </o>
@@ -206,28 +210,30 @@
           <o n="GeneratedLMMDescriptions" t="GeneratedLanguageModelEntriesData">
             <o n="GeneratedVisuFbDescription" t="GenericFbDescription">
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
-                <v>GetUpdateRects</v>
-                <v>d0a70209-6383-4bd7-95bf-266bc7d7bb90</v>
+                <v>HasVisibilityAccess</v>
+                <v>f2e5f7ba-fe3d-4000-b7e2-7bf5eca46825</v>
                 <v>ContainsPoint</v>
                 <v>92ec6f99-97d3-442e-b2f1-1cae7e5f256f</v>
-                <v>SetStaticState</v>
-                <v>52ab6908-271a-44ac-9145-056345382f9d</v>
-                <v>Update</v>
-                <v>6b76bfbb-2814-4d92-b15e-46b756e453bc</v>
+                <v>HasInputAccess</v>
+                <v>b015d028-7438-47e0-8727-5dad8c5d5a79</v>
+                <v>HasInputAccessIntern</v>
+                <v>b1ff0a53-1a9e-5273-aca0-a08276a13c1b</v>
                 <v>GetTooltip</v>
                 <v>eef651ab-0915-408b-90a1-c52366eb024f</v>
+                <v>GetUpdateRects</v>
+                <v>d0a70209-6383-4bd7-95bf-266bc7d7bb90</v>
                 <v>GetNamespace</v>
                 <v>d72f445b-ec07-48dc-ba1f-7f1c50517439</v>
                 <v>GetTranslator</v>
                 <v>5b7ebef4-cea8-4915-82cf-161ce78acfbb</v>
+                <v>Update</v>
+                <v>6b76bfbb-2814-4d92-b15e-46b756e453bc</v>
                 <v>SetClientData</v>
                 <v>a9d40611-5e9d-4c32-a801-492568734b98</v>
                 <v>GetClientData</v>
                 <v>b5f57f09-c57f-4b18-b933-480a9b397680</v>
                 <v>Paint</v>
                 <v>2c40eba8-fc4d-4b02-8e1f-699db1414758</v>
-                <v>HasVisibilityAccess</v>
-                <v>f2e5f7ba-fe3d-4000-b7e2-7bf5eca46825</v>
                 <v>GetElementArray</v>
                 <v>76fa4f9a-0d3c-4cec-9a60-eb334cf986d8</v>
                 <v>SetVisuFlagsInternal</v>
@@ -240,12 +246,14 @@
                 <v>87b1c069-1e11-425e-90e3-451bee43a5af</v>
                 <v>Initialize</v>
                 <v>095a5792-6b95-4cc7-a222-a7e5f556bef2</v>
-                <v>HasInputAccess</v>
-                <v>b015d028-7438-47e0-8727-5dad8c5d5a79</v>
+                <v>HasVisibilityAccessIntern</v>
+                <v>e44a52de-5603-5b7e-9765-19fce80a7ffb</v>
                 <v>GetSurroundingRect</v>
                 <v>b8971b21-d631-4789-86ea-bfacd9913a97</v>
                 <v>ElementInfo</v>
                 <v>5b3a5647-8c1d-4c79-bfb2-b94ca34aebfc</v>
+                <v>SetStaticState</v>
+                <v>52ab6908-271a-44ac-9145-056345382f9d</v>
                 <v>GetLocalUsergroup</v>
                 <v>c95df7b8-41a8-4360-843e-f58817481a56</v>
                 <v>GetName</v>
@@ -334,7 +342,7 @@
               <o>
                 <v n="Id">14L</v>
                 <n n="Tag" />
-                <v n="Text">"	btnInitialize	: BOOL;	(*  *)"</v>
+                <v n="Text">"	btnInitialize			: BOOL;	(*  *)"</v>
               </o>
               <o>
                 <v n="Id">1L</v>

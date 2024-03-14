@@ -2,10 +2,12 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="E_VisionJob" Id="{c15c3b8c-9186-4696-9e1d-0ee705d2c942}">
     <Declaration><![CDATA[{attribute 'strict'}
+{attribute 'to_string'}
 TYPE E_VisionJob :
 (
-	CASE_RECEIVER_E25_0100812762 := 0
-);
+	UNKNOWN := 0,
+	CASE_RECEIVER_E25_0100812762 := 1
+);// Basic data type is INT, default initialization for all E_ColorBasic  variables is eYellow
 END_TYPE
 ]]></Declaration>
   </DUT>

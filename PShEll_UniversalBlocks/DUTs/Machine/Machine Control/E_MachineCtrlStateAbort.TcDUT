@@ -4,8 +4,9 @@
     <Declaration><![CDATA[{attribute 'strict'}
 TYPE E_MachineCtrlStateAbort :
 (
-	MACHINE_STATE_ABORTING_ROBOT_CYCLE_STOP	:= 0,	(*  *)
-	MACHINE_STATE_ABORTING_TABLE			:= 10	(*  *)
+	MACHINE_STATE_ABORTING_TABLE					:= 0,	(*  *)
+	MACHINE_STATE_ABORTING_ROBOT_CYCLE_STOP			:= 10,	(*  *)
+	MACHINE_STATE_ABORTING_DONE						:= 200	(*  *)
 );
 END_TYPE]]></Declaration>
   </DUT>

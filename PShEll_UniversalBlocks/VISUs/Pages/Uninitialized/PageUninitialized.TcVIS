@@ -90,19 +90,19 @@
                     </o>
                     <o>
                       <v n="Id">1649127785L</v>
-                      <v n="Value" t="Int16">20</v>
+                      <v n="Value">20</v>
                     </o>
                     <o>
                       <v n="Id">357335551L</v>
-                      <v n="Value" t="Int16">50</v>
+                      <v n="Value">50</v>
                     </o>
                     <o>
                       <v n="Id">2422045748L</v>
-                      <v n="Value" t="Int16">1480</v>
+                      <v n="Value">1480</v>
                     </o>
                     <o>
                       <v n="Id">2134141914L</v>
-                      <v n="Value" t="Int16">780</v>
+                      <v n="Value">780</v>
                     </o>
                     <o>
                       <v n="Id">394923068L</v>
@@ -110,7 +110,7 @@
                     </o>
                     <o>
                       <v n="Id">2322377816L</v>
-                      <v n="Value">"FRAME"</v>
+                      <v n="Value">"NO_FRAME"</v>
                     </o>
                     <o>
                       <v n="Id">3549563837L</v>
@@ -253,7 +253,7 @@
                                 <l n="TypeNodeChildren" t="ArrayList" cet="BasicTypeNode">
                                   <o>
                                     <v n="Flags">2L</v>
-                                    <v n="BasicTypeNodeValue">"PRG_VisuControl.fbVisuControl.stUninitializedFrame"</v>
+                                    <n n="BasicTypeNodeValue" />
                                     <v n="BasicTypeNodeAcceptsExpression">true</v>
                                     <n n="BasicTypeNodeFastAccess" />
                                     <a n="BasicTypeNodeEnumValues" et="String" />
@@ -431,11 +431,11 @@
                     </o>
                     <o>
                       <v n="Id">550940142L</v>
-                      <v n="Value">738</v>
+                      <v n="Value">410</v>
                     </o>
                     <o>
                       <v n="Id">1473355128L</v>
-                      <v n="Value">210</v>
+                      <v n="Value">328</v>
                     </o>
                     <o>
                       <v n="Id">493260384L</v>
@@ -448,73 +448,6 @@
                     <o>
                       <v n="Id">390574330L</v>
                       <v n="Value">""</v>
-                    </o>
-                    <o>
-                      <v n="Id">2597686782L</v>
-                      <v n="Value">false</v>
-                    </o>
-                    <o>
-                      <v n="Id">2322814029L</v>
-                      <o n="Value" t="VisualizationNode">
-                        <v n="VisuNodeReferenceGuid">{00000000-0000-0000-0000-000000000000}</v>
-                        <n n="VisuNodeReference" />
-                        <v n="VisNodeRefs33">"UninitializedSetupFrame"</v>
-                        <l n="TypeNodeChildren" t="ArrayList" cet="BasicTypeNode">
-                          <o>
-                            <v n="Flags">2L</v>
-                            <v n="BasicTypeNodeValue">"PRG_VisuControl.fbVisuControl.stUninitializedSetupFrame"</v>
-                            <v n="BasicTypeNodeAcceptsExpression">true</v>
-                            <n n="BasicTypeNodeFastAccess" />
-                            <a n="BasicTypeNodeEnumValues" et="String" />
-                            <n n="EnumValueDisplayTextIds" />
-                            <n n="EnumValueVisibilityAttributeValues" />
-                            <n n="EnumValueLibraryId" />
-                            <n n="DynamicEnumMemberVisibilityCheckerTypeGuid" />
-                            <l n="TypeNodeChildren" t="ArrayList" />
-                            <o n="TypeNodeType" t="TypeNodeType">
-                              <v n="TypeClass" t="TypeClass">Reference</v>
-                              <v n="QualifiedName">"ST_UninitializedSetupFrame"</v>
-                              <v n="Name">"ST_UninitializedSetupFrame"</v>
-                            </o>
-                            <v n="TypeNodeName">"stUninitializedFrame"</v>
-                            <o n="TypeNodeAttributes" t="TypeNodeAttributes2">
-                              <v n="AttrFlags">0UL</v>
-                              <d n="TypeNodeAttributesData" t="CaseInsensitiveHashtable" />
-                              <v n="ConvDone">true</v>
-                            </o>
-                            <v n="TypeNodeId" t="Int16">255</v>
-                            <v n="TypeNodeIdLong">3743785165L</v>
-                            <n n="LibraryId" />
-                            <n n="DisplayTextId" />
-                            <n n="DescriptionTextID" />
-                            <v n="DescriptionUseParent">false</v>
-                          </o>
-                        </l>
-                        <o n="TypeNodeType" t="TypeNodeType">
-                          <v n="TypeClass" t="TypeClass">Userdef</v>
-                          <v n="QualifiedName">"IVisualisation"</v>
-                          <v n="Name">"IVisualisation"</v>
-                        </o>
-                        <v n="TypeNodeName">"[1]"</v>
-                        <o n="TypeNodeAttributes" t="TypeNodeAttributes2">
-                          <v n="AttrFlags">0UL</v>
-                          <d n="TypeNodeAttributesData" t="CaseInsensitiveHashtable" ckt="String" cvt="String">
-                            <v>ieccodeconversion_useexistinginterface</v>
-                            <v>_3S.CoDeSys.VisuGenerated.IVisualisationIEC</v>
-                            <v>conditionalshow</v>
-                            <v>visu_elemdev</v>
-                            <v>''NORMAL__COMMENT</v>
-                            <v> interface contains additional methods to IVisualElement</v>
-                          </d>
-                          <v n="ConvDone">true</v>
-                        </o>
-                        <v n="TypeNodeId" t="Int16">1</v>
-                        <v n="TypeNodeIdLong">2322814029L</v>
-                        <n n="LibraryId" />
-                        <n n="DisplayTextId" />
-                        <n n="DescriptionTextID" />
-                        <v n="DescriptionUseParent">false</v>
-                      </o>
                     </o>
                     <o>
                       <v n="Id">2473092364L</v>
@@ -580,8 +513,45 @@
                       </o>
                     </o>
                     <o>
+                      <v n="Id">2597686782L</v>
+                      <v n="Value">false</v>
+                    </o>
+                    <o>
                       <v n="Id">360585687L</v>
                       <v n="Value">"PRG_VisuControl.fbVisuControl.stUninitializedStartUpFrame"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2322814029L</v>
+                      <o n="Value" t="VisualizationNode">
+                        <v n="VisuNodeReferenceGuid">{00000000-0000-0000-0000-000000000000}</v>
+                        <n n="VisuNodeReference" />
+                        <v n="VisNodeRefs33">"UninitializedSetupFrame"</v>
+                        <l n="TypeNodeChildren" t="ArrayList" />
+                        <o n="TypeNodeType" t="TypeNodeType">
+                          <v n="TypeClass" t="TypeClass">Userdef</v>
+                          <v n="QualifiedName">"IVisualisation"</v>
+                          <v n="Name">"IVisualisation"</v>
+                        </o>
+                        <v n="TypeNodeName">"[1]"</v>
+                        <o n="TypeNodeAttributes" t="TypeNodeAttributes2">
+                          <v n="AttrFlags">0UL</v>
+                          <d n="TypeNodeAttributesData" t="CaseInsensitiveHashtable" ckt="String" cvt="String">
+                            <v>ieccodeconversion_useexistinginterface</v>
+                            <v>_3S.CoDeSys.VisuGenerated.IVisualisationIEC</v>
+                            <v>conditionalshow</v>
+                            <v>visu_elemdev</v>
+                            <v>''NORMAL__COMMENT</v>
+                            <v> interface contains additional methods to IVisualElement</v>
+                          </d>
+                          <v n="ConvDone">true</v>
+                        </o>
+                        <v n="TypeNodeId" t="Int16">1</v>
+                        <v n="TypeNodeIdLong">2322814029L</v>
+                        <n n="LibraryId" />
+                        <n n="DisplayTextId" />
+                        <n n="DescriptionTextID" />
+                        <v n="DescriptionUseParent">false</v>
+                      </o>
                     </o>
                     <o>
                       <v n="Id">1311860368L</v>
@@ -591,16 +561,12 @@
                       <v n="Id">1013868361L</v>
                       <v n="Value">true</v>
                     </o>
-                    <o>
-                      <v n="Id">3743785165L</v>
-                      <v n="Value">"PRG_VisuControl.fbVisuControl.stUninitializedSetupFrame"</v>
-                    </o>
                   </l>
                 </o>
                 <v n="VisualElementName">"Frame"</v>
                 <v n="VisualElementTypeName">"VisuFbFrame"</v>
                 <v n="VisualElementIsRectangle">true</v>
-                <v n="VisualElementIdentifier">"FrmMachineInitialSetup"</v>
+                <v n="VisualElementIdentifier">"GenElemInst_32"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <o n="VisualElementFrameInformation" t="VisualFrameInfo">
                   <l n="ContainedGuids" t="ArrayList" />
@@ -611,11 +577,11 @@
                   </a>
                 </o>
                 <d n="VisualElementInputActions" t="Hashtable" />
-                <v n="VisualElementIdentification">{b81081e9-9715-4b8d-959b-35d935c009f6}</v>
+                <v n="VisualElementIdentification">{087ad7e9-7683-4da2-a9c8-5cbce1424af1}</v>
                 <v n="VisualElementOwningObjectGuid">{8065769f-ab69-4fc0-8d86-6905fea0168d}</v>
                 <a n="LMGuids" et="Guid" />
                 <d n="SubElements" t="Hashtable" />
-                <v n="VisualElementId">2</v>
+                <v n="VisualElementId">20</v>
                 <l n="UserManagementAccessRights" t="ArrayList" />
               </o>
             </l>
@@ -712,10 +678,10 @@
               <d n="FbMethods" t="CaseInsensitiveHashtable_1" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
                 <v>03fe163f-47cf-4c3a-a083-006936825495</v>
-                <v>FB_Reinit</v>
-                <v>c620f40f-f129-42ca-908b-50f9b6cf683c</v>
                 <v>FB_Exit</v>
                 <v>812e0dc4-e18e-4f22-afdb-f86c65ac1f71</v>
+                <v>FB_Reinit</v>
+                <v>c620f40f-f129-42ca-908b-50f9b6cf683c</v>
               </d>
               <v n="FbName">"NotImportant"</v>
               <v n="FbGuid">{12cb1814-eddd-46c5-aa13-179e62e8aff8}</v>
@@ -759,7 +725,7 @@
             </o>
             <v n="DialogDut">{2bd66e59-b9a2-4726-8b89-d64764449da1}</v>
           </o>
-          <v n="LastUsedIdForIdentifier">14</v>
+          <v n="LastUsedIdForIdentifier">34</v>
           <o n="TextDocument" t="TextDocument">
             <a n="TextLines" cet="TextLine">
               <o>

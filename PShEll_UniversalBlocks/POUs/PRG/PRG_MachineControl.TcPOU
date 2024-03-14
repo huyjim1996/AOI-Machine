@@ -4,13 +4,6 @@
     <Declaration><![CDATA[(* =======================================================================================================================================
    Automatic Optical Inspection Machine Program
    =======================================================================================================================================
-   Description: 
-   This PLC sample contains an object-oriented program to control the Automatic Optical Inspection Machine.
-   The application can be controlled via an integrated visualization PRG_VisuControl.
-   
-   Automatic Optical Inspection Machine:
-   Descript how to use this program
-   =======================================================================================================================================
    References
    ======================================================================================================================================= *)
 PROGRAM PRG_MachineControl
@@ -29,9 +22,9 @@ END_VAR]]></Declaration>
 	(* Set assignamnet done bit for visu controler *)
 	stShell.stFlags.bMachineCtrlAssignamentsDone := TRUE;
 	
-	fbMachineLogger.MR_FirstCycle( 	sName		:= 'PSE_Shell_Machine_Logger',
-									sFileDir 	:= 'C:\TwinCAT\Tests\Loggers',
-									sFileName 	:= 'PSE_Shell_Machine_Logger',
+	fbMachineLogger.MR_FirstCycle( 	sName		:= 'AOI_Machine_Logger',
+									sFileDir 	:= 'C:\TwinCAT\Loggers',
+									sFileName 	:= 'AOI_Machine_Logger',
 									sAmsNetId 	:= '',
 									bAddTimeStamp := FALSE,
 									bAddHeader := FALSE);

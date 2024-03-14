@@ -1,11 +1,17 @@
 Id;Default
+150;%2.1f
+250;%2.2f
+1258;%2.4f
 224;%2d
 1044;%3.0f
 1573;%3.1f
 21;%6.3f
 331;%d
 890;%f
+1627;%ms
 976;%s
+361;%t[s$'s$']
+2692;%t[s]
 2051;/
 887;Abort
 494;Acceleration:
@@ -34,11 +40,17 @@ Id;Default
 542;Back
 300;Backup
 2292;Backup and restore from external directory
+2866;Batch Data
+2617;Batch ID
+2549;Batch Performance
+1008;Batch Settings
 2272;Battery low
 662;Battery reset
 161;Bowl Feeder
 1355;Camera
 576;Camera connection
+2594;Camera Focus$R$NCheck
+564;Camera Focus Check
 2601;Camera job setup
 917;Change pass.
 1549;Clear all
@@ -47,6 +59,7 @@ Id;Default
 410;Close HMI
 1072;Commands
 186;Communication Setup
+1536;Complete
 592;Continue
 1156;Controller
 2906;Controller reset
@@ -55,6 +68,7 @@ Id;Default
 1448;Courtains checked
 1047;Create
 2909;Create new recipe:
+3176;Current state:
 2120;Current value
 2043;Cycle pause
 3558;Cycle restore
@@ -62,17 +76,23 @@ Id;Default
 424;Cylinders
 1092;Deceleration:
 362;Deinitialization in progress...
+115;Delay 
+301;Dent
 1655;Digital Inputs
 1456;Digital inputs
 1692;Digital Outputs
 1445;Digital outputs
 1090;Digital outputs and valves
+2518;Dirt
+1004;Distance
 538;Door Lock
 1033;Door locks checked
 2366;E-Stop checked
+956;Enable
 1643;Enable simulation
 245;Enable/Disable All
 1468;Error
+2495;Error inform
 2782;Error reset
 537;Error: %d
 1738;Error: %s
@@ -82,6 +102,8 @@ Id;Default
 619;Event Text
 297;Event Type
 77;Export to file
+1865;File name
+2449;File Name:
 1073;Finishing initialization...
 742;Fixture 1
 433;Fixture 2
@@ -100,9 +122,18 @@ Id;Default
 738;Fixture initialization (7)
 405;Fixture initialization (8)
 1696;Force Input Value
+2573;General FCQ State:
 244;Go %s
 2687;Go auto
 66;Go home
+29;Golden Sample
+2114;Golden Sample$R$NCheck
+2384;Good
+440;Good Blow Time
+2052;Good Distance
+274;Good Position
+70;Good quantity
+182;GS Type
 1163;Halt
 2141;Halted
 110;Home
@@ -110,6 +141,7 @@ Id;Default
 2548;In Position
 371;Initialize
 1488;Initialized
+2081;Input Quality
 312;Inputs
 1273;IP Address
 2436;Jog
@@ -119,7 +151,11 @@ Id;Default
 121;Lag error:
 715;Lights
 1263;Load from file
+546;Load from Recipes
 1426;Loaded recipe
+3542;Local path
+2198;Lock
+1750;Lock the doors before going back to full speed
 332;Log In
 198;Log Out
 1506;Logged user
@@ -135,11 +171,14 @@ Id;Default
 3024;Manual Robots Control
 83;Measurement fixtures setup
 67;MES connection
+2665;MES delay
+644;MES file command dwell time:
 729;Mode switch
 417;Motors
 1606;Next
 1295;No dry run
 1023;None
+616;Normfile-Config
 1645;Number of:
 1015;Operator
 1972;Others
@@ -151,17 +190,23 @@ Id;Default
 1429;Override: %3.0f
 1146;Parameters:
 1309;Path:
+2305;Pause
 725;Paused
+3825;Pick&Place Only
 2613;Place empty trays inside machine output zone and close the cover
 1304;Port
+93;Position
 1845;Position hold
 2517;Position:
 905;Position: %s
 731;Powered on
 1584;Press $" Safety Reset$" button at front panel
 1825;Previous
+3063;Product Item-Config
+2388;Production Order (PO)
 316;Program
 1005;Read to file
+1949;Recipe
 690;Recipe list:
 2365;Recipe name
 1499;Recipe name:
@@ -169,8 +214,12 @@ Id;Default
 298;Recipes
 260;Recipes Manager initialization
 2656;Recipes Manager: %s
+2461;Reduced Speed
+1796;Reject
+647;Rejected quantity
 1083;Release
 2097;Reload
+3410;Remote path
 2954;Remove
 3075;Reset
 707;Reset in progress...
@@ -179,12 +228,17 @@ Id;Default
 561;Restore
 2648;Restore auto
 854;Retry
+2957;Rework
+1951;Rework Processing
+1759;Rework quantity
 610;Robot 1
 704;Robot Controlers Communication Setup
 1558;Robot Controlers Power On ( aprox. 60 sec.)
 1027;Robot Controlers reset
+1702;Robot homed
 2693;Robot homed (1)
 2286;Robot homed (2)
+590;Robot initialization
 155;Robot initialization (1)
 1178;Robot initialization (2)
 951;Robots
@@ -192,7 +246,10 @@ Id;Default
 2245;Robots in automatic mode
 1226;Robots in remote mode
 1611;Rotary table
+1886;Rotary table homed
 962;Rotary table initialization
+2099;RTC Vision
+3103;RTC Vision System
 2584;Safe Inputs
 958;Safe mode switch in progress...
 711;Safe mode switching...
@@ -202,6 +259,8 @@ Id;Default
 1398;Safety Controler reset
 980;Safety Controler start
 670;Safety I/O
+1981;Sample ID
+556;Samples measured: %d
 2626;Save in file
 550;Select
 1288;Selected recipe
@@ -217,25 +276,35 @@ Id;Default
 2362;Skip to next
 1781;Skip tray change
 50;Software version: v%s
+1856;Sort Good Blow Time
 959;Sort Good Distance
+1950;Sort Station Parameters
 820;Sorting Station
+562;Sorting Station Parameter
+827;SP
 450;Start
+2048;START
 3789;Started
 1037;State: %s
 895;Status
 85;Statuses & parameters:
 442;Stop
+563;STOP
 1093;Stopped
+2590;Time
+359;Time (s)
 848;Time Cleared
 730;Time Confirmed
 9;Time Raised
 1974;Time: %d [ms]
 10;Total active alarms
+411;Tray ID
 3571;Trayfeeder courtain signal interupted
 3;Trayfeeder courtain signal interupted while initialization
 109;Trayfeeder home
 513;Trayfeeder initialization
 1629;Update recipes
+1902;Use Adapter
 1832;UTU 1
 458;UTU 2
 124;UTU 3
@@ -253,5 +322,6 @@ Id;Default
 1515;UTU Device 7
 948;UTU Device 8
 1334;Velocity:
+2437;Vision system
 322;[%s/s]
 374;[%s]

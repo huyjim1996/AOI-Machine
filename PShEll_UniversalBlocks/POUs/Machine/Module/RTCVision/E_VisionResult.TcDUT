@@ -1,23 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <DUT Name="E_VisionResult" Id="{b10f470d-097d-410b-98da-d876df638217}">
+  <DUT Name="E_VisionResult" Id="{2bc22ade-a5e0-463c-9bd7-ccaed6211ed0}">
     <Declaration><![CDATA[{attribute 'strict'}
 TYPE E_VisionResult :
 (
-	UNDEFINE 						:= 0,
-	LESS_QTTY_CAM 					:= 10,
-	LESS_QTTY_HOLE					:= 20,
-	LESS_QTTY_SOUND_OUTLET			:= 30,
-	STONE_STUCK_IN_HOLE				:= 40,
-	WRONG_POSITION_SOUND_OUTLET		:= 50,
-	SCRATCH							:= 60,
-	DENT							:= 70,
-	DIRT_CONTAMINATION				:= 80,
-	WRONG_POSITION_CAM				:= 90,					
-	DEFORM							:= 100,
-	INSUFFICIENT_CHIPPING			:= 110
-	//BURR							:= 120,
-	
+	VISION_RESULT_UNKNOWN				:= 0,
+	VISION_RESULT_GOOD 					:= 1,
+	VISION_RESULT_CONTAMINATION_DIRTY	:= 2,
+	VISION_RESULT_SCRATCH_DENT			:= 3,
+	VISION_RESULT_REJECT				:= 4
 );
 END_TYPE
 ]]></Declaration>

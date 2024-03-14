@@ -390,10 +390,10 @@
     <Compile Include="DUTs\Libs\Vision\Cognex\E_CognexCameraStoreFileStatus.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Libs\Vision\RTC\E_RTCCameraInitState.TcDUT">
+    <Compile Include="DUTs\Machine\Machine Control\Batch\ST_BatchData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Libs\Vision\RTC\E_RTCCameraState.TcDUT">
+    <Compile Include="DUTs\Machine\Machine Control\Batch\ST_BatchPerformacne.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\Machine\Machine Control\E_MachineCtrlStateAbort.TcDUT">
@@ -654,6 +654,7 @@
     </Compile>
     <Compile Include="POUs\Libs\Utilities\FB_DataSetFifo.TcPOU">
       <SubType>Code</SubType>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="POUs\Libs\Utilities\FB_DataSetFifo_1.TcPOU">
       <SubType>Code</SubType>
@@ -715,19 +716,16 @@
     <Compile Include="POUs\Libs\Vision\Cognex\I_CognexCamera.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Machine\FB_MachineControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Machine\FB_MachineSafety.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Machine\Machine Control\E_ProductOut.TcDUT">
+    <Compile Include="POUs\Machine\FB_VisuControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Machine\Machine Control\E_TableState.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Machine\Machine Control\FB_MachineControl.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Machine\Machine Control\I_MachineControl.TcIO">
+    <Compile Include="POUs\Machine\I_MachineControl.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Machine\Module\Robot\E_AOIRobotActions.TcDUT">
@@ -751,16 +749,22 @@
     <Compile Include="POUs\Machine\Module\Robot\I_AOIRobot.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Machine\Module\RTCVision\FB_DoubleTrigger.TcPOU">
+    <Compile Include="POUs\Machine\Module\RTCVision\E_RTCCameraInitState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Machine\Module\RTCVision\E_SortingResult.TcDUT">
+    <Compile Include="POUs\Machine\Module\RTCVision\E_RTCCameraMethodState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\RTCVision\E_RTCCameraState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Machine\Module\RTCVision\E_VisionJob.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Machine\Module\RTCVision\E_VisionResult.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\Module\RTCVision\FB_DoubleTrigger.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Machine\Module\RTCVision\FB_RTCVision.TcPOU">
@@ -770,7 +774,7 @@
       <SubType>Code</SubType>
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
-    <Compile Include="POUs\Machine\Visu Control\FB_VisuControl.TcPOU">
+    <Compile Include="POUs\Machine\ST_VisuCtrlBowlFeeder.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Machine\Visu Control\F_CloseDialog_1.TcPOU">
@@ -949,9 +953,42 @@
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
+    <Compile Include="VISUs\Pages\Auto\AOIBowlFeederFrame.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="VISUs\Pages\Auto\AOIBatchPerformanceFrame.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <External>false</External>
+      <ExcludeFromBuild>false</ExcludeFromBuild>
+    </Compile>
+    <Compile Include="VISUs\Pages\Auto\AOIHeaderFrame.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </Compile>
+    <Compile Include="VISUs\Pages\Auto\AOIHeaderKeySwitchFrame.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </Compile>
+    <Compile Include="VISUs\Pages\Auto\AOIBatchDataFrame.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <External>false</External>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </Compile>
+    <Compile Include="VISUs\Pages\Auto\AOISortStationFrame.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
     <Compile Include="VISUs\Pages\Auto\PageAuto.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="VISUs\Pages\Auto\ST_SortStationParam.TcDUT">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="VISUs\Pages\Initializing\InitializingDoorLockOpen.TcVIS">
       <SubType>Code</SubType>
@@ -964,14 +1001,17 @@
     <Compile Include="VISUs\Pages\Initializing\InitializingFixtureConnectionFailed.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="VISUs\Pages\Initializing\InitializingNoFixturesAvailable.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="VISUs\Pages\Initializing\InitializingRotaryTablePlaceTrayDialog.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="VISUs\Pages\Initializing\InitializingStartSafetySystem.TcVIS">
       <SubType>Code</SubType>
@@ -980,20 +1020,16 @@
     <Compile Include="VISUs\Pages\Initializing\InitializingTrayfeederCourtainBroken.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="VISUs\Pages\Initializing\InitializingTrayfeederInterupted.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="VISUs\Pages\Initializing\PageInitializing.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
-    </Compile>
-    <Compile Include="VISUs\Pages\PageXtsEnviroment.TcVIS">
-      <SubType>Code</SubType>
-      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
-      <External>false</External>
-      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="VISUs\Pages\PageAborting.TcVIS">
       <SubType>Code</SubType>
@@ -1044,12 +1080,6 @@
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
-    <Compile Include="VISUs\Pages\PageXtsDiagnostic.TcVIS">
-      <SubType>Code</SubType>
-      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
-      <External>false</External>
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </Compile>
     <Compile Include="VISUs\Pages\Uninitialized\PageUninitialized.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
@@ -1057,6 +1087,7 @@
     <Compile Include="VISUs\Pages\Uninitialized\UninitializedSetupFrame.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+      <ExcludeFromBuild>false</ExcludeFromBuild>
     </Compile>
     <Compile Include="VISUs\Pages\Uninitialized\UninitializedStartUpFrame.TcVIS">
       <SubType>Code</SubType>
@@ -1128,11 +1159,10 @@
     <Folder Include="DUTs\Machine" />
     <Folder Include="DUTs\Machine\Machine Control" />
     <Folder Include="DUTs\Machine\Machine Control\Internal" />
+    <Folder Include="DUTs\Machine\Machine Control\Batch" />
     <Folder Include="DUTs\Machine\Robot" />
     <Folder Include="DUTs\Machine\Visu Control" />
     <Folder Include="DUTs\Machine\Shell API" />
-    <Folder Include="DUTs\Platform" />
-    <Folder Include="DUTs\Platform\Universal Visu" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\Libs" />
     <Folder Include="POUs\Libs\0_Checks" />
@@ -1548,13 +1578,25 @@
     <SubObject Include="FB_CSVDataExchanger.M_FileProperties">
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
+    <SubObject Include="FB_MachineControl.GoldenSample">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
     <SubObject Include="FB_MachineControl.M_AutoProcessing">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_MachineControl.Production">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_MachineControl.robotcamtest">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_MachineControl.Robot_Process">
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
     <SubObject Include="FB_MachineControl.TableProcess">
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
-    <SubObject Include="FB_RTCVision\Backup">
+    <SubObject Include="FB_MachineControl.tableRefer">
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
     <SubObject Include="FB_UniversalSafety.MS_Running">

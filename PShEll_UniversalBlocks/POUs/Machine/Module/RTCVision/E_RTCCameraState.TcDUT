@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_RTCCameraState" Id="{8a0fc53e-59af-42e0-b947-ecbf60f52e31}">
+    <Declaration><![CDATA[{attribute 'strict'}
+TYPE E_RTCCameraState :
+(
+	RTC_CAMERA_UNINITIALIZED 				:= 0,	(* Not ready to work *)
+	RTC_CAMERA_INITIALIZING					:= 10,	(* Preparing to work *)
+	RTC_CAMERA_READY 						:= 20,	(* Ready to work *)
+	RTC_CAMERA_IDLE							:= 30,	(* Waiting for commands *)
+	RTC_CAMERA_RESET 						:= 40,	(*  *)
+	
+	RTC_CAMERA_SET_JOB						:= 200,	(* Set job *)
+	RTC_CAMERA_START						:= 210,	(* Start job *)
+	RTC_CAMERA_STOP							:= 220,	(* Stop job *)
+	RTC_CAMERA_GET_RESULT					:= 230,	(* Get result *)
+	RTC_CAMERA_GET_BATCH_DATA				:= 240, (* Get batch data *)
+	RTC_CAMERA_CLEAR_DATA					:= 250,	(* Clear all data/parameters, prepare for new batch*)
+	RTC_CAMERA_STOP_CYCLE					:= 260, (* If there is problem while production, then stop the current vision cycle, prepare a new cycle *)
+	
+	RTC_CAMERA_METHOD_DONE					:= 290,	(* Send command and receive confirm with vision system *)
+	RTC_CAMERA_ABORTING						:= -10	(* Aborting *)
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

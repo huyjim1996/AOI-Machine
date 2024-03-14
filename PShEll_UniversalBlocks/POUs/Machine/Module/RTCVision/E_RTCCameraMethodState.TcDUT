@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_RTCCameraMethodState" Id="{604b1db0-2d6e-41fc-9ca7-c914928de928}">
+    <Declaration><![CDATA[{attribute 'strict'}
+TYPE E_RTCCameraMethodState :
+(
+	RTC_CAMERA_METHOD_SEND_COMMAND 			:= 0,
+	RTC_CAMERA_METHOD_RECEIVE_RESPONSE 		:= 10
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -6600,10 +6600,6 @@
                       </o>
                     </o>
                     <o>
-                      <v n="Id">288709961L</v>
-                      <v n="Value">"PRG_VisuControl.fbVisuControl.btnInit"</v>
-                    </o>
-                    <o>
                       <v n="Id">3968048659L</v>
                       <v n="Value">"PRG_VisuControl.fbVisuControl.btnAbort"</v>
                     </o>
@@ -6642,6 +6638,10 @@
                     <o>
                       <v n="Id">1311860368L</v>
                       <v n="Value">"PRG_VisuControl.fbVisuControl.eCurrentNavigation"</v>
+                    </o>
+                    <o>
+                      <v n="Id">288709961L</v>
+                      <v n="Value">"PRG_VisuControl.fbVisuControl.btnInit"</v>
                     </o>
                   </l>
                 </o>

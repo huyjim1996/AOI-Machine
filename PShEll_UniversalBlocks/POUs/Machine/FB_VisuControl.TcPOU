@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_VisuControl" Id="{0bfae5f4-05f6-4ba2-8d1c-2f6d5de3971a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_VisuControl EXTENDS FB_UniversalVisu
+VAR
+	(* Page Uninitialized *)
+	eUninitializedFrameSelector		: E_VisuCtrlUninitializedFrameSelector;						(* This enum is used to switch HMI frames for "Uninitialized" page *)
+	stUninitializedSetupFrame 		: ST_UninitializedSetupFrame;								(* This structure contains data from "Uninitialized-Setup" page *)
+	stUninitializedStartUpFrame		: ST_UninitializedStartUpFrame;								(* This structure contains data from "Uninitialized-StartUp" page *)
+	
+	(* Page Initializing *)                                                         	
+	stInitializingFrame				: ST_InitializationFrame;									(* This structure contains data from "Initializing" page *)
+	eInitializingHintFrameSelector 	: E_VisuCtrlInitializingPopUpFrameSelector;					
+	bInitializingHintFrameInvisible : BOOL;		
+												
+	(* Common *)                  		
+	ifAOIMachineCtrl		 		: I_MachineControl;	
+	
+	(* HMI button triggers *) 
+	rtInit 							: R_TRIG;		
+	rtStart							: R_TRIG;													
+	rtStop							: R_TRIG;													
+	ftRunning						: F_TRIG;													
+	rtReset							: R_TRIG;													
+	rtAbort							: R_TRIG;
+
+	stVisuCtrlBowlFeeder : ST_VisuCtrlBowlFeeder;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bFirstCycle THEN
+	(* --- Page Uninitialized --- *)
+	(* Start-Up frame *)
+	MEMSET(destAddr := ADR(stUninitializedStartUpFrame), fillByte := 0, n:= SIZEOF(stUninitializedStartUpFrame));
+	
+	(* Setup frame *)
+	//Put setup frame here
+	
+	(* --- Page Initializing --- *)
+	(* Status checkboxes reset *)
+	MEMSET(destAddr := ADR(stInitializingFrame), fillByte := 0, n := SIZEOF(stInitializingFrame));
+	
+	(* Progress bar reset *)
+	iInitProgressBar := 0;
+	//iManualToAutoProgressBar := 0;
+	
+	(* --- Read from recipes --- *)
+END_IF
+
+(* --- Page Uninitialized --- *)
+(* Wait for trigger from "Initialize" button to assign setup from HMI to Machine Controler *)
+rtInit( CLK := SUPER^.btnInit);
+//IF rtInit.Q THEN
+	
+//END_IF
+
+(* --- Page Auto --- *)
+(* Wait for trigger from "Start" button *)
+rtStart( CLK := SUPER^.btnStart);
+
+(* Wait for trigger from "Stop" button *)
+rtStop( CLK := SUPER^.btnStop);
+
+SUPER^();]]></ST>
+    </Implementation>
+    <Folder Name="Internal" Id="{1e15612a-b169-44ca-8527-dee6e490a87f}" />
+    <Folder Name="Requests" Id="{1b2bbef1-5408-47e8-b47a-6ac3407a622c}" />
+    <Folder Name="States" Id="{237c15c6-bedf-4173-ad60-1844960195ec}" />
+    <Method Name="M_CloseAllPopUps" Id="{1c647d58-71e0-40ee-8fe1-ad65747d4901}" FolderPath="Internal\">
+      <Declaration><![CDATA[METHOD M_CloseAllPopUps
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[(* Fcq *)
+F_CloseDialog('AutoPopUpStopping');
+F_CloseDialog('AutoFcqPopUpTrayfeederInputEmpty');
+F_CloseDialog('AutoFcqPopUpTrayfeederOutputFull');
+F_CloseDialog('AutoFcqPopUpTrayfeederInterupted');
+F_CloseDialog('AutoFcqPopUpCsvReaderError');
+F_CloseDialog('AutoFcqPopUpInfleDeleteErrror');
+F_CloseDialog('AutoFcqPopUpBatchDone');
+F_CloseDialog('AutoFcqPopUpOutputTrayReplaced');
+F_CloseDialog('AutoFcqPopUpRejectErrorAcknowlageInvestigate');
+F_CloseDialog('AutoFcqPopUpRejectErrorCloseOutputDoors');
+F_CloseDialog('AutoFcqPopUpRejectErrorContinueEject');
+F_CloseDialog('AutoFcqPopUpRejectErrorRejectTrayReplaced');
+
+(* RnR *)
+F_CloseDialog('AutoRnRPopUpMissingProductInputTray');
+F_CloseDialog('AutoRnRPopUpMissingProductWhileTest');
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MR_AppendAOIMachine" Id="{0563bf15-a8a0-437a-853b-f070ef1f1867}" FolderPath="Requests\">
+      <Declaration><![CDATA[METHOD MR_AppendAOIMachine : BOOL
+VAR_INPUT
+	ifAOIMachine : I_MachineControl;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.ifAOIMachineCtrl := ifAOIMachine;
+MR_AppendAOIMachine := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Aborting" Id="{7a0c9554-84c9-4799-894c-9a73234fb5e4}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Aborting]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.MS_Aborting();
+
+eUninitializedFrameSelector := VISU_CTRL_UNINITIALIZED_FRAME_STARTUP;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Auto" Id="{9d383fd0-4dbb-454a-8fc0-0c89c58b1618}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Auto]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[(* Run Shell code for "Auto" page *)
+SUPER^.MS_Auto();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Emergency" Id="{2a34c643-f64a-4582-8b3a-6c75d3cb4aac}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD PROTECTED  MS_Emergency]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Initializing" Id="{479ed395-7624-429f-9596-ca73d0019bb5}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Initializing]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[(* Run Shell code for "Initializing" page *)
+SUPER^.MS_Initializing();
+
+(* --- Checkbox status update --- *)
+(* Machine logger initialized *)
+stInitializingFrame.bMachineLoggerInitialized := ifAOIMachineCtrl.StateInit > MACHINE_STATE_INITIALIZING_MACHINE_LOGGER;
+
+
+(* Machine robots power check *)
+stInitializingFrame.bRobotControlersPowerOn := ifAOIMachineCtrl.StateInit > MACHINE_STATE_INITIALIZING_ROBOTS_POWER_CHECK;
+
+(* Robots controlers reset *)
+stInitializingFrame.bRobotControlersResetDone := ifAOIMachineCtrl.StateInit > MACHINE_STATE_INITIALIZING_ROBOT_CONTROLERS_RESET;
+
+(* Robot 1 initialized*)
+stInitializingFrame.bRobotOneInitialized := ifAOIMachineCtrl.StateInit > MACHINE_STATE_INITIALIZING_ROBOT_INIT;
+
+(* Robot 2 initialized*)
+//stInitializingFrame.bRobotTwoInitialized := ifAOIMachineCtrl.StateInit > MACHINE_STATE_INITIALIZING_ROBOT_TWO_INIT;
+
+(* Robot 1 homed *)
+stInitializingFrame.bRobotOneHomed := ifAOIMachineCtrl.StateInit > MACHINE_STATE_INITIALIZING_ROBOT_HOME;
+
+(* Robot 2 homed *)
+//stInitializingFrame.bRobotTwoHomed := ifAOIMachineCtrl.StateInit > MACHINE_STATE_INITIALIZING_ROBOT_TWO_HOME;
+
+(* Robot 1/2 in automatic mode *)
+stInitializingFrame.bRobotsInAutomaticMode := ifAOIMachineCtrl.StateInit > MACHINE_STATE_INITIALIZING_ROBOT_AUTOMATIC_MODE;
+
+(* Progress bar value update *)
+iInitProgressBar := UINT_TO_USINT((STRING_TO_UINT(TO_STRING(ifAOIMachineCtrl.StateInit))*100)/STRING_TO_UINT(TO_STRING(MACHINE_STATE_INITIALIZING_DONE)));
+
+(* User hits frame selector *)
+//IF ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_CHECK_ESTOP THEN
+//	eInitializingHintFrameSelector := VISU_CTRL_INITIALIZING_FRAME_E_STOP;
+//	bInitializingHintFrameInvisible := FALSE;
+	
+//ELSIF ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_CHECK_DOOR_LOCKS THEN
+//	eInitializingHintFrameSelector := VISU_CTRL_INITIALIZING_FRAME_DOOR_LOCK;
+//	bInitializingHintFrameInvisible := FALSE;
+	
+//ELSIF ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_CHECK_COURTAIN THEN
+//	eInitializingHintFrameSelector := VISU_CTRL_INITIALIZING_FRAME_TRAYFEEDER_COURTAINT;
+//	bInitializingHintFrameInvisible := FALSE;
+	
+//ELSIF ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_SAFETY_START THEN
+//	eInitializingHintFrameSelector := VISU_CTRL_INITIALIZING_FRAME_RESET_BUTTON;
+//	bInitializingHintFrameInvisible := FALSE;
+	
+//ELSIF ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_TRAYFEEDER_INTERUPTED_WAIT THEN
+//	eInitializingHintFrameSelector := VISU_CTRL_INITIALIZING_FRAME_TRAYFEEDER_INTERUPTED;
+//	bInitializingHintFrameInvisible := FALSE;
+//	stInitializingFrame.stTrayfeederRetryFrame.rtTrayfeederInitRetry(CLK := stInitializingFrame.stTrayfeederRetryFrame.btnTrayfeederInitRetry);
+//	IF stInitializingFrame.stTrayfeederRetryFrame.rtTrayfeederInitRetry.Q THEN
+//		stInitializingFrame.stTrayfeederRetryFrame.btnTrayfeederInitRetry := FALSE;
+//		ifAOIMachineCtrl.TrayfeederInitRetry := TRUE;
+//	END_IF
+	
+//ELSIF ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_ROTARY_TABLE_PLACE_TRAY_1 THEN
+//	eInitializingHintFrameSelector := VISU_CTRL_INITIALIZING_FRAME_ROTARY_TABLE;
+//	bInitializingHintFrameInvisible := FALSE;
+//	stInitializingFrame.stRotaryTableFrame.rtContinue(CLK := stInitializingFrame.stRotaryTableFrame.btnContinue);
+//	IF stInitializingFrame.stRotaryTableFrame.rtContinue.Q THEN
+//		stInitializingFrame.stRotaryTableFrame.btnContinue := FALSE;
+//		ifAOIMachineCtrl.InitRotate := TRUE;
+//	END_IF
+	
+//ELSIF ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_ROTARY_TABLE_PLACE_TRAY_2 THEN
+//	eInitializingHintFrameSelector := VISU_CTRL_INITIALIZING_FRAME_ROTARY_TABLE;
+//	bInitializingHintFrameInvisible := FALSE;
+//	stInitializingFrame.stRotaryTableFrame.rtContinue(CLK := stInitializingFrame.stRotaryTableFrame.btnContinue);
+//	IF stInitializingFrame.stRotaryTableFrame.rtContinue.Q THEN
+//		stInitializingFrame.stRotaryTableFrame.btnContinue := FALSE;
+//		ifAOIMachineCtrl.InitRotate := TRUE;
+//	END_IF
+	
+//ELSIF ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_FIRST_FIXTURE_INIT_FAILED OR
+//		ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_SECOND_FIXTURE_INIT_FAILED OR
+//		ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_THIRD_FIXTURE_INIT_FAILED OR
+//		ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_FOURTH_FIXTURE_INIT_FAILED OR
+//		ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_FIFTH_FIXTURE_INIT_FAILED OR
+//		ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_SIXTH_FIXTURE_INIT_FAILED OR
+//		ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_SEVENTH_FIXTURE_INIT_FAILED OR
+//		ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_EIGHT_FIXTURE_INIT_FAILED THEN
+//		eInitializingHintFrameSelector := VISU_CTRL_INITIALIZING_FRAME_FIXTURE_CONNECTION_FAILED;
+//		bInitializingHintFrameInvisible := FALSE;
+		
+//		stInitializingFrame.stFixtureFailedFrame.rtFixtureInitRetry(CLK := stInitializingFrame.stFixtureFailedFrame.btnFixtureInitRetry);
+//		stInitializingFrame.stFixtureFailedFrame.rtFixtureInitSkip(CLK := stInitializingFrame.stFixtureFailedFrame.btnFixtureInitSkip);
+//		IF stInitializingFrame.stFixtureFailedFrame.rtFixtureInitRetry.Q THEN
+//			stInitializingFrame.stFixtureFailedFrame.btnFixtureInitRetry := FALSE;
+//			ifAOIMachineCtrl.FixtureInitRetry := TRUE;
+//		ELSIF stInitializingFrame.stFixtureFailedFrame.rtFixtureInitSkip.Q THEN
+//			stInitializingFrame.stFixtureFailedFrame.btnFixtureInitSkip := FALSE;
+//			ifAOIMachineCtrl.FixtureInitSkip := TRUE;
+//		END_IF
+	
+//ELSIF ifAOIMachineCtrl.StateInit = MACHINE_STATE_INITIALIZING_FIXTURES_INIT_FAILED THEN
+//	eInitializingHintFrameSelector := VISU_CTRL_INITIALIZING_FRAME_NO_FIXTURES_AVAILABLE;
+//	bInitializingHintFrameInvisible := FALSE;
+	
+//ELSE
+//	bInitializingHintFrameInvisible := TRUE;
+//END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MS_Uninitialized" Id="{417a8e7a-0a13-4911-8657-5c73c30bff3b}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD PROTECTED MS_Uninitialized]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[(* Run Shell code for "Uninitialized" page *)
+SUPER^.MS_Uninitialized();
+
+M_CloseAllPopUps();
+
+CASE eUninitializedFrameSelector OF
+	VISU_CTRL_UNINITIALIZED_FRAME_STARTUP:
+		eCurrentNavigation := NAVIGATION_EMPTY;
+		
+		(* Power on robot controlers *)
+		stUninitializedStartUpFrame.bCR800PowerOn := ifAOIMachineCtrl.StateUninitialized > MACHINE_STATE_UNINITIALIZED_CR800_CHECK_POWER_REGISTER;
+		stUninitializedStartUpFrame.bCR800EtherCatInitialization := ifAOIMachineCtrl.StateUninitialized > MACHINE_STATE_UNINITIALIZED_CR800_CHECK_POWER_REGISTER;
+
+		(* Progress bar value update *)
+		stUninitializedStartUpFrame.iProgressBar := (STRING_TO_USINT(TO_STRING(ifAOIMachineCtrl.StateUninitialized))*100)/60;
+		
+		(* Start-Up finished -> switch frame *)
+		IF ifAOIMachineCtrl.StateUninitialized = MACHINE_STATE_UNINITIALIZED_DONE THEN
+			eUninitializedFrameSelector := VISU_CTRL_UNINITIALIZED_FRAME_SETUP;
+			eCurrentNavigation := NAVIGATION_UNINITIALIZED;
+		END_IF
+	
+	VISU_CTRL_UNINITIALIZED_FRAME_SETUP:
+		;
+		
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_VisuControl">
+      <LineId Id="17" Count="0" />
+      <LineId Id="21" Count="4" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="32" Count="1" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="52" Count="1" />
+      <LineId Id="3" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="80" Count="2" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="84" Count="1" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="113" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_VisuControl.M_CloseAllPopUps">
+      <LineId Id="28" Count="0" />
+      <LineId Id="6" Count="3" />
+      <LineId Id="32" Count="1" />
+      <LineId Id="10" Count="1" />
+      <LineId Id="23" Count="2" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_VisuControl.MR_AppendAOIMachine">
+      <LineId Id="16" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_VisuControl.MS_Aborting">
+      <LineId Id="6" Count="1" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_VisuControl.MS_Auto">
+      <LineId Id="6" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_VisuControl.MS_Emergency">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_VisuControl.MS_Initializing">
+      <LineId Id="123" Count="0" />
+      <LineId Id="121" Count="1" />
+      <LineId Id="3" Count="0" />
+      <LineId Id="65" Count="1" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="207" Count="9" />
+      <LineId Id="202" Count="0" />
+      <LineId Id="218" Count="0" />
+      <LineId Id="217" Count="0" />
+      <LineId Id="222" Count="0" />
+      <LineId Id="57" Count="2" />
+      <LineId Id="190" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="137" Count="0" />
+      <LineId Id="185" Count="0" />
+      <LineId Id="259" Count="0" />
+      <LineId Id="138" Count="0" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="184" Count="0" />
+      <LineId Id="260" Count="0" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="161" Count="0" />
+      <LineId Id="183" Count="0" />
+      <LineId Id="261" Count="0" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="181" Count="1" />
+      <LineId Id="262" Count="0" />
+      <LineId Id="250" Count="1" />
+      <LineId Id="249" Count="0" />
+      <LineId Id="258" Count="0" />
+      <LineId Id="252" Count="1" />
+      <LineId Id="255" Count="0" />
+      <LineId Id="254" Count="0" />
+      <LineId Id="263" Count="0" />
+      <LineId Id="231" Count="0" />
+      <LineId Id="233" Count="0" />
+      <LineId Id="232" Count="0" />
+      <LineId Id="237" Count="1" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="239" Count="1" />
+      <LineId Id="264" Count="0" />
+      <LineId Id="235" Count="1" />
+      <LineId Id="234" Count="0" />
+      <LineId Id="242" Count="1" />
+      <LineId Id="245" Count="0" />
+      <LineId Id="244" Count="0" />
+      <LineId Id="241" Count="0" />
+      <LineId Id="272" Count="8" />
+      <LineId Id="282" Count="3" />
+      <LineId Id="293" Count="0" />
+      <LineId Id="286" Count="1" />
+      <LineId Id="294" Count="0" />
+      <LineId Id="291" Count="1" />
+      <LineId Id="295" Count="0" />
+      <LineId Id="289" Count="0" />
+      <LineId Id="268" Count="3" />
+      <LineId Id="265" Count="0" />
+      <LineId Id="171" Count="0" />
+      <LineId Id="180" Count="0" />
+      <LineId Id="172" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_VisuControl.MS_Uninitialized">
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="13" Count="1" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="17" Count="1" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="19" Count="3" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="12" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
