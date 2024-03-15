@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-03-07T04:56:30.588Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0" etag="OjzmjL3IvIEKFCX7QY3i" version="24.0.2" type="github" pages="6">
+<mxfile host="app.diagrams.net" modified="2024-03-15T04:49:52.190Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0" etag="CaEGkTGwKhZEeERQKFkX" version="24.0.6" type="github" pages="6">
   <diagram name="Overview State Machine Diagram" id="v3ZlMP72TM2bRMMOr79-">
     <mxGraphModel dx="827" dy="595" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
       <root>
@@ -458,14 +458,14 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Init" id="50sgaSQ5cKTBNT3R1G_v">
-    <mxGraphModel dx="1276" dy="845" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
+    <mxGraphModel dx="827" dy="595" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
       <root>
         <mxCell id="2POLmIKTKXDjE0cFi6Rh-0" />
         <mxCell id="2POLmIKTKXDjE0cFi6Rh-1" parent="2POLmIKTKXDjE0cFi6Rh-0" />
-        <mxCell id="Meh8zQ_2P7Z9oA6iVJGR-2" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;Initializing&lt;/span&gt;" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=30;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;whiteSpace=wrap;rounded=1;" vertex="1" parent="2POLmIKTKXDjE0cFi6Rh-1">
+        <mxCell id="Meh8zQ_2P7Z9oA6iVJGR-2" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;Initializing&lt;/span&gt;" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=30;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;whiteSpace=wrap;rounded=1;" parent="2POLmIKTKXDjE0cFi6Rh-1" vertex="1">
           <mxGeometry x="234" y="475" width="176" height="210" as="geometry" />
         </mxCell>
-        <mxCell id="Meh8zQ_2P7Z9oA6iVJGR-3" value="- Machine logger&lt;br&gt;- Recipe manager&lt;br&gt;- Clear all error&lt;br&gt;- MES command logger&lt;br&gt;- MES CSV reader (barcode)&lt;br&gt;- Safety init&lt;br&gt;- Check EStop&lt;br&gt;- Check door lock&lt;br&gt;- Robot power check&lt;br&gt;- Safety reset &amp;amp; start&lt;br&gt;- Robot controller reset&lt;br&gt;- Safety check&lt;br&gt;-&amp;nbsp;" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;whiteSpace=wrap;rounded=1;align=left;" vertex="1" parent="Meh8zQ_2P7Z9oA6iVJGR-2">
+        <mxCell id="Meh8zQ_2P7Z9oA6iVJGR-3" value="- Machine logger&lt;br&gt;- Recipe manager&lt;br&gt;- Clear all error&lt;br&gt;- MES command logger&lt;br&gt;- MES CSV reader (barcode)&lt;br&gt;- Safety init&lt;br&gt;- Check EStop&lt;br&gt;- Check door lock&lt;br&gt;- Robot power check&lt;br&gt;- Safety reset &amp;amp; start&lt;br&gt;- Robot controller reset&lt;br&gt;- Safety check&lt;br&gt;-&amp;nbsp;" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;whiteSpace=wrap;rounded=1;align=left;" parent="Meh8zQ_2P7Z9oA6iVJGR-2" vertex="1">
           <mxGeometry width="176" height="180" relative="1" as="geometry">
             <mxPoint y="30" as="offset" />
           </mxGeometry>
@@ -702,21 +702,48 @@
     </mxGraphModel>
   </diagram>
   <diagram id="Vc4fHgMzqMQyeyqcJqE1" name="State EM">
-    <mxGraphModel dx="473" dy="340" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1034" dy="744" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="s6ZxAptEYPuYZumMudyC-1" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Table:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-take product from robot and cmd robot go home&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-transfer product to station 3+4, sorting station&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-have to wait the result from station 4&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="s6ZxAptEYPuYZumMudyC-1" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Table:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-take product from robot and cmd robot go home&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-transfer product to station 3+4, sorting station&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-have to wait the result from station 4&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="50" y="55" width="310" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="s6ZxAptEYPuYZumMudyC-2" value="Robot&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-Transfer product to station 1+2 then table&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="s6ZxAptEYPuYZumMudyC-2" value="Robot&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-Transfer product to station 1+2 then table&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="50" y="130" width="270" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="s6ZxAptEYPuYZumMudyC-3" value="&lt;div&gt;Vision&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;- Check all picture&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;- get result at cam7 then cmd table continue moving&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="s6ZxAptEYPuYZumMudyC-3" value="&lt;div&gt;Vision&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;- Check all picture&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;- get result at cam7 then cmd table continue moving&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="50" y="173" width="330" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="s6ZxAptEYPuYZumMudyC-4" value="Sorting&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-take result from vision system&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-sort product into the right bin&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="s6ZxAptEYPuYZumMudyC-4" value="Sorting&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-take result from vision system&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-sort product into the right bin&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="50" y="240" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kbULoxBdlpvddOo4WAWk-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kbULoxBdlpvddOo4WAWk-1" target="kbULoxBdlpvddOo4WAWk-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kbULoxBdlpvddOo4WAWk-1" value="wait for robot" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="10" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kbULoxBdlpvddOo4WAWk-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kbULoxBdlpvddOo4WAWk-2" target="kbULoxBdlpvddOo4WAWk-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kbULoxBdlpvddOo4WAWk-2" value="cmd robot drop product and go back" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kbULoxBdlpvddOo4WAWk-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kbULoxBdlpvddOo4WAWk-4" target="kbULoxBdlpvddOo4WAWk-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kbULoxBdlpvddOo4WAWk-4" value="&lt;ul&gt;&lt;li&gt;add buffer&lt;/li&gt;&lt;li&gt;calculate the position&lt;/li&gt;&lt;li&gt;move to the position&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;align=left;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="330" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kbULoxBdlpvddOo4WAWk-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kbULoxBdlpvddOo4WAWk-6" target="kbULoxBdlpvddOo4WAWk-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kbULoxBdlpvddOo4WAWk-6" value="check position with camera 3, if true then trigger" style="whiteSpace=wrap;html=1;align=left;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kbULoxBdlpvddOo4WAWk-8" value="check position with camera 4, if true then trigger" style="whiteSpace=wrap;html=1;align=left;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="710" y="330" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
