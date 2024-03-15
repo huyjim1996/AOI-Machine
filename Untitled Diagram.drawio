@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-03-15T04:49:52.190Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0" etag="CaEGkTGwKhZEeERQKFkX" version="24.0.6" type="github" pages="6">
+<mxfile host="app.diagrams.net" modified="2024-03-15T05:24:02.632Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0" etag="g39QeK36ZSkk7rrtnBss" version="24.0.6" type="github" pages="6">
   <diagram name="Overview State Machine Diagram" id="v3ZlMP72TM2bRMMOr79-">
     <mxGraphModel dx="827" dy="595" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
       <root>
@@ -206,7 +206,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Auto process State Diagram_First Concept" id="GE9Ud-njpaZmaiL3tsWu">
-    <mxGraphModel dx="1210" dy="811" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
+    <mxGraphModel dx="827" dy="595" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#E6E6E6" math="0" shadow="0">
       <root>
         <mxCell id="q1DA9xK3n46PnG2VsxQA-0" />
         <mxCell id="q1DA9xK3n46PnG2VsxQA-1" parent="q1DA9xK3n46PnG2VsxQA-0" />
@@ -474,7 +474,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Auto process State Diagram_Optimized Concept" id="UqVfY-wAiMxmco9DKr0V">
-    <mxGraphModel dx="1210" dy="811" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+    <mxGraphModel dx="827" dy="595" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
       <root>
         <mxCell id="QQanCnBcPrRKSwi5wl0U-0" />
         <mxCell id="QQanCnBcPrRKSwi5wl0U-1" parent="QQanCnBcPrRKSwi5wl0U-0" />
@@ -702,48 +702,101 @@
     </mxGraphModel>
   </diagram>
   <diagram id="Vc4fHgMzqMQyeyqcJqE1" name="State EM">
-    <mxGraphModel dx="1034" dy="744" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1257" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="s6ZxAptEYPuYZumMudyC-1" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Table:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-take product from robot and cmd robot go home&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-transfer product to station 3+4, sorting station&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-have to wait the result from station 4&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="50" y="55" width="310" height="70" as="geometry" />
+          <mxGeometry x="839" y="30" width="310" height="70" as="geometry" />
         </mxCell>
         <mxCell id="s6ZxAptEYPuYZumMudyC-2" value="Robot&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-Transfer product to station 1+2 then table&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="50" y="130" width="270" height="40" as="geometry" />
+          <mxGeometry x="839" y="105" width="270" height="40" as="geometry" />
         </mxCell>
         <mxCell id="s6ZxAptEYPuYZumMudyC-3" value="&lt;div&gt;Vision&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;- Check all picture&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;- get result at cam7 then cmd table continue moving&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="50" y="173" width="330" height="60" as="geometry" />
+          <mxGeometry x="839" y="148" width="330" height="60" as="geometry" />
         </mxCell>
         <mxCell id="s6ZxAptEYPuYZumMudyC-4" value="Sorting&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-take result from vision system&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;-sort product into the right bin&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="50" y="240" width="210" height="60" as="geometry" />
+          <mxGeometry x="839" y="215" width="210" height="60" as="geometry" />
         </mxCell>
         <mxCell id="kbULoxBdlpvddOo4WAWk-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kbULoxBdlpvddOo4WAWk-1" target="kbULoxBdlpvddOo4WAWk-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="kbULoxBdlpvddOo4WAWk-1" value="wait for robot" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="10" y="330" width="120" height="60" as="geometry" />
+          <mxGeometry x="10" y="30" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="kbULoxBdlpvddOo4WAWk-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kbULoxBdlpvddOo4WAWk-2" target="kbULoxBdlpvddOo4WAWk-4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="kbULoxBdlpvddOo4WAWk-2" value="cmd robot drop product and go back" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="170" y="330" width="120" height="60" as="geometry" />
+          <mxGeometry x="170" y="30" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="kbULoxBdlpvddOo4WAWk-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kbULoxBdlpvddOo4WAWk-4" target="kbULoxBdlpvddOo4WAWk-6">
+        <mxCell id="p8RnAYrtxQv6PBsti4rF-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="kbULoxBdlpvddOo4WAWk-4" target="kbULoxBdlpvddOo4WAWk-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="160" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="395" y="130" />
+              <mxPoint x="70" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kbULoxBdlpvddOo4WAWk-4" value="&lt;span style=&quot;background-color: initial;&quot;&gt;add buffer&lt;/span&gt;" style="whiteSpace=wrap;html=1;align=center;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="30" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kbULoxBdlpvddOo4WAWk-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" target="kbULoxBdlpvddOo4WAWk-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="534" y="200" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kbULoxBdlpvddOo4WAWk-6" value="check position with camera 3, if true then trigger" style="whiteSpace=wrap;html=1;align=center;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="454" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cNTi58TNvTkIcXxnAGYC-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kbULoxBdlpvddOo4WAWk-8" target="cNTi58TNvTkIcXxnAGYC-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="kbULoxBdlpvddOo4WAWk-4" value="&lt;ul&gt;&lt;li&gt;add buffer&lt;/li&gt;&lt;li&gt;calculate the position&lt;/li&gt;&lt;li&gt;move to the position&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;align=left;strokeWidth=1;" vertex="1" parent="1">
-          <mxGeometry x="330" y="330" width="180" height="60" as="geometry" />
+        <mxCell id="WmYviypK2qCKCH82h6Gl-1" value="true" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="cNTi58TNvTkIcXxnAGYC-2">
+          <mxGeometry x="-0.3737" y="4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="kbULoxBdlpvddOo4WAWk-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kbULoxBdlpvddOo4WAWk-6" target="kbULoxBdlpvddOo4WAWk-8">
+        <mxCell id="kbULoxBdlpvddOo4WAWk-8" value="check position with camera 4, if true then trigger" style="whiteSpace=wrap;html=1;align=center;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="634" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cNTi58TNvTkIcXxnAGYC-1" value="waiting for result" style="whiteSpace=wrap;html=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="634" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WmYviypK2qCKCH82h6Gl-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WmYviypK2qCKCH82h6Gl-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="544" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WmYviypK2qCKCH82h6Gl-6" value="TRUE" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="WmYviypK2qCKCH82h6Gl-5">
+          <mxGeometry x="-0.1539" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WmYviypK2qCKCH82h6Gl-2" value="check movement buffer" style="whiteSpace=wrap;html=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="624" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WmYviypK2qCKCH82h6Gl-4" value="" style="whiteSpace=wrap;html=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="410" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p8RnAYrtxQv6PBsti4rF-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WmYviypK2qCKCH82h6Gl-7" target="p8RnAYrtxQv6PBsti4rF-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="kbULoxBdlpvddOo4WAWk-6" value="check position with camera 3, if true then trigger" style="whiteSpace=wrap;html=1;align=left;strokeWidth=1;" vertex="1" parent="1">
-          <mxGeometry x="550" y="330" width="120" height="60" as="geometry" />
+        <mxCell id="WmYviypK2qCKCH82h6Gl-7" value="&lt;span style=&quot;background-color: initial; text-align: left;&quot;&gt;calculate the position&lt;/span&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="170" width="110" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="kbULoxBdlpvddOo4WAWk-8" value="check position with camera 4, if true then trigger" style="whiteSpace=wrap;html=1;align=left;strokeWidth=1;" vertex="1" parent="1">
-          <mxGeometry x="710" y="330" width="120" height="60" as="geometry" />
+        <mxCell id="p8RnAYrtxQv6PBsti4rF-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="p8RnAYrtxQv6PBsti4rF-4" target="WmYviypK2qCKCH82h6Gl-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p8RnAYrtxQv6PBsti4rF-4" value="Check buffer" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="10" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p8RnAYrtxQv6PBsti4rF-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="p8RnAYrtxQv6PBsti4rF-6" target="kbULoxBdlpvddOo4WAWk-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p8RnAYrtxQv6PBsti4rF-6" value="&lt;span style=&quot;text-align: left;&quot;&gt;move to the position&lt;/span&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="170" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
